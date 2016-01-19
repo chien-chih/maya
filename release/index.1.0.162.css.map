@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.less","index.css"],"names":[],"mappings":"AAAA,MACE,oBAAA,CCCD","file":"index.1.0.162.css","sourcesContent":[".main {\n  border:solid 1px red;\n}\n\n",".main {\n  border: solid 1px red;\n}\n"],"sourceRoot":"/source/"}
