@@ -10,10 +10,12 @@ var gulp = require("gulp"),
     inject = require('gulp-inject-string'),
     clear = require('clear'),
     colors = require('colors'),
-    rename = require("gulp-rename")
-    ; 
+    rename = require("gulp-rename"),
+    changed = require('gulp-changed');
 
 var project=require("./package.json");
+var DEBUG_PATH='./output/debug/';
+var RELEASE_PATH='./output/release/';
 var angularInclude=[
     "angular2/bundles/angular2-polyfills.js",
     "systemjs/dist/system.src.js",
@@ -38,7 +40,7 @@ gulp.task('watch', function () {
     gaze(['./app/**/*.less'], function () {this.on('all', function () {gulp.start('app:css')});this.on('error', function() {})});
     gaze(['./app/**/*.ts'], function () {this.on('all', function () {gulp.start('app:js')});this.on('error', function() {})});
     gaze(['./app/**/*.html'], function () {this.on('all', function () {gulp.start('app:html')});this.on('error', function() {})});
-    gaze(['./test/**/*.ts','!./test/ai.d.ts'], function () {this.on('all', function () {gulp.start('test')});this.on('error', function() {})});
+    gaze(['./test/**/*.ts'], function () {this.on('all', function () {gulp.start('test:js')});this.on('error', function() {})});
 });
 
 /*
@@ -47,7 +49,7 @@ gulp.task('watch', function () {
 var rimraf = require('rimraf');
 gulp.task('clean', function (cb) {
     rimraf('node_modules/'+project.name+'/*', function(){
-        rimraf('web/**/*', cb);        
+        rimraf(DEBUG_PATH+'**/*', cb);        
     });
     
 });
@@ -56,7 +58,7 @@ gulp.task('build',['clean'], function () {
     var runSequence = require('run-sequence');
     runSequence(
         ['src:css','src:js'],
-        ['app:css','app:html','app:js']
+        ['app:css','app:html','app:js','test:js']
         );
 });
 
@@ -69,13 +71,14 @@ gulp.task('src:css', function () {
             .pipe(less())
             .pipe(concat(project.name+".css"))
             .pipe(sourcemaps.write())
-		    .pipe(gulp.dest('./web'));
+		    .pipe(gulp.dest(DEBUG_PATH));
 });
 
-function log(name,description){console.log(colors.white(name).bgGreen+" : "+description.green);}
-function ignore(name,description){console.log(colors.black(name).bgWhite+" : "+description.gray);}
-function error(name,description){console.log(colors.white(name).bgRed+" : "+description.red);}
-function warning(name,description){console.log(colors.white(name).bgYellow+" : "+description.yellow);}
+function logTypescript(name,description){console.log(colors.white(name).bgBlue+" : "+description.blue);}
+function logIgnore(name,description){console.log(colors.black(name).bgWhite+" : "+description.gray);}
+function logCss(name,description){console.log(colors.white(name).bgYellow+" : "+description.yellow);}
+function logHtml(name,description){console.log(colors.white(name).bgGreen+" : "+description.green);}
+function logError(name,description){console.log(colors.white(name).bgRed+" : "+description.red);}
 
 function addModuleName(srcRoot,namespace) {
     function transform(file, cb) {
@@ -102,8 +105,9 @@ var srcProject = ts.createProject({
     sortOutput: true,
     declaration: true
 });
-gulp.task('src:js', function () {clear(); 
-    log('src:js','typescript compiler');
+gulp.task('src:js', function () {
+    clear(); 
+    logTypescript('src:js','compile src script');
     srcError=false;
     var tsResult = gulp.src('./src/**/*.ts')
         .pipe(sourcemaps.init())
@@ -116,34 +120,34 @@ gulp.task('src:js', function () {clear();
 
     return merge([
     		tsResult.dts
-    		    //.pipe(concat(project.name+".d.ts"))
     		    .pipe(gulp.dest('./node_modules/'+project.name))
     		    ,
     		tsResult.js
-		        //.pipe(concat(project.name+".js"))
 		        .pipe(sourcemaps.write())
-		        //.pipe(rename({extname: ""}))
-		        .pipe(gulp.dest('./web/'+project.name))
+		        .pipe(gulp.dest(DEBUG_PATH+project.name))
     	]);		
 });
 
 /*
     app
 */
-
 gulp.task('app:css', function () {
+    logCss('app:css','compile app css');
     return gulp.src('app/**/*.less')
-            .pipe(sourcemaps.init())
-            .pipe(less())
-            .pipe(concat("index.css"))
-            .pipe(sourcemaps.write())
-		    .pipe(gulp.dest('./web'));
+        .pipe(changed(DEBUG_PATH))
+        .pipe(sourcemaps.init())
+        .pipe(less())
+        .pipe(concat("index.css"))
+        .pipe(sourcemaps.write())
+	    .pipe(gulp.dest(DEBUG_PATH));
 });
 
 gulp.task('app:html', function () {
-    var htmlResult= gulp.src('app/**/*.html')
-            .pipe(processHtml('debug'))
-		    .pipe(gulp.dest('./web'));
+    logHtml('app:html','compile app html');
+    return gulp.src('app/**/*.html')
+        .pipe(changed(DEBUG_PATH))
+        .pipe(processHtml('debug'))
+	    .pipe(gulp.dest(DEBUG_PATH));
 });
 
 var appProject = ts.createProject({
@@ -156,65 +160,20 @@ var appProject = ts.createProject({
     removeComments: true
 });
 gulp.task('app:js', function () {
-    
     if(srcError) {
-        ignore('app:js','typescript compiler');
+        logIgnore('app:js','skip compile because src error');
         return;   
     }
-    log('app:js','typescript compiler');
+    logTypescript('app:js','compile app script');
     var tsResult = gulp.src('app/**/*s')
         .pipe(sourcemaps.init())
 		.pipe(ts(appProject,{},ts.reporter.fullReporter()));
 
     return tsResult.js
-    		        .pipe(sourcemaps.write())
-    		        //.pipe(rename({extname: ""}))
-    		        .pipe(gulp.dest('./web'))
-    		        ;
-    			
+	        .pipe(sourcemaps.write())
+	        .pipe(gulp.dest(DEBUG_PATH))
+	        ;
 });
-
-function processHtml(mode) {
-    function transform(file, cb) {
-        var filename=path.basename(file.path,'.html');
-        var replaceFrom="<head>";
-        var replaceTo
-        if(mode==="debug")
-        {
-            var includeFiles="";
-            for(var i=0;i<angularInclude.length;i++)
-                includeFiles+="\n<script src='../node_modules/"+angularInclude[i]+"'></script>";
-            
-            replaceTo=
-                "<head>"+includeFiles+
-                "\n<link rel='stylesheet' type='text/css' href='index.css'>"+
-                "\n<link rel='stylesheet' type='text/css' href='"+project.name+".css'>"+
-                //"\n<script src='"+project.name+".js'></script>"+
-                "\n<script>"+
-                    "System.config({packages: { "+filename+": {defaultExtension: 'js'},"+project.name+": {defaultExtension: 'js'}} });"+
-                    "System.import('"+filename+"/app');"+
-                "</script>";
-
-        }
-        else
-        {
-            var tag=filename+'.'+currentVersion;
-            replaceTo=
-                "<head>"+
-                "<link rel='stylesheet' type='text/css' href='index."+currentVersion+".css'>"+
-                "<script src='"+project.name+'/'+currentVersion+'/'+project.name+".js'></script>"+
-                "\n<script>System.config({bundles:{'"+tag+"/app.js': ['"+filename+"/app']}});"+
-                "System.import('"+filename+"/app');"+
-                "</script>";
-        }
-
-        var html = String(file.contents);
-        html = html.replace(replaceFrom, replaceTo);
-        file.contents = new Buffer(html);
-        cb(null, file);
-    }
-    return require('event-stream').map(transform);
-}
 
 /*
     release
@@ -223,9 +182,8 @@ var cssnano = require('gulp-cssnano');
 
 var currentVersion,srcRepository;
 gulp.task('release:version', function () {clear(); 
-    log('release','start packing '+project.name);
     var jeditor = require("gulp-json-editor");
-   return merge([ 
+    return merge([ 
     gulp.src("./package.json")
         .pipe(jeditor(function(json) {
             var index=json.version.lastIndexOf(".");
@@ -233,7 +191,8 @@ gulp.task('release:version', function () {clear();
             var tag=json.version.substring(0,index+1);
             json.version = tag+(++ver);
             currentVersion=json.version;
-            srcRepository='./release/'+project.name+'/'+json.version;
+            srcRepository=RELEASE_PATH+project.name+'/'+json.version;
+            logTypescript('release','prepare release version '+project.name +" "+currentVersion);
             return json; 
         }))
       .pipe(gulp.dest("./"))
@@ -241,7 +200,7 @@ gulp.task('release:version', function () {clear();
 });
 
 gulp.task('release:clean',['release:version'], function (cb) {
-    rimraf('release/**/*', cb);
+    rimraf(RELEASE_PATH+'**/*', cb);
 });
 
 var uglify = require('gulp-uglify');
@@ -254,6 +213,7 @@ var uglify = require('gulp-uglify');
     }));
 */          
 gulp.task('release:build', function (cb) {
+    logTypescript('release','compile script/css/html ');
     var srcRelease = ts.createProject({
         target: "ES5",
         module: "system",
@@ -320,8 +280,8 @@ gulp.task('release:build', function (cb) {
     		        .pipe(gulp.dest(srcRepository))
     		        ,
             srcLess.pipe(gulp.dest(srcRepository)),
-    		appLess.pipe(gulp.dest('./release')),
-		    appHtml.pipe(gulp.dest('./release')),
+    		appLess.pipe(gulp.dest(RELEASE_PATH)),
+		    appHtml.pipe(gulp.dest(RELEASE_PATH)),
             appTs.js
     		        .pipe(addModuleName('app')) //add module name that typescript should add
                     .pipe(uglify())
@@ -329,11 +289,12 @@ gulp.task('release:build', function (cb) {
                         path.dirname += "."+currentVersion;
                       }))
 		            .pipe(sourcemaps.write('.'))
-    		        .pipe(gulp.dest('./release'))
+    		        .pipe(gulp.dest(RELEASE_PATH))
         	]);		
 });
 
 gulp.task('release:bootstrapcss', function () {
+    logTypescript('release','bootstrap css to self execute js');
     function bootstrapCss(){
         function transform(file, cb) {
             var dict = readFileString("./config/stylename.txt");
@@ -362,6 +323,7 @@ gulp.task('release:bootstrapcss', function () {
 });
 
 gulp.task('release:link', function () {
+    logTypescript('release','link all scripts to single file');
     function combineCssJs(){
         function transform(file, cb) {
             var js = String(file.contents);
@@ -406,39 +368,32 @@ gulp.task('release', function () {
 /*
     test
 */
+var testProject = ts.createProject({
+    target: "ES5",
+    module: "system",
+    moduleResolution: "node",
+    emitDecoratorMetadata: true,
+    experimentalDecorators: true,
+    noImplicitAny: false
+});
+gulp.task('test:js', function () {
+    logTypescript('test:js','compile test script');
+    var compileTest = gulp.src('test/**/*.ts')
+        .pipe(sourcemaps.init())
+		.pipe(ts(testProject),{},ts.reporter.fullReporter());
 
-gulp.task('test:js',['src:js'], function () {
-    var prepareJs = gulp.src('web/'+project.name+'.js')
-                .pipe(inject.append('module.exports ='+project.name))
+    var htmlTest= gulp.src('test/**/*.html')
+                .pipe(changed(DEBUG_PATH))
                 ;
 
-    var compileTestTS = gulp.src('test/**/*.ts')
-		.pipe(ts({
-            target: 'ES5',
-            module: 'commonjs',
-            noEmitOnError: true,
-            noImplicitAny: true,
-            emitDecoratorMetadata: true,
-            experimentalDecorators: true
-        },{},ts.reporter.fullReporter()));
-        
     return merge([
-            prepareJs
-                .pipe(gulp.dest('./test')),
-            compileTestTS.js
-    		        .pipe(gulp.dest('./test/output'))
-        ]);
-
+		    htmlTest.pipe(gulp.dest(DEBUG_PATH))
+		    ,
+            compileTest.js
+		        .pipe(sourcemaps.write())
+    		    .pipe(gulp.dest(DEBUG_PATH))
+    	]);		
 });
-
-gulp.task('test',['test:js'], function () {
-    var mocha = require('gulp-mocha');
-    return gulp.src(['./test/output/**/*.js'])
-        .pipe(mocha({ reporter: 'spec', ui: 'bdd' }));
-});
-
-
-
 
 function readFileString(filename) {
     var data = fs.readFileSync(filename, { encoding: 'utf8' }).toString()
@@ -465,4 +420,42 @@ function styleNameShrink(css, styleNames) {
     return css;
 }
 
+function processHtml(mode) {
+    function transform(file, cb) {
+        var filename=path.basename(file.path,'.html');
+        var replaceFrom="<head>";
+        var replaceTo
+        if(mode==="debug")
+        {
+            var includeFiles="";
+            for(var i=0;i<angularInclude.length;i++)
+                includeFiles+="\n<script src='/node_modules/"+angularInclude[i]+"'></script>";
+            
+            replaceTo=
+                "<head>"+includeFiles+
+                "\n<link rel='stylesheet' type='text/css' href='index.css'>"+
+                "\n<link rel='stylesheet' type='text/css' href='"+project.name+".css'>"+
+                "\n<script>"+
+                    "System.config({packages: { "+filename+": {defaultExtension: 'js'},"+project.name+": {defaultExtension: 'js'}} });"+
+                    "System.import('"+filename+"/app');"+
+                "</script>";
+        }
+        else
+        {
+            var tag=filename+'.'+currentVersion;
+            replaceTo=
+                "<head>"+
+                "<link rel='stylesheet' type='text/css' href='index."+currentVersion+".css'>"+
+                "<script src='"+project.name+'/'+currentVersion+'/'+project.name+".js'></script>"+
+                "\n<script>System.config({bundles:{'"+tag+"/app.js': ['"+filename+"/app']}});"+
+                "System.import('"+filename+"/app');"+
+                "</script>";
+        }
 
+        var html = String(file.contents);
+        html = html.replace(replaceFrom, replaceTo);
+        file.contents = new Buffer(html);
+        cb(null, file);
+    }
+    return require('event-stream').map(transform);
+}
