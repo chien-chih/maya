@@ -1,0 +1,415 @@
+@import "../../ai";
+  
+.ai-button {
+    .userSelect();
+    .round(2px);
+    .gradient(top,transparent,transparent);
+    border: 1px solid transparent;
+    white-space: nowrap;
+    text-align: center;
+    display: inline-block;
+    cursor: default;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: box-shadow .4s cubic-bezier(.25,.8,.25,1),background .4s cubic-bezier(.25,.8,.25,1);
+
+}
+
+.ai-button:focus {
+    outline: none;
+}
+
+/******************* 
+     icon
+****************** */
+
+.ai-button.icon{
+    .round(50%);
+    margin: 6px 8px;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    background-clip: padding-box;
+    color:#666;
+    background: rgba(0,0,0,0);
+    font-weight: 500;
+}
+.ai-button.icon .ai-icon{
+    font-size: 24px;
+}
+
+.ai-button.icon.disabled{
+    .opacity(0.8);
+    color: rgba(215,215,215,.85)!important ;
+}
+.ai-button.icon:focus:not(.disabled):not(:active){
+    background: rgba(215,215,215,.85);
+}
+.ai-button.icon:hover:not(.disabled):not(:active) {
+    background:rgba(102, 102, 102,.15);
+}
+.ai-button.icon:active:not(.disabled) {
+    background:rgba(102, 102, 102,.5);
+}   
+
+/*icon size*/
+
+.ai-button.icon.large {
+    width: 72px;
+    height: 72px;
+    line-height: 72px;
+}
+.ai-button.icon.large .ai-icon{
+    font-size: 48px;
+}
+
+.ai-button.icon.small {
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 0;
+}
+.ai-button.icon.small .ai-icon{
+    font-size: 16px;
+}
+
+/*icon primary*/
+.ai-button.icon.primary{
+    color: rgba(16,108,200,.95);
+}
+.ai-button.primary.icon:hover:not(.disabled):not(:active) {
+    background:rgba(16,108,200,.15);
+}
+.ai-button.primary.icon:active:not(.disabled) {
+    background:rgba(16,108,200,.5);
+}   
+/*icon red*/
+.ai-button.icon.red {
+    color: #fc3d39;
+}
+.ai-button.red.icon:hover:not(.disabled):not(:active) {
+    background:rgba(252, 61, 57,.15);
+}
+.ai-button.red.icon:active:not(.disabled) {
+    background:rgba(252, 61, 57,.5);
+}   
+/*icon green*/
+.ai-button.icon.green {
+    color: #51d466;
+}
+.ai-button.green.icon:hover:not(.disabled):not(:active) {
+    background:rgba(81, 212, 102,.15);
+}
+.ai-button.green.icon:active:not(.disabled) {
+    background:rgba(81, 212, 102,.5);
+}   
+
+/*icon yellow*/
+.ai-button.icon.yellow {
+    color: #ffc107;
+}
+.ai-button.yellow.icon:hover:not(.disabled):not(:active) {
+    background:rgba(255, 193, 7,.15);
+}
+.ai-button.yellow.icon:active:not(.disabled) {
+    background:rgba(255, 193, 7,.5);
+}   
+
+/******************* 
+     link
+****************** */
+
+.ai-button.link{
+    padding: 0 20px;
+    margin: 6px 0px;
+    min-height: 24px;
+    line-height: 22px;
+    min-width: 46px;
+    max-width: 264px;
+    font-size: 17px;
+    font-weight: 300;
+    color: #167efb;
+    background: rgba(0,0,0,0);
+}
+
+.ai-button.link.disabled{
+    .opacity(0.8);
+    color: rgba(215,215,215,.85)!important ;
+}
+.ai-button.link:focus:not(.disabled):not(:active){
+    text-decoration: underline;
+}
+.ai-button.link:hover:not(.disabled):not(:active) {
+    background:rgba(76, 158, 241,.15);
+}
+.ai-button.link:active:not(.disabled) {
+    background:rgba(76, 158, 241,.5);
+}   
+
+/*link size*/
+
+.ai-button.link.large {
+    min-height: 36px;
+    line-height: 34px;
+    padding: 0 36px;
+    min-width: 110px;
+    font-size: 19px;
+}
+
+.ai-button.link.small {
+    min-height: 18px;
+    line-height: 16px;
+    padding: 0 6px;
+    min-width: 38px;
+    font-size: 14px;
+}
+/*link border*/
+.ai-button.link.left {
+    border-left:solid 1px #E5E5E5;
+}
+.ai-button.link.right {
+    border-right:solid 1px #E5E5E5;
+}
+
+/*link primary*/
+.ai-button.link.primary{
+    font-weight: 500;
+}
+
+/*link red*/
+.ai-button.link.red {
+    color: #fc3d39;
+}
+.ai-button.red.link:hover:not(.disabled):not(:active) {
+    background:rgba(252, 61, 57,.15);
+}
+.ai-button.red.link:active:not(.disabled) {
+    background:rgba(252, 61, 57,.5);
+}   
+/*link green*/
+.ai-button.link.green {
+    color: #51d466;
+}
+.ai-button.green.link:hover:not(.disabled):not(:active) {
+    background:rgba(81, 212, 102,.15);
+}
+.ai-button.green.link:active:not(.disabled) {
+    background:rgba(81, 212, 102,.5);
+}   
+
+/*link yellow*/
+.ai-button.link.yellow {
+    color: #ffc107;
+}
+.ai-button.yellow.link:hover:not(.disabled):not(:active) {
+    background:rgba(255, 193, 7,.15);
+}
+.ai-button.yellow.link:active:not(.disabled) {
+    background:rgba(255, 193, 7,.5);
+}   
+
+/******************* 
+     fab
+****************** */
+
+.ai-button.fab{
+    .round(50%);
+    padding: 0 8px;
+    margin: 6px 8px;
+    width: 56px;
+    height: 56px;
+    line-height: 56px;
+    background-clip: padding-box;
+    background: #fff;
+    color: #666;
+}
+
+.ai-button.fab .ai-icon{
+    font-size: 28px;
+}
+
+.ai-button.fab.disabled{
+    .opacity(0.6);
+    color: rgba(0,0,0,0.26) ;
+    background:rgba(215,215,215,0.8) ;
+}
+
+.ai-button.fab:not(.disabled) {
+    .boxShadow(0 2px 5px rgba(0, 0, 0, .26));
+}
+.ai-button.fab:active:not(.disabled) {
+    .boxShadow(0 5px 8px rgba(0, 0, 0, .26));
+    .background(#f3f3f3, #fefefe);
+}   
+.ai-button.fab:focus:not(.disabled):not(:active), .ai-button.fab:hover:not(.disabled):not(:active) {
+    .boxShadow(0 8px 11px rgba(0, 0, 0, .26));
+    transform:scale(1.05,1.05);
+}
+
+/*fab primary*/
+
+.ai-button.fab.primary {
+    background-color: #157efb;
+    color: #fff;
+}
+
+.ai-button.fab.primary:active:not(.disabled) {
+    .background(#1477ed, #157efb);
+}
+
+
+/*fab size*/
+
+.ai-button.fab.large {
+    width: 84px;
+    height: 84px;
+    line-height: 84px;
+}
+.ai-button.fab.large .ai-icon{
+    font-size: 44px;
+}
+
+.ai-button.fab.small {
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 0;
+}
+.ai-button.fab.small .ai-icon{
+    font-size: 16px;
+}
+
+/*fab red*/
+.ai-button.fab.red {
+    background: #fc3d39;
+    color: #fff;
+}
+.ai-button.fab.red:active:not(.disabled) {
+    .background(#ed3a36, #fc3d39);
+}
+
+/*fab green*/
+.ai-button.fab.green {
+    background: #51d466;
+    color: #fff;
+}
+.ai-button.fab.green:active:not(.disabled) {
+    .background(#4cc55f, #51d466);
+}
+
+/*fab yellow*/
+.ai-button.fab.yellow {
+    background: #ffc107;
+    color: #fff;
+}
+.ai-button.fab.yellow:active:not(.disabled) {
+    .background(#f2b708, #ffc107);
+}
+
+
+/******************* 
+     raised
+****************** */
+
+.ai-button.raised{
+    padding: 0 8px;
+    margin: 6px 8px;
+    background: #fff;
+    color: #666;
+    min-height: 36px;
+    line-height: 36px;
+    min-width: 88px;
+    max-width: 264px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.ai-button.raised:focus:not(.disabled) {
+    border-bottom:solid 1px #157efb;
+}
+.ai-button.raised.disabled{
+    .opacity(0.6);
+    color: rgba(0,0,0,0.26) ;
+    background:rgba(215,215,215,0.8) ;
+}
+
+.ai-button.raised:not(.disabled) {
+    .boxShadow(0 2px 5px rgba(0, 0, 0, .26));
+}
+.ai-button.raised:active:not(.disabled) {
+    .boxShadow(0 5px 8px rgba(0, 0, 0, .26));
+    .background(#f3f3f3, #fefefe);
+}   
+.ai-button.raised:focus:not(.disabled):not(:active), .ai-button.raised:hover:not(.disabled):not(:active) {
+    .boxShadow(0 8px 11px rgba(0, 0, 0, .26));
+    transform:scale(1.05,1.05);
+}
+
+/*raised size*/
+
+.ai-button.raised.large {
+    min-height: 48px;
+    line-height: 48px;
+    padding: 0 36px;
+    min-width: 110px;
+    font-size: 18px;
+}
+
+.ai-button.raised.small {
+    min-height: 24px;
+    line-height: 22px;
+    padding: 0 6px;
+    min-width: 38px;
+    font-size: 11px;
+}
+
+/*raise primary*/
+
+.ai-button.raised.primary {
+    background-color: #157efb;
+    color: #fff;
+}
+
+.ai-button.raised.primary:active:not(.disabled) {
+    .background(#1477ed, #157efb);
+}
+
+.ai-button.raised.primary:focus:not(.disabled) {
+    border-bottom:solid 1px #fff;
+}
+
+/*raised red*/
+.ai-button.raised.red {
+    background: #fc3d39;
+    color: #fff;
+}
+.ai-button.raised.red:active:not(.disabled) {
+    .background(#ed3a36, #fc3d39);
+}
+.ai-button.raised.red:focus:not(.disabled) {
+    border-bottom:solid 1px #fff;
+}
+
+/*raised green*/
+.ai-button.raised.green {
+    background: #51d466;
+    color: #fff;
+}
+.ai-button.raised.green:active:not(.disabled) {
+    .background(#4cc55f, #51d466);
+}
+.ai-button.raised.green:focus:not(.disabled) {
+    border-bottom:solid 1px #fff;
+}
+
+/*raised yellow*/
+.ai-button.raised.yellow {
+    background: #ffc107;
+    color: #fff;
+}
+.ai-button.raised.yellow:active:not(.disabled) {
+    .background(#f2b708, #ffc107);
+}
+.ai-button.raised.yellow:focus:not(.disabled) {
+    border-bottom:solid 1px #fff;
+}

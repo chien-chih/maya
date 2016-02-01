@@ -9,14 +9,16 @@
 </head>
 <body>
   <script>
+
     System.config({
+
       packages: {
-        'test1': {defaultExtension: 'js'},'ai': {defaultExtension: 'js'}
+        'testComponents': {defaultExtension: 'js'},'ai': {defaultExtension: 'js'}
       }
     });
-    System.import('test1/ai.test')
+    System.import('testComponents/utils.test')
       .then(window.onload)
       .catch(console.error.bind(console));
-  </script>
+  </script> 
 </body>
 </html>

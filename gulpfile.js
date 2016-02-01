@@ -11,11 +11,13 @@ var gulp = require("gulp"),
     clear = require('clear'),
     colors = require('colors'),
     rename = require("gulp-rename"),
+    runSequence = require('run-sequence'),
     changed = require('gulp-changed');
 
 var project=require("./package.json");
 var DEBUG_PATH='./output/debug/';
 var RELEASE_PATH='./output/release/';
+
 var angularInclude=[
     "angular2/bundles/angular2-polyfills.js",
     "systemjs/dist/system.src.js",
@@ -34,13 +36,34 @@ var angularRelease=[
     wath file and perform realtime build
 */
 gulp.task('watch', function () {
-    var gaze = require('gaze');
-    gaze(['./src/**/*.ts'], function () {this.on('all', function () {gulp.start('src:js')});this.on('error', function() {})});
-    gaze(['./src/**/*.less'], function () {this.on('all', function () {gulp.start('src:css')});this.on('error', function() {})});
-    gaze(['./app/**/*.less'], function () {this.on('all', function () {gulp.start('app:css')});this.on('error', function() {})});
-    gaze(['./app/**/*.ts'], function () {this.on('all', function () {gulp.start('app:js')});this.on('error', function() {})});
-    gaze(['./app/**/*.html'], function () {this.on('all', function () {gulp.start('app:html')});this.on('error', function() {})});
-    gaze(['./test/**/*.ts'], function () {this.on('all', function () {gulp.start('test:js')});this.on('error', function() {})});
+    function swallowError (error) {
+        console.log(error.toString());
+        this.emit('end');
+    }
+    //.on('error', swallowError)
+    
+    var watch = require('gulp-watch');
+    watch(['./src/**/*.ts'], function() {
+        clear();logTypescript('src:js','');
+        runSequence(
+            ['src:js'],
+            ['app:js']
+        );
+    }).on('error', swallowError);
+    watch(['./src/**/*.less'], function() {clear();logCss('src:css','');gulp.start('src:css')});
+    watch(['./app/**/*.less'], function() {clear();logCss('app:css','');gulp.start('app:css')});
+    watch(['./app/**/*.ts'], function() {clear();logTypescript('app:js','');gulp.start('app:js')});
+    watch(['./app/**/*.html'], function() {clear();logHtml('app:html','');gulp.start('app:html')});
+    watch(['./test/**/*.ts','./test/**/*.html'], function() {clear();logTypescript('test','');gulp.start('test')});
+    
+    //var gaze = require('gaze');
+    //gaze(['./src/**/*.ts'], function () {this.on('all', function () {gulp.start('src:js')});this.on('error', function() {})});
+    //gaze(['./src/**/*.less'], function () {this.on('all', function () {gulp.start('src:css')});this.on('error', function() {})});
+    //gaze(['./app/**/*.less'], function () {this.on('all', function () {gulp.start('app:css')});this.on('error', function() {})});
+    //gaze(['./app/**/*.ts'], function () {this.on('all', function () {gulp.start('app:js')});this.on('error', function() {})});
+    //gaze(['./app/**/*.html'], function () {this.on('all', function () {gulp.start('app:html')});this.on('error', function() {})});
+    //gaze(['./test/**/*.ts'], function () {this.on('all', function () {gulp.start('test')});this.on('error', function() {})});
+    
 });
 
 /*
@@ -55,10 +78,9 @@ gulp.task('clean', function (cb) {
 });
 
 gulp.task('build',['clean'], function () {
-    var runSequence = require('run-sequence');
     runSequence(
         ['src:css','src:js'],
-        ['app:css','app:html','app:js','test:js']
+        ['app:css','app:html','app:js','test']
         );
 });
 
@@ -66,9 +88,13 @@ gulp.task('build',['clean'], function () {
     src
 */
 gulp.task('src:css', function () {
+    function showError (error) {
+        logError(error.message,error.extract+'');        
+        this.emit('end');
+    }
     return gulp.src('src/**/*.less')
             .pipe(sourcemaps.init())
-            .pipe(less())
+            .pipe(less().on('error', showError))
             .pipe(concat(project.name+".css"))
             .pipe(sourcemaps.write())
 		    .pipe(gulp.dest(DEBUG_PATH));
@@ -106,17 +132,22 @@ var srcProject = ts.createProject({
     declaration: true
 });
 gulp.task('src:js', function () {
+    var plumber = require('gulp-plumber');
     clear(); 
     logTypescript('src:js','compile src script');
     srcError=false;
     var tsResult = gulp.src('./src/**/*.ts')
+        .pipe(plumber(function () {
+                srcError=true;
+                console.log('There was an issue compiling Sass');
+                this.emit('end');
+            }))
         .pipe(sourcemaps.init())
 		.pipe(ts(srcProject,{},ts.reporter.fullReporter()))
-		
-        .on('error', function () {
-            srcError=true;
-            this.emit("end");
-        });
+    //    .on('error', function () {
+      //      this.emit("end");
+        //})
+        ;
 
     return merge([
     		tsResult.dts
@@ -126,6 +157,7 @@ gulp.task('src:js', function () {
 		        .pipe(sourcemaps.write())
 		        .pipe(gulp.dest(DEBUG_PATH+project.name))
     	]);		
+    	
 });
 
 /*
@@ -356,7 +388,6 @@ gulp.task('release:link', function () {
 });
 
 gulp.task('release', function () {
-    var runSequence = require('run-sequence');
     runSequence(
         ['release:version','release:clean'],
         ['release:build'],
@@ -376,8 +407,8 @@ var testProject = ts.createProject({
     experimentalDecorators: true,
     noImplicitAny: false
 });
-gulp.task('test:js', function () {
-    logTypescript('test:js','compile test script');
+gulp.task('test', function () {
+    logTypescript('test','compile test script');
     var compileTest = gulp.src('test/**/*.ts')
         .pipe(sourcemaps.init())
 		.pipe(ts(testProject),{},ts.reporter.fullReporter());

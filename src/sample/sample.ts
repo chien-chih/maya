@@ -5,7 +5,7 @@ import {Component} from 'angular2/core';
     // Declare the tag name in index.html to where the component attaches
     selector: 'hello-world',
     // Location of the template for this component
-    template: 'hello'
+    template: 'hello2 '
 })
 
 export class HelloWorld {

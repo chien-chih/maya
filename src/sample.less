@@ -1,0 +1,15 @@
+@zorderPopMask: 200;
+@zorderPopUp: (@zorderPopMask+1);
+@zorderPopOver: (@zorderPopUp+1);
+ 
+.round(@radius: 4px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    border-radius: @radius;
+} 
+ .student{ 
+    .round(6px);    
+    background: #f00;
+    overflow: hidden;
+    min-height: 34px;
+}

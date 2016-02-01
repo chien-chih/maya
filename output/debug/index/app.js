@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/platform/browser', 'ai/ai', 'ai/button/button'], function(exports_1) {
+System.register(['angular2/core', 'angular2/platform/browser', 'ai/components/aiCheckbox/aiCheckbox'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/platform/browser', 'ai/ai', 'ai/butt
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, browser_1, ai, button;
+    var core_1, browser_1, aiCheckbox_1;
     var AppComponent;
     return {
         setters:[
@@ -18,27 +18,18 @@ System.register(['angular2/core', 'angular2/platform/browser', 'ai/ai', 'ai/butt
             function (browser_1_1) {
                 browser_1 = browser_1_1;
             },
-            function (ai_1) {
-                ai = ai_1;
-            },
-            function (button_1) {
-                button = button_1;
+            function (aiCheckbox_1_1) {
+                aiCheckbox_1 = aiCheckbox_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
                 function AppComponent() {
                 }
-                AppComponent.prototype.onClick = function () {
-                    var strings = ['Hello', '98052', 10];
-                    var l = new ai.LettersOnlyValidator();
-                    if (l.isAcceptable('hello'))
-                        alert("true");
-                };
                 AppComponent = __decorate([
                     core_1.Component({
-                        selector: 'my-app',
-                        template: '<hello-world>Loading...</hello-world><h1 class="student main">My First Angular 2 App</h1><br><button  (click)="onClick()">click</button>',
-                        directives: [button.HelloWorld]
+                        selector: 'checkbox-app',
+                        template: "\n        <ai-checkbox>normal</ai-checkbox><ai-checkbox primary>primary</ai-checkbox><ai-checkbox [disabled]=\"true\">disabled</ai-checkbox>\n        <ai-checkbox color=\"red\" [checked]=\"true\" >red</ai-checkbox><ai-checkbox color=\"green\">green</ai-checkbox><ai-checkbox color=\"yellow\">yellow</ai-checkbox>\n        <br/>\n        <ai-checkbox size='small'>small</ai-checkbox><ai-checkbox>normal</ai-checkbox><ai-checkbox size='large'>large</ai-checkbox>\n        ",
+                        directives: [aiCheckbox_1.AiCheckbox]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
@@ -50,4 +41,4 @@ System.register(['angular2/core', 'angular2/platform/browser', 'ai/ai', 'ai/butt
     }
 });
 
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGV4L2FwcC50cyJdLCJuYW1lcyI6WyJBcHBDb21wb25lbnQiLCJBcHBDb21wb25lbnQuY29uc3RydWN0b3IiLCJBcHBDb21wb25lbnQub25DbGljayJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1lBS0E7Z0JBQUFBO2dCQWVBQyxDQUFDQTtnQkFSR0QsOEJBQU9BLEdBQVBBO29CQUNJRSxJQUFJQSxPQUFPQSxHQUFHQSxDQUFDQSxPQUFPQSxFQUFFQSxPQUFPQSxFQUFFQSxFQUFFQSxDQUFDQSxDQUFDQTtvQkFDckNBLElBQUlBLENBQUNBLEdBQUdBLElBQUlBLEVBQUVBLENBQUNBLG9CQUFvQkEsRUFBRUEsQ0FBQ0E7b0JBQ3RDQSxFQUFFQSxDQUFBQSxDQUFDQSxDQUFDQSxDQUFDQSxZQUFZQSxDQUFDQSxPQUFPQSxDQUFDQSxDQUFDQTt3QkFDdkJBLEtBQUtBLENBQUNBLE1BQU1BLENBQUNBLENBQUNBO2dCQUd4QkEsQ0FBQ0E7Z0JBZEhGO29CQUFDQSxnQkFBU0EsQ0FBQ0E7d0JBQ1BBLFFBQVFBLEVBQUVBLFFBQVFBO3dCQUNsQkEsUUFBUUEsRUFBRUEsMElBQTBJQTt3QkFDbkpBLFVBQVVBLEVBQUVBLENBQUNBLE1BQU1BLENBQUNBLFVBQVVBLENBQUNBO3FCQUNuQ0EsQ0FBQ0E7O2lDQVdEQTtnQkFBREEsbUJBQUNBO1lBQURBLENBZkEsQUFlQ0EsSUFBQTtZQWZELHVDQWVDLENBQUE7WUFFRCxtQkFBUyxDQUFDLFlBQVksQ0FBQyxDQUFDIiwiZmlsZSI6ImluZGV4L2FwcC5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7Q29tcG9uZW50fSBmcm9tICdhbmd1bGFyMi9jb3JlJztcbmltcG9ydCB7Ym9vdHN0cmFwfSAgICBmcm9tICdhbmd1bGFyMi9wbGF0Zm9ybS9icm93c2VyJztcbmltcG9ydCAqIGFzIGFpIGZyb20gJ2FpL2FpJztcbmltcG9ydCAqIGFzIGJ1dHRvbiBmcm9tICdhaS9idXR0b24vYnV0dG9uJztcblxuQENvbXBvbmVudCh7XG4gICAgc2VsZWN0b3I6ICdteS1hcHAnLFxuICAgIHRlbXBsYXRlOiAnPGhlbGxvLXdvcmxkPkxvYWRpbmcuLi48L2hlbGxvLXdvcmxkPjxoMSBjbGFzcz1cInN0dWRlbnQgbWFpblwiPk15IEZpcnN0IEFuZ3VsYXIgMiBBcHA8L2gxPjxicj48YnV0dG9uICAoY2xpY2spPVwib25DbGljaygpXCI+Y2xpY2s8L2J1dHRvbj4nXG4gICAgLGRpcmVjdGl2ZXM6IFtidXR0b24uSGVsbG9Xb3JsZF1cbn0pXG5leHBvcnQgY2xhc3MgQXBwQ29tcG9uZW50IHsgXG4gICAgXG4gICAgb25DbGljaygpIHtcbiAgICAgICAgdmFyIHN0cmluZ3MgPSBbJ0hlbGxvJywgJzk4MDUyJywgMTBdO1xuICAgICAgICB2YXIgbCA9IG5ldyBhaS5MZXR0ZXJzT25seVZhbGlkYXRvcigpO1xuICAgICAgICBpZihsLmlzQWNjZXB0YWJsZSgnaGVsbG8nKSlcbiAgICAgICAgICAgIGFsZXJ0KFwidHJ1ZVwiKTtcbiAgICAgICAgICAgIC8vZWxzZVxuICAgICAgICAgICAgLy9hbGVydChcImZhbHNlXCIpO1xuICB9IFxufSAgICAgICAgICAgICBcblxuYm9vdHN0cmFwKEFwcENvbXBvbmVudCk7ICAiXSwic291cmNlUm9vdCI6Ii9zb3VyY2UvIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGV4L2FwcC50cyJdLCJuYW1lcyI6WyJBcHBDb21wb25lbnQiLCJBcHBDb21wb25lbnQuY29uc3RydWN0b3IiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztZQU1BO2dCQUFBQTtnQkFZQUMsQ0FBQ0E7Z0JBWkREO29CQUFDQSxnQkFBU0EsQ0FBQ0E7d0JBQ1BBLFFBQVFBLEVBQUVBLGNBQWNBO3dCQUN4QkEsUUFBUUEsRUFBRUEsd2RBS0xBO3dCQUNKQSxVQUFVQSxFQUFFQSxDQUFDQSx1QkFBVUEsQ0FBQ0E7cUJBQzVCQSxDQUFDQTs7aUNBR0RBO2dCQUFEQSxtQkFBQ0E7WUFBREEsQ0FaQSxBQVlDQSxJQUFBO1lBWkQsdUNBWUMsQ0FBQTtZQUVELG1CQUFTLENBQUMsWUFBWSxDQUFDLENBQUMiLCJmaWxlIjoiaW5kZXgvYXBwLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHtDb21wb25lbnR9IGZyb20gJ2FuZ3VsYXIyL2NvcmUnO1xuaW1wb3J0IHtib290c3RyYXB9ICAgIGZyb20gJ2FuZ3VsYXIyL3BsYXRmb3JtL2Jyb3dzZXInO1xuaW1wb3J0ICogYXMgYWkgZnJvbSAnYWkvYWknO1xuaW1wb3J0IHtBaUNoZWNrYm94fSBmcm9tICdhaS9jb21wb25lbnRzL2FpQ2hlY2tib3gvYWlDaGVja2JveCc7XG4gICAgICAgIFxuXG5AQ29tcG9uZW50KHtcbiAgICBzZWxlY3RvcjogJ2NoZWNrYm94LWFwcCcsXG4gICAgdGVtcGxhdGU6IGBcbiAgICAgICAgPGFpLWNoZWNrYm94Pm5vcm1hbDwvYWktY2hlY2tib3g+PGFpLWNoZWNrYm94IHByaW1hcnk+cHJpbWFyeTwvYWktY2hlY2tib3g+PGFpLWNoZWNrYm94IFtkaXNhYmxlZF09XCJ0cnVlXCI+ZGlzYWJsZWQ8L2FpLWNoZWNrYm94PlxuICAgICAgICA8YWktY2hlY2tib3ggY29sb3I9XCJyZWRcIiBbY2hlY2tlZF09XCJ0cnVlXCIgPnJlZDwvYWktY2hlY2tib3g+PGFpLWNoZWNrYm94IGNvbG9yPVwiZ3JlZW5cIj5ncmVlbjwvYWktY2hlY2tib3g+PGFpLWNoZWNrYm94IGNvbG9yPVwieWVsbG93XCI+eWVsbG93PC9haS1jaGVja2JveD5cbiAgICAgICAgPGJyLz5cbiAgICAgICAgPGFpLWNoZWNrYm94IHNpemU9J3NtYWxsJz5zbWFsbDwvYWktY2hlY2tib3g+PGFpLWNoZWNrYm94Pm5vcm1hbDwvYWktY2hlY2tib3g+PGFpLWNoZWNrYm94IHNpemU9J2xhcmdlJz5sYXJnZTwvYWktY2hlY2tib3g+XG4gICAgICAgIGBcbiAgICAsZGlyZWN0aXZlczogW0FpQ2hlY2tib3hdICBcbn0pXG5leHBvcnQgY2xhc3MgQXBwQ29tcG9uZW50IHsgIFxuICAgIFxufSAgICAgICAgICAgICAgXG5cbmJvb3RzdHJhcChBcHBDb21wb25lbnQpOyAgIl0sInNvdXJjZVJvb3QiOiIvc291cmNlLyJ9
