@@ -40,8 +40,6 @@ gulp.task('watch', function () {
         console.log(error.toString());
         this.emit('end');
     }
-    //.on('error', swallowError)
-    
     var watch = require('gulp-watch');
     watch(['./src/**/*.ts'], function() {
         clear();logTypescript('src:js','');
@@ -55,15 +53,6 @@ gulp.task('watch', function () {
     watch(['./app/**/*.ts'], function() {clear();logTypescript('app:js','');gulp.start('app:js')});
     watch(['./app/**/*.html'], function() {clear();logHtml('app:html','');gulp.start('app:html')});
     watch(['./test/**/*.ts','./test/**/*.html'], function() {clear();logTypescript('test','');gulp.start('test')});
-    
-    //var gaze = require('gaze');
-    //gaze(['./src/**/*.ts'], function () {this.on('all', function () {gulp.start('src:js')});this.on('error', function() {})});
-    //gaze(['./src/**/*.less'], function () {this.on('all', function () {gulp.start('src:css')});this.on('error', function() {})});
-    //gaze(['./app/**/*.less'], function () {this.on('all', function () {gulp.start('app:css')});this.on('error', function() {})});
-    //gaze(['./app/**/*.ts'], function () {this.on('all', function () {gulp.start('app:js')});this.on('error', function() {})});
-    //gaze(['./app/**/*.html'], function () {this.on('all', function () {gulp.start('app:html')});this.on('error', function() {})});
-    //gaze(['./test/**/*.ts'], function () {this.on('all', function () {gulp.start('test')});this.on('error', function() {})});
-    
 });
 
 /*

@@ -1,0 +1,119 @@
+@import "../AiControl/AiControl";
+  
+ai-checkbox {
+    .userSelect();
+    display: inline-block;
+    cursor: default;
+    position: relative;
+    outline: 0;
+    color:#555;
+}
+
+ai-checkbox .outer {
+    width: 20px;
+    height: 20px;
+    outline: 0 none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index:0;
+    font-weight: 300;
+}
+
+ai-checkbox .inner {
+    display:none;
+    width: 20px;
+    height: 20px;
+    outline: 0 none;
+    position: absolute;
+    top: -6px;
+    left: 1px;
+    z-index:1;
+    font-weight: 800;
+    font-size:30px;
+    color:#000;
+    transition: display .4s cubic-bezier(.25,.8,.25,1);
+}
+
+ai-checkbox.checked .inner{
+    display:inline-block;
+}
+
+
+ai-checkbox .label {
+    padding-left:26px;
+    display: inline-block;
+    max-width:220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    white-space: normal;
+    -webkit-user-select: text;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+/******************* 
+     disable
+****************** */
+
+ai-checkbox[disabled] .inner,ai-checkbox[disabled] .outer,ai-checkbox[disabled] .label {
+    color: rgba(215,215,215,.85)!important;
+}
+
+/******************* 
+     primary
+****************** */
+
+ai-checkbox[primary] .inner {
+    color: rgba(16,108,200,0.87);
+}
+
+/******************* 
+     color
+****************** */
+
+ai-checkbox.red .inner,ai-checkbox.red .outer,ai-checkbox.red .label {
+    color: rgba(252,61,57,0.87);
+}
+
+ai-checkbox.green .inner,ai-checkbox.green .outer,ai-checkbox.green .label {
+    color: rgba(81,212,102,0.87);
+}
+
+ai-checkbox.yellow .inner,ai-checkbox.yellow .outer,ai-checkbox.yellow .label {
+    color: rgba(255,193,7,0.87);
+}
+
+/******************* 
+     size
+****************** */
+
+ai-checkbox.large .outer,ai-checkbox.large .inner {
+    width: 40px;
+    height: 40px;
+    font-size: 34px;
+}
+ai-checkbox.large .inner {
+    top: -5px;
+    left:4px;
+    font-weight: 900;
+}
+ai-checkbox.large .label {
+    padding-left:40px;
+    font-size: 30px;
+}
+
+ai-checkbox.small .outer,ai-checkbox.small .inner {
+    width: 14px;
+    height: 14px;
+    font-size: 14px;
+}
+ai-checkbox.small .inner {
+    top: -1px;
+    left:2px;
+}
+ai-checkbox.small .label {
+    padding-left:15px;
+    font-size: 12px;
+}
