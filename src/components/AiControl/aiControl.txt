@@ -1,0 +1,67 @@
+/*
+        //Reflect.getMetadata('annotations', ComponentClass);
+        //Reflect.defineMetadata("service", { serviceName: name }, target);
+        //this.rebuildClassName();  
+    rebuildClassName(){
+        
+        this._classChain=new StringChain('');
+        this.onClassNameRebuild(el);
+
+        this.addClassName(el.getAttribute('size')); 
+        this.addClassName(el.getAttribute('color')); 
+        if(el.getAttribute('primary')!=null) this.addClassName('primary')
+        if(this.disabled) this.addClassName('disabled');
+
+        this._className=this._classChain.toString();
+        this._classChain=null;
+    }
+    onClassNameRebuild(el:any){}
+    addClassName(name:string){
+        this._classChain.add(name);
+    }
+
+    get disabled(): boolean {
+        return this._disabled;
+    }
+	
+    set disabled(v: boolean) {
+        this._disabled = v;
+        this.rebuildClassName();
+    }
+    <!--
+<span [ngClass]="_className" (click)="toggle()">
+</span>
+ -->
+
+    removeClass(cssClasses:string){
+        var element:any = this.ele.nativeElement;
+        if (cssClasses && element.setAttribute) {
+            var cssList=cssClasses.split(' ');          
+            for(var i=0;i<cssList.length;i++){
+                var cssClass=cssList[i].trim();
+                var c=(" " + (element.getAttribute('class') || '') + " ")
+                      .replace(/[\n\t]/g, " ")
+                      .replace(" " + cssClass + " ", " ");
+                element.setAttribute('class', c.trim());
+            }
+        }
+    }    
+
+    addClass(cssClasses:string){
+        var element:any = this.ele.nativeElement;
+        if (cssClasses && element.setAttribute) {
+            var existingClasses = (' ' + (element.getAttribute('class') || '') + ' ')
+                                    .replace(/[\n\t]/g, " ");
+        
+            var cssList=cssClasses.split(' ');          
+            for(var i=0;i<cssList.length;i++){
+                var cssClass=cssList[i].trim();
+                if (existingClasses.indexOf(' ' + cssClass + ' ') === -1) {
+                    existingClasses += cssClass + ' ';
+                }
+            }        
+            element.setAttribute('class', existingClasses.trim());
+        }
+    }
+
+*/

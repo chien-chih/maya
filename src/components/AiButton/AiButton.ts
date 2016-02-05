@@ -1,30 +1,27 @@
-import {Component,ElementRef,Renderer} from 'angular2/core';
+import {Component,ElementRef,Attribute} from 'angular2/core';
 import {AiControl} from '../AiControl/AiControl';
 
 @Component(AiControl.meta({
     templateUrl:'package:src/components/AiButton/AiButton.html',
     selector: 'ai-button',
-    inputs:['type','border'],
+    inputs:[],
     host:{
-      '[class.raised]':'type==="raised"',
-      '[class.fab]':'type==="fab"',
-      '[class.icon]':'type==="icon"',
-      '[class.material]':'type==="fab" ||type==="icon"',
-      '[class.link]':'!type',
-      '[class.left]':'border==="left"',
-      '[class.right]':'border==="right"',
+      //'[class.material]':'type==="fab" ||type==="icon"',
     },
 }))    
 //size:default,small,large
 //color:red,green,yellow
 export class AiButton extends AiControl{ 
-    type:string;
+    //type:string;
     border:string;
-    
+
     constructor(ele: ElementRef) { 
         super(ele); 
-        //var el:any = this.ele.nativeElement;
-        //var icon=el.getAttribute('icon');
+        var el:any = this.ele.nativeElement;
+        if(el.getAttribute('fab')==="" || el.getAttribute('icon')==="") {
+          this.enableMaterial();
+        }
+          
         //if(icon){
           //el.innerHTML=icon;
         //}
@@ -89,7 +86,7 @@ export class AiButton extends AiControl{
     '[class.flag]': 'type==="flag"',
     '[class.fab]': 'type==="fab"',
     '[class.link]': 'type==="link"',
-    '[class.icon]': 'type==="icon"',
+    '[class[icon]]': 'type==="icon"',
 
     setClasses() {
       let classes =  { 

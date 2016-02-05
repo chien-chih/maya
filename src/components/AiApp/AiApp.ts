@@ -14,7 +14,6 @@ export class AiApp{
     }
 
     constructor(ele: ElementRef) { 
-        debugger
     }
 
 } 

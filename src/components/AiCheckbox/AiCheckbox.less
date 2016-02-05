@@ -1,119 +1,157 @@
 @import "../AiControl/AiControl";
   
 ai-checkbox {
-    .userSelect();
+    .color-default(.9);
     display: inline-block;
     cursor: default;
     position: relative;
-    outline: 0;
-    color:#555;
-}
-
-ai-checkbox .outer {
-    width: 20px;
-    height: 20px;
     outline: 0 none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index:0;
-    font-weight: 300;
-}
-
-ai-checkbox .inner {
-    display:none;
-    width: 20px;
-    height: 20px;
-    outline: 0 none;
-    position: absolute;
-    top: -6px;
-    left: 1px;
-    z-index:1;
-    font-weight: 800;
-    font-size:30px;
-    color:#000;
-    transition: display .4s cubic-bezier(.25,.8,.25,1);
+    margin-right: 16px;
+    vertical-align: middle;
+    min-width: 36px;
+    height: 36px;
+    
+    .outer {
+        width: 24px;
+        height: 24px;
+        outline: 0 none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index:0;
+        font-weight: 300;
+        padding:6px;
+        border-radius:50%;
+    }
+    .outer.active{
+        .background-default(.1);
+    }
+    
+    .inner {
+        display:none;
+        width: 24px;
+        height: 24px;
+        outline: 0 none;
+        position: absolute;
+        top: 0;
+        left: 7px;
+        z-index:1;
+        font-weight: 800;
+        font-size:30px;
+        color:#000;
+        transition: display .4s cubic-bezier(.25,.8,.25,1);
+    }
+    
+    .label {
+        padding:6px 0 6px 32px;
+        display: inline-block;
+        max-width:220px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        -webkit-user-select: text;
+        box-sizing: border-box;
+        font-size: 20px;
+    }
 }
 
 ai-checkbox.checked .inner{
     display:inline-block;
 }
 
-
-ai-checkbox .label {
-    padding-left:26px;
-    display: inline-block;
-    max-width:220px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    vertical-align: middle;
-    white-space: normal;
-    -webkit-user-select: text;
-    box-sizing: border-box;
-    font-size: 20px;
+ai-checkbox.focus .outer{
+    .background-default(.1);
 }
+
+
 
 /******************* 
      disable
 ****************** */
 
-ai-checkbox[disabled] .inner,ai-checkbox[disabled] .outer,ai-checkbox[disabled] .label {
-    color: rgba(215,215,215,.85)!important;
+ai-checkbox.disabled .inner,ai-checkbox.disabled .outer,ai-checkbox.disabled .label {
+    .color-default(.3);
 }
-
+ 
 /******************* 
      primary
 ****************** */
 
 ai-checkbox[primary] .inner {
-    color: rgba(16,108,200,0.87);
+     .color-primary(.9);
 }
 
 /******************* 
      color
 ****************** */
 
-ai-checkbox.red .inner,ai-checkbox.red .outer,ai-checkbox.red .label {
-    color: rgba(252,61,57,0.87);
+ai-checkbox[red] .inner,ai-checkbox[red] .outer,ai-checkbox[red] .label {
+    .color-red(.9);
+}
+ai-checkbox[red].focus .outer{
+    .background-red(.1);
 }
 
-ai-checkbox.green .inner,ai-checkbox.green .outer,ai-checkbox.green .label {
-    color: rgba(81,212,102,0.87);
+ai-checkbox[green] .inner,ai-checkbox[green] .outer,ai-checkbox[green] .label {
+    .color-green(.9);
+}
+ai-checkbox[green].focus .outer{
+    .background-green(.1);
 }
 
-ai-checkbox.yellow .inner,ai-checkbox.yellow .outer,ai-checkbox.yellow .label {
-    color: rgba(255,193,7,0.87);
+ai-checkbox[yellow] .inner,ai-checkbox[yellow] .outer,ai-checkbox[yellow] .label {
+    .color-yellow(.9);
+}
+ai-checkbox[yellow].focus .outer{
+    .background-yellow(.1);
 }
 
 /******************* 
      size
 ****************** */
 
-ai-checkbox.large .outer,ai-checkbox.large .inner {
-    width: 40px;
-    height: 40px;
-    font-size: 34px;
-}
-ai-checkbox.large .inner {
-    top: -5px;
-    left:4px;
-    font-weight: 900;
-}
-ai-checkbox.large .label {
-    padding-left:40px;
-    font-size: 30px;
+ai-checkbox[large] {
+    width: 48px;
+    height: 48px;
+    
+    .outer{
+        width: 34px;
+        height: 34px;
+        padding:10px;
+        font-size: 34px;
+    }
+    
+    .inner {
+        top: 5px;
+        left:14px;
+        font-weight: 900;
+        font-size: 34px;
+    }
+    
+     .label {
+        padding:10px 0 10px 50px;
+        font-size: 30px;
+    }
 }
 
-ai-checkbox.small .outer,ai-checkbox.small .inner {
-    width: 14px;
-    height: 14px;
-    font-size: 14px;
-}
-ai-checkbox.small .inner {
-    top: -1px;
-    left:2px;
-}
-ai-checkbox.small .label {
-    padding-left:15px;
-    font-size: 12px;
+ai-checkbox[small] {
+    width: 24px;
+    height: 24px;
+
+    .outer{
+        width: 14px;
+        height: 14px;
+        padding:4px;
+        font-size: 14px;
+    }
+    
+     .inner {
+        top: 3px;
+        left:6px;
+        font-size: 14px;
+    }
+    .label {
+        padding:4px 0 4px 19px;
+        font-size: 12px;
+    }
 }

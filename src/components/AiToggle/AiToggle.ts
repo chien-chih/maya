@@ -1,33 +1,42 @@
-import {Component,ElementRef,Renderer} from 'angular2/core';
+import {Component,ElementRef} from 'angular2/core';
+import {ObservableWrapper,EventEmitter} from 'angular2/src/facade/async';
 import {AiControl} from '../AiControl/AiControl';
 
 @Component(AiControl.meta({
     templateUrl:'package:src/components/AiToggle/AiToggle.html',
     selector: 'ai-toggle',
     inputs:['value','up','down'],
+    outputs:['onchange'],
     host:{
-        '(click)':'toggle()',
         '[class.checked]': 'value',
     },
 }))    
 export class AiToggle extends AiControl{ 
+
     value:boolean=false; 
     _up:string='check_box_outline_blank';
     _down:string='check_box';
-    _current:string='check_box_outline_blank';
+
+    onchange: EventEmitter<any>=new EventEmitter();
+
     constructor(ele: ElementRef) {  
         super(ele); 
     }
     toggle():void{
-        if(!this.disabled)
+        if(!this.disabled){
             this.value=!this.value;
+        }
     }
 
+    onClick(){
+        this.toggle();
+    }
+    
     get current(): string {
-        return this._current;
+        if(this.value) return this._down;
+        return this._up;
     }
     set current(v: string) {
-        this._current = v;
     }
 
 

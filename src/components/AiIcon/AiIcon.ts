@@ -5,13 +5,14 @@ import {AiControl} from '../AiControl/AiControl';
     templateUrl:'package:src/components/AiIcon/AiIcon.html',
     selector: 'ai-icon',
       host:{
-      '[class.material]':'true',
     },
 }))    
 export class AiIcon extends AiControl { 
 
     constructor(ele: ElementRef) { 
         super(ele); 
+        this.tabindex=-1;
+        this.enableMaterial();
     }
 
 } 

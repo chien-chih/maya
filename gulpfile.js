@@ -441,6 +441,13 @@ function styleNameShrink(css, styleNames) {
 }
 
 function processHtml(mode) {
+    
+    function firstCharUppercase(text){
+        var c=text.substring(0,1);
+        text=c.toUpperCase() + text.substring(1,text.length);
+        return text;
+    }
+    
     function transform(file, cb) {
         var filename=path.basename(file.path,'.html');
         var replaceFrom="<head>";
@@ -457,7 +464,7 @@ function processHtml(mode) {
                 "\n<link rel='stylesheet' type='text/css' href='"+project.name+".css'>"+
                 "\n<script>"+
                     "System.config({packages: { "+filename+": {defaultExtension: 'js'},"+project.name+": {defaultExtension: 'js'}} });"+
-                    "System.import('"+filename+"/app');"+
+                    "System.import('"+filename+"/"+firstCharUppercase(filename)+"App');"+
                 "</script>";
         }
         else
