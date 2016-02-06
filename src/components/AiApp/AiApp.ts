@@ -1,4 +1,6 @@
-import {Component,ElementRef,Renderer} from 'angular2/core';
+import {Component,ElementRef} from 'angular2/core';
+//import {enableProdMode} from 'angular2/core';
+//enableProdMode();
 
 @Component({
     template:'',
@@ -13,11 +15,18 @@ export class AiApp{
         return meta;
     }
 
-    constructor(ele: ElementRef) { 
+    constructor(protected ele: ElementRef) { 
     }
+
+
 
 } 
   
+document.addEventListener('DOMContentLoaded', function() {
+    alert('hello');
+    //debugger
+    //document.body.setAttribute('mobile','a');
+});
    
  
   
