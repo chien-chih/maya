@@ -75,7 +75,7 @@ export class AiControl {
     constructor(protected ele: ElementRef) {
         
         var el:any = this.ele.nativeElement;
-        el.setAttribute('ai-control','');
+        el.setAttribute('ai-control',''); 
         
         var tabindex = el.getAttribute('tabindex');
         if(tabindex) this.tabindex = NumberWrapper.parseInt(tabindex, 10);

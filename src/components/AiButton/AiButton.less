@@ -1,4 +1,4 @@
-@import "../AiControl/AiControl";
+@import "../AiControl/Ai";
   
 ai-button {
     .color-default(.9);
@@ -141,19 +141,19 @@ ai-button[icon]{
     font-size: 24px;
 }
 
-ai-button[icon].focus {
+ai-button[icon].focus:not(.active) {
     .background-default(.1);
 }
-ai-button[icon][primary].focus {
+ai-button[icon][primary].focus:not(.active) {
     .background-primary(.1);
 }
-ai-button[icon][red].focus {
+ai-button[icon][red].focus:not(.active) {
     .background-red(.1);
 }
-ai-button[icon][green].focus {
+ai-button[icon][green].focus:not(.active) {
     .background-green(.1);
 }
-ai-button[icon][yellow].focus {
+ai-button[icon][yellow].focus:not(.active) {
     .background-yellow(.1);
 }
 
@@ -176,7 +176,7 @@ ai-button[icon][small] {
 /******************* 
      link
 ****************** */
-ai-button[link]:not([red]):not([green]):not([yellow]){
+ai-button[link]:not([red]):not([green]):not([yellow]):not(.disabled){
     .color-primary(.9);
 }
 ai-button[link].active:not([red]):not([green]):not([yellow]){
@@ -208,6 +208,7 @@ ai-button[fab]{
     padding:0;
     background-clip: padding-box;
     font-size: 28px;
+    box-shadow:0 2px 5px rgba(0, 0, 0, .26);
 }
 
 ai-button[fab].disabled{
@@ -216,9 +217,6 @@ ai-button[fab].disabled{
     background:rgba(215,215,215,0.8) ;
 }
 
-ai-button[fab] {
-    box-shadow:0 2px 5px rgba(0, 0, 0, .26);
-}
 ai-button[fab].active:not(.hover) {
     background:#e5e5e5;
     box-shadow:0 0px 1px rgba(0, 0, 0, .26);

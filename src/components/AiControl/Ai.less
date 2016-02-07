@@ -1,0 +1,82 @@
+
+.userSelect(@argument: none) {
+    -webkit-user-select: @argument;
+    -moz-user-select: @argument;
+    -ms-user-select: @argument;
+    user-select: @argument;
+}
+.appearance(@argument: none) {
+    appearance: @argument;
+    -moz-appearance: @argument;
+    -webkit-appearance: @argument;
+}
+.gradientBackground(@start: rgba(0,0,0,0.0),@stop: rgba(255,255,255,0.0),@origin: top) {
+    background-color: @stop;
+    background-image: linear-gradient(@origin, @start, @stop);
+}  
+.animation(@name) {
+    -webkit-animation: @name;
+    animation: @name;
+}
+
+.transform(...) {
+    -webkit-transform: @arguments;
+    transform: @arguments;
+}
+
+
+
+@zorderPopMask: 200;
+@zorderPopUp: (@zorderPopMask+1);
+@zorderPopOver: (@zorderPopUp+1);
+
+.margin-default() {
+    margin: 6px 0px;
+}
+ 
+.color-default(@a) {
+    color:rgba(88,88,88,@a);    
+}
+.border-default(@a) {
+    border:solid 1px rgba(88,88,88,@a);    
+}
+.background-default(@a) {
+    background:rgba(88,88,88,@a);    
+}
+.color-primary(@a) {
+    color:rgba(21, 126, 251,@a);    
+}
+.border-primary(@a) {
+    border:solid 1px rgba(21, 126, 251,@a);    
+}
+.background-primary(@a) {
+    background:rgba(21, 126, 251,@a);    
+}
+.color-red(@a) {
+    color:rgba(252, 61, 57,@a);    
+}
+.border-red(@a) {
+    border:solid 1px rgba(252, 61, 57,@a);    
+}
+.background-red(@a) {
+    background:rgba(252, 61, 57,@a);    
+}
+
+.color-green(@a) {
+    color:rgba(81, 212, 102,@a);    
+}
+.border-green(@a) {
+    border:solid 1px rgba(81, 212, 102,@a);    
+}
+.background-green(@a) {
+    background:rgba(81, 212, 102,@a);    
+}
+.color-yellow(@a) {
+    color:rgba(255, 193, 7,@a);    
+}
+.border-yellow(@a) {
+    border:solid 1px rgba(255, 193, 7,@a);    
+}
+.background-yellow(@a) {
+    background:rgba(255, 193, 7,@a);    
+}
