@@ -19,8 +19,11 @@ export class KeyCodes {
   @CONST() static ESCAPE = 27;
   @CONST() static ENTER = 13;
   @CONST() static SPACE = 32;
+  @CONST() static LEFT = 37;
   @CONST() static UP = 38;
+  @CONST() static RIGHT = 39;
   @CONST() static DOWN = 40;
+  
 }
 
 export class AiControl { 
@@ -54,16 +57,16 @@ export class AiControl {
         meta.host['[class.focus]']='isFocus';
         meta.host['[class.active]']='isActive';
         meta.host['[class.hover]']='isHover';
-        meta.host['(touchstart)']='onTouchstart($event)';
-        meta.host['(touchend)']='onTouchend($event)';
-        meta.host['(mouseup)']='onMouseup($event)';
-        meta.host['(mousedown)']='onMousedown($event)';
-        meta.host['(mouseover)']='onMouseover()';
-        meta.host['(mouseout)']='onMouseout()';
-        meta.host['(keyup)']='onKeyup($event)';
-        meta.host['(keydown)']='onKeydown($event)';
-        meta.host['(focus)']='onFocus()';
-        meta.host['(blur)']='onBlur()';
+        meta.host['(touchstart)']='touchStart($event)';
+        meta.host['(touchend)']='touchEnd($event)';
+        meta.host['(mouseup)']='mouseUp($event)';
+        meta.host['(mousedown)']='mouseDown($event)';
+        meta.host['(mouseover)']='mouseOver()';
+        meta.host['(mouseout)']='mouseOut()';
+        meta.host['(keyup)']='keyUp($event)';
+        meta.host['(keydown)']='keyDown($event)';
+        meta.host['(focus)']='focus()';
+        meta.host['(blur)']='blur()';
         meta.host['[tabindex]']='getTabIndex()';
         return meta;
     }
@@ -89,15 +92,23 @@ export class AiControl {
         return this.tabindex;
     }
     
-    protected onClick(){
-        
-    }
+    protected onClick(){}
+    protected onMouseOver() {}
+    protected onMouseOut() {}
+    protected onMouseDown(event: MouseEvent) {}
+    protected onMouseUp(event: MouseEvent) {}
+    protected onKeyDown(event: KeyboardEvent) {}
+    protected onKeyUp(event: KeyboardEvent) {}
+    protected onTouchStart(event) {}
+    protected onTouchEnd(event) {}
+    protected onFocus() {}
+    protected onBlur() {}
     
     fireClickEvent(){
         if (!this.disabled && !this.isFire) {
             try{
-                this.isFire=true;
                 this.onClick();
+                this.isFire=true;
                 ObservableWrapper.callEmit(this.onclick, null);
             }finally{
                 this.isFire=false;
@@ -105,75 +116,93 @@ export class AiControl {
         }
     }
 
-    onMouseover() {
+    mouseOver() {
         //console.log('mouseover');
         //need prevent ios/andorid send strange mouseover event
-        if (!this.disabled && !AiControl.mobile) this.isHover = true;
+        if (!this.disabled && !AiControl.mobile) {
+            this.onMouseOver();
+            this.isHover = true;
+        }
     }
     
-    onMouseout() {
+    mouseOut() {
         this.isHover = false;
         this.isActive = false;
+        if (!this.disabled && !AiControl.mobile) 
+            this.onMouseOut();
     }
     
-    onMousedown(event: MouseEvent) {
+    mouseDown(event: MouseEvent) {
         //console.log('mousedown');
         if (!this.disabled && event.button==0) {
+            this.onMouseDown(event);
             this.isActive = true;
         }
     }
     
-    onMouseup(event: MouseEvent) {
+    mouseUp(event: MouseEvent) {
         //console.log('mouseup');
         this.isActive = false;
-        if (event.button==0) {
+        if (!this.disabled && event.button==0) {
+            this.onMouseUp(event);
             this.fireClickEvent();
         }
     }
     
     
-    onKeydown(event: KeyboardEvent) {
+    keyDown(event: KeyboardEvent) {
         //fix ios bluetooth keycode bug
         this.keyCode=event.keyCode;
-        
-        if (!this.disabled && event.keyCode == KeyCodes.SPACE) {
-            this.isActive = true;
-            //prevent press space jump to end
-            event.preventDefault();
-            event.stopPropagation();
+        if (!this.disabled) {
+            this.onKeyDown(event);
+            if(event.keyCode == KeyCodes.SPACE){
+                this.isActive = true;
+                //prevent press space jump to end
+                event.preventDefault();
+                event.stopPropagation();
+            }
         }
     }
     
-    onKeyup(event: KeyboardEvent) {
+    keyUp(event: KeyboardEvent) {
+        if (!this.disabled) {
+            this.onKeyUp(event);
+        }
         this.isActive = false;
         if (this.keyCode == KeyCodes.SPACE) 
             this.fireClickEvent();
     }
     
-    onTouchstart(event) {
+    touchStart(event) {
         //console.log('touchstart');
-        if (!this.disabled && event.touches.length == 1) {
-            this.isActive = true;
+        if (!this.disabled) {
+            this.onTouchStart(event);
+            if(event.touches.length == 1)
+                this.isActive = true;
         }
     }
     
-    onTouchend(event) {
+    touchEnd(event) {
         //console.log('touchend');
         this.isActive = false;
          if (!this.disabled){
+            this.onTouchEnd(event);
             this.fireClickEvent();
         }
         event.preventDefault();
     }
 
-    onFocus() {
+    focus() {
         //console.log('focus');
         if (!this.disabled){
+            this.onFocus();
             this.isFocus = !this.isActive;
         }
     }
     
-    onBlur() {
+    blur() {
+        if (!this.disabled)
+            this.onBlur();
         this.isFocus = false;
     }
 

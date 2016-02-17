@@ -1,6 +1,6 @@
 @import "../AiControl/Ai";
   
-ai-toggle {
+ai-radio {
     .color-default(.9);
     display: inline-block;
     cursor: default;
@@ -38,11 +38,11 @@ ai-toggle {
     }
 }
 
-ai-toggle.focus .inner,ai-toggle.active .inner{
+ai-radio.focus .inner,ai-radio.active .inner{
     .background-default(.1);
 }
 
-ai-toggle.hover .inner,ai-toggle.hover .label{
+ai-radio.hover .inner,ai-radio.hover .label{
     .color-default(1);
 }
 
@@ -50,7 +50,7 @@ ai-toggle.hover .inner,ai-toggle.hover .label{
      disable
 ****************** */
 
-ai-toggle.disabled .inner,ai-toggle.disabled .outer,ai-toggle.disabled .label {
+ai-radio.disabled .inner,ai-radio.disabled .outer,ai-radio.disabled .label {
     .color-default(.3);
 }
 
@@ -58,13 +58,13 @@ ai-toggle.disabled .inner,ai-toggle.disabled .outer,ai-toggle.disabled .label {
      primary
 ****************** */
 
-ai-toggle[primary] .inner,ai-toggle[primary] .label {
+ai-radio[primary] .inner,ai-radio[primary] .label {
      .color-primary(.9);
 }
-ai-toggle[primary].focus .inner,ai-toggle[primary].active .inner{
+ai-radio[primary].focus .inner,ai-radio[primary].active .inner{
     .background-primary(.1);
 }
-ai-toggle[primary].hover .inner,ai-toggle[primary].hover .label{
+ai-radio[primary].hover .inner,ai-radio[primary].hover .label{
     .color-primary(1);
 }
 
@@ -72,33 +72,33 @@ ai-toggle[primary].hover .inner,ai-toggle[primary].hover .label{
      color
 ****************** */
 
-ai-toggle[red] .inner,ai-toggle[red] .label {
+ai-radio[red] .inner,ai-radio[red] .label {
     .color-red(.9);
 }
-ai-toggle[red].focus .inner,ai-toggle[red].active .inner{
+ai-radio[red].focus .inner,ai-radio[red].active .inner{
     .background-red(.1);
 }
-ai-toggle[red].hover .inner,ai-toggle[red].hover .label{
+ai-radio[red].hover .inner,ai-radio[red].hover .label{
     .color-red(1);
 }
 
-ai-toggle[green] .inner,ai-toggle[green] .label {
+ai-radio[green] .inner,ai-radio[green] .label {
     .color-green(.9);
 }
-ai-toggle[green].focus .inner,ai-toggle[green].active .inner{
+ai-radio[green].focus .inner,ai-radio[green].active .inner{
     .background-green(.1);
 }
-ai-toggle[green].hover .inner,ai-toggle[green].hover .label{
+ai-radio[green].hover .inner,ai-radio[green].hover .label{
     .color-green(1);
 }
 
-ai-toggle[yellow] .inner,ai-toggle[yellow] .label {
+ai-radio[yellow] .inner,ai-radio[yellow] .label {
     .color-yellow(.9);
 }
-ai-toggle[yellow].focus .inner,ai-toggle[yellow].active .inner{
+ai-radio[yellow].focus .inner,ai-radio[yellow].active .inner{
     .background-yellow(.1);
 }
-ai-toggle[yellow].hover .inner,ai-toggle[yellow].hover .label{
+ai-radio[yellow].hover .inner,ai-radio[yellow].hover .label{
     .color-yellow(1);
 }
 
@@ -106,7 +106,7 @@ ai-toggle[yellow].hover .inner,ai-toggle[yellow].hover .label{
      size
 ****************** */
 
-ai-toggle[large]{
+ai-radio[large]{
     min-width: 48px;
     height: 48px;
     
@@ -124,7 +124,7 @@ ai-toggle[large]{
     }
 }
 
-ai-toggle[small]{
+ai-radio[small]{
     min-width: 24px;
     height: 24px;
     .inner {

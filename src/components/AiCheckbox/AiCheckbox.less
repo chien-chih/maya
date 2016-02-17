@@ -55,6 +55,10 @@ ai-checkbox {
     }
 }
 
+ai-checkbox.hover .label{
+    .color-default(1);
+}
+
 ai-checkbox.checked .inner{
     display:inline-block;
 }
@@ -91,6 +95,10 @@ ai-checkbox[primary].active .outer{
 ai-checkbox[red] .inner,ai-checkbox[red] .outer,ai-checkbox[red] .label {
     .color-red(.9);
 }
+ai-checkbox[red].hover .label{
+    .color-red(1);
+}
+
 ai-checkbox[red].focus .outer,ai-checkbox[red].active .outer{
     .background-red(.1);
 }
@@ -101,12 +109,18 @@ ai-checkbox[green] .inner,ai-checkbox[green] .outer,ai-checkbox[green] .label {
 ai-checkbox[green].focus .outer,ai-checkbox[green].active .outer{
     .background-green(.1);
 }
+ai-checkbox[green].hover .label{
+    .color-green(1);
+}
 
 ai-checkbox[yellow] .inner,ai-checkbox[yellow] .outer,ai-checkbox[yellow] .label {
     .color-yellow(.9);
 }
 ai-checkbox[yellow].focus .outer,ai-checkbox[yellow].active .outer{
     .background-yellow(.1);
+}
+ai-checkbox[yellow].hover .label{
+    .color-yellow(1);
 }
 
 /******************* 
