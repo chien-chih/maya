@@ -1,9 +1,9 @@
-import {Component,ElementRef,Renderer} from 'angular2/core';
+import {Component,ElementRef} from 'angular2/core';
 import {AiControl} from '../AiControl/AiControl';
 
 @Component(AiControl.meta({
-        templateUrl:'package:src/components/AiIcon/AiIcon.html',
-        selector: 'ai-icon',
+        templateUrl:'package:src/components/AiSpinner/AiSpinner.html',
+        selector: 'ai-spinner',
     },{
         ignoreActive:1,
         ignoreDisabled:1,
@@ -11,13 +11,11 @@ import {AiControl} from '../AiControl/AiControl';
         ignoreHover:1
     }
 ))    
-export class AiIcon extends AiControl { 
+export class AiSpinner extends AiControl { 
 
     constructor(ele: ElementRef) { 
         super(ele); 
-        this.enableMaterial();
     }
-
 } 
   
    

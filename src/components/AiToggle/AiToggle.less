@@ -1,6 +1,6 @@
-@import "../AiControl/Ai";
+@import "../AiControl/Definition";
   
-ai-toggle {
+[ai-toggle] {
     .color-default(.9);
     display: inline-block;
     cursor: default;
@@ -38,11 +38,11 @@ ai-toggle {
     }
 }
 
-ai-toggle.focus .inner,ai-toggle.active .inner{
+[ai-toggle].focus .inner,[ai-toggle].active .inner{
     .background-default(.1);
 }
 
-ai-toggle.hover .inner,ai-toggle.hover .label{
+[ai-toggle].hover .inner,[ai-toggle].hover .label{
     .color-default(1);
 }
 
@@ -50,7 +50,7 @@ ai-toggle.hover .inner,ai-toggle.hover .label{
      disable
 ****************** */
 
-ai-toggle.disabled .inner,ai-toggle.disabled .outer,ai-toggle.disabled .label {
+[ai-toggle].disabled .inner,[ai-toggle].disabled .outer,[ai-toggle].disabled .label {
     .color-default(.3);
 }
 
@@ -58,13 +58,13 @@ ai-toggle.disabled .inner,ai-toggle.disabled .outer,ai-toggle.disabled .label {
      primary
 ****************** */
 
-ai-toggle[primary] .inner,ai-toggle[primary] .label {
+[ai-toggle][primary] .inner,[ai-toggle][primary] .outer,[ai-toggle][primary] .label {
      .color-primary(.9);
 }
-ai-toggle[primary].focus .inner,ai-toggle[primary].active .inner{
+[ai-toggle][primary].focus .inner,[ai-toggle][primary].active .inner{
     .background-primary(.1);
 }
-ai-toggle[primary].hover .inner,ai-toggle[primary].hover .label{
+[ai-toggle][primary].hover .inner,[ai-toggle][primary].hover .label{
     .color-primary(1);
 }
 
@@ -72,33 +72,33 @@ ai-toggle[primary].hover .inner,ai-toggle[primary].hover .label{
      color
 ****************** */
 
-ai-toggle[red] .inner,ai-toggle[red] .label {
+[ai-toggle][red] .inner,[ai-toggle][red] .outer,[ai-toggle][red] .label {
     .color-red(.9);
 }
-ai-toggle[red].focus .inner,ai-toggle[red].active .inner{
+[ai-toggle][red].focus .inner,[ai-toggle][red].active .inner{
     .background-red(.1);
 }
-ai-toggle[red].hover .inner,ai-toggle[red].hover .label{
+[ai-toggle][red].hover .inner,[ai-toggle][red].hover .label{
     .color-red(1);
 }
 
-ai-toggle[green] .inner,ai-toggle[green] .label {
+[ai-toggle][green] .inner,[ai-toggle][green] .outer,[ai-toggle][green] .label {
     .color-green(.9);
 }
-ai-toggle[green].focus .inner,ai-toggle[green].active .inner{
+[ai-toggle][green].focus .inner,[ai-toggle][green].active .inner{
     .background-green(.1);
 }
-ai-toggle[green].hover .inner,ai-toggle[green].hover .label{
+[ai-toggle][green].hover .inner,[ai-toggle][green].hover .label{
     .color-green(1);
 }
 
-ai-toggle[yellow] .inner,ai-toggle[yellow] .label {
+[ai-toggle][yellow] .inner,[ai-toggle][yellow] .outer,[ai-toggle][yellow] .label {
     .color-yellow(.9);
 }
-ai-toggle[yellow].focus .inner,ai-toggle[yellow].active .inner{
+[ai-toggle][yellow].focus .inner,[ai-toggle][yellow].active .inner{
     .background-yellow(.1);
 }
-ai-toggle[yellow].hover .inner,ai-toggle[yellow].hover .label{
+[ai-toggle][yellow].hover .inner,[ai-toggle][yellow].hover .label{
     .color-yellow(1);
 }
 
@@ -106,7 +106,7 @@ ai-toggle[yellow].hover .inner,ai-toggle[yellow].hover .label{
      size
 ****************** */
 
-ai-toggle[large]{
+[ai-toggle][large]{
     min-width: 48px;
     height: 48px;
     
@@ -124,7 +124,7 @@ ai-toggle[large]{
     }
 }
 
-ai-toggle[small]{
+[ai-toggle][small]{
     min-width: 24px;
     height: 24px;
     .inner {

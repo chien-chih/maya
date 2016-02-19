@@ -1,33 +1,12 @@
-@import "../AiControl/Ai";
+@import "../AiControl/Definition";
   
-ai-checkbox {
-    .color-default(.9);
-    display: inline-block;
-    cursor: default;
-    position: relative;
-    outline: 0 none;
-    margin-right: 16px;
-    vertical-align: middle;
-    min-width: 36px;
-    height: 36px;
-    
-    .outer {
-        width: 24px;
-        height: 24px;
-        outline: 0 none;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index:0;
-        font-weight: 300;
-        padding:6px;
-        border-radius:50%;
-    }
-    .outer.active{
-        .background-default(.1);
-    }
-    
+ai-checkbox[ai-toggle] {
+
     .inner {
+        z-index:0;
+    }
+
+    .outer {
         display:none;
         width: 24px;
         height: 24px;
@@ -43,102 +22,39 @@ ai-checkbox {
     }
     
     .label {
-        padding:6px 0 6px 32px;
-        display: inline-block;
-        max-width:220px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: normal;
-        -webkit-user-select: text;
-        box-sizing: border-box;
-        font-size: 20px;
     }
 }
 
-ai-checkbox.hover .label{
-    .color-default(1);
-}
-
-ai-checkbox.checked .inner{
+ai-checkbox.checked .outer{
     display:inline-block;
 }
-
-ai-checkbox.focus .outer,ai-checkbox.active .outer{
-    .background-default(.1);
-}
-
 
 
 /******************* 
      disable
 ****************** */
 
-ai-checkbox.disabled .inner,ai-checkbox.disabled .outer,ai-checkbox.disabled .label {
-    .color-default(.3);
-}
- 
+
 /******************* 
      primary
 ****************** */
 
-ai-checkbox[primary] .inner {
-     .color-primary(.9);
-}
-ai-checkbox[primary].active .outer{
-    .background-primary(.1);
-}
 
 /******************* 
      color
 ****************** */
 
-ai-checkbox[red] .inner,ai-checkbox[red] .outer,ai-checkbox[red] .label {
-    .color-red(.9);
-}
-ai-checkbox[red].hover .label{
-    .color-red(1);
-}
-
-ai-checkbox[red].focus .outer,ai-checkbox[red].active .outer{
-    .background-red(.1);
-}
-
-ai-checkbox[green] .inner,ai-checkbox[green] .outer,ai-checkbox[green] .label {
-    .color-green(.9);
-}
-ai-checkbox[green].focus .outer,ai-checkbox[green].active .outer{
-    .background-green(.1);
-}
-ai-checkbox[green].hover .label{
-    .color-green(1);
-}
-
-ai-checkbox[yellow] .inner,ai-checkbox[yellow] .outer,ai-checkbox[yellow] .label {
-    .color-yellow(.9);
-}
-ai-checkbox[yellow].focus .outer,ai-checkbox[yellow].active .outer{
-    .background-yellow(.1);
-}
-ai-checkbox[yellow].hover .label{
-    .color-yellow(1);
-}
 
 /******************* 
      size
 ****************** */
 
-ai-checkbox[large] {
-    min-width: 48px;
-    height: 48px;
-    
-    .outer{
-        width: 34px;
-        height: 34px;
-        padding:10px;
-        font-size: 34px;
+ai-checkbox[ai-toggle][large] {
+
+    .inner{
     }
     
-    .inner {
+    .outer {
         top: 5px;
         left:14px;
         font-weight: 900;
@@ -146,29 +62,19 @@ ai-checkbox[large] {
     }
     
      .label {
-        padding:10px 0 10px 50px;
-        font-size: 30px;
     }
 }
 
-ai-checkbox[small] {
-    min-width: 24px;
-    height: 24px;
+ai-checkbox[ai-toggle][small] {
 
-    .outer{
-        width: 14px;
-        height: 14px;
-        padding:4px;
-        font-size: 14px;
+    .inner{
     }
     
-     .inner {
+     .outer {
         top: 3px;
         left:6px;
         font-size: 14px;
     }
     .label {
-        padding:4px 0 4px 19px;
-        font-size: 12px;
     }
 }

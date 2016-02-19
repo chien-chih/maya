@@ -34,6 +34,7 @@ export class AiControl {
     isHover: boolean = false;
     isFire:boolean=false;
     keyCode:number=0;
+    visible: boolean = true;
     
     static mobile:boolean=AiControl.init();
     static init():boolean{
@@ -45,29 +46,45 @@ export class AiControl {
 
     onclick: EventEmitter<any>=new EventEmitter();
     
-    static meta(meta:any):any{
+    static meta(meta:any,options?:any):any{
+        if(!options) options={}; 
         if(!meta.inputs) meta.inputs=[];
-        meta.inputs.push('disabled');
-
         if(!meta.outputs) meta.outputs=[];
-        meta.outputs.push('onclick');
-        
         if(!meta.host) meta.host={};
-        meta.host['[class.disabled]']='disabled';
-        meta.host['[class.focus]']='isFocus';
-        meta.host['[class.active]']='isActive';
-        meta.host['[class.hover]']='isHover';
-        meta.host['(touchstart)']='touchStart($event)';
-        meta.host['(touchend)']='touchEnd($event)';
-        meta.host['(mouseup)']='mouseUp($event)';
-        meta.host['(mousedown)']='mouseDown($event)';
-        meta.host['(mouseover)']='mouseOver()';
-        meta.host['(mouseout)']='mouseOut()';
-        meta.host['(keyup)']='keyUp($event)';
-        meta.host['(keydown)']='keyDown($event)';
-        meta.host['(focus)']='focus()';
-        meta.host['(blur)']='blur()';
-        meta.host['[tabindex]']='getTabIndex()';
+
+        meta.inputs.push('visible');
+        meta.host['[class.hide]']='!visible';
+        if(!options.ignoreDisabled){
+            meta.inputs.push('disabled');
+            meta.host['[class.disabled]']='disabled';
+        }
+        
+        if(!options.ignoreFocus){
+            meta.host['[class.focus]']='isFocus';
+            meta.host['(focus)']='focus()';
+            meta.host['(blur)']='blur()';
+            meta.host['[tabindex]']='getTabIndex()';
+        }        
+        else
+            meta.host['[tabindex]']='-1';
+
+
+        if(!options.ignoreHover){
+            meta.host['[class.hover]']='isHover';
+            meta.host['(mouseover)']='mouseOver()';
+            meta.host['(mouseout)']='mouseOut()';
+        }        
+
+        if(!options.ignoreActive){
+            meta.outputs.push('onclick');
+            meta.host['[class.active]']='isActive';
+            meta.host['(mouseup)']='mouseUp($event)';
+            meta.host['(mousedown)']='mouseDown($event)';
+            meta.host['(touchstart)']='touchStart($event)';
+            meta.host['(touchend)']='touchEnd($event)';
+            meta.host['(keyup)']='keyUp($event)';
+            meta.host['(keydown)']='keyDown($event)';
+        }
         return meta;
     }
 
@@ -76,22 +93,19 @@ export class AiControl {
     }
 
     constructor(protected ele: ElementRef) {
-        
         var el:any = this.ele.nativeElement;
         el.setAttribute('ai-control',''); 
         
         var tabindex = el.getAttribute('tabindex');
         if(tabindex) this.tabindex = NumberWrapper.parseInt(tabindex, 10);
-
-        if(el.getAttribute('disabled'))
-            this.disabled = true;
     }  
 
     getTabIndex(){
-        if(this.disabled) return -1;
+        if(this.disabled || !this.visible) return -1;
         return this.tabindex;
     }
-    
+
+
     protected onClick(){}
     protected onMouseOver() {}
     protected onMouseOut() {}

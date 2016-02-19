@@ -1,0 +1,64 @@
+@import "../AiControl/Definition";
+
+@progress-linear-bar-height: 5px;
+@progress-linear-bar-height-large: 18px;
+@progress-linear-bar-height-small: 2px;
+
+ai-progress {
+    display: inline-block;
+    width: 180px;
+    height: @progress-linear-bar-height;
+    overflow: hidden;
+    position: relative;
+    transition: all .3s linear;
+    transform: translate(0, 0) scale(1, 1);
+    background-color: rgba(180, 180, 180,.5);
+
+    .bar {
+        box-sizing: border-box;
+        height: @progress-linear-bar-height;
+        position: absolute;
+        width: 100%;
+        transition: all 0.2s linear;
+        background-color: rgba(15, 124, 254,.9);
+    }
+}
+
+ai-progress[red] {
+    .bar {
+        .gradientBackground(#fa6e43,#f2220c);
+    }
+}
+
+ai-progress[green] {
+    .bar {
+        .gradientBackground(#c7fa44,#88f20d);
+    }
+}
+
+ai-progress[yellow] {
+    .bar {
+        .gradientBackground(#fad643,#f2a40c);
+    }
+}
+
+ai-progress[white] {
+    background:rgba(200,200,200,.6);
+    .bar {
+        background:rgba(255,255,255,.95);
+    }
+}
+
+ai-progress[large] {
+    height: @progress-linear-bar-height-large;
+    .bar {
+        height: @progress-linear-bar-height-large;
+    }
+}
+
+ai-progress[small] {
+    height: @progress-linear-bar-height-small;
+    .bar {
+        height: @progress-linear-bar-height-small;
+    }
+}

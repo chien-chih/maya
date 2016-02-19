@@ -1,62 +1,38 @@
-import {Component,ElementRef} from 'angular2/core';
-import {ObservableWrapper,EventEmitter} from 'angular2/src/facade/async';
+import {ElementRef,OnChanges} from 'angular2/core';
 import {AiControl} from '../AiControl/AiControl';
+import {EventEmitter} from 'angular2/src/facade/async';
 
-@Component(AiControl.meta({
-    templateUrl:'package:src/components/AiToggle/AiToggle.html',
-    selector: 'ai-toggle',
-    inputs:['value','up','down'],
-    outputs:['onchange'],
-    host:{
-        '[class.checked]': 'value',
-    },
-}))    
-export class AiToggle extends AiControl{ 
+ 
+export class AiToggle extends AiControl { 
 
-    value:boolean=false; 
-    _up:string='check_box_outline_blank';
-    _down:string='check_box';
+    /** Whether this toggle is checked. */
+    checked: boolean=false;
 
-    onchange: EventEmitter<any>=new EventEmitter();
+    /** Value assigned to this toggle. May Used to assign the value to the parent Group. */
+    value:any;
 
-    constructor(ele: ElementRef) {  
-        super(ele); 
+    onchange:EventEmitter<any>=new EventEmitter();
+
+    static meta(meta:any):any{
+        meta=AiControl.meta(meta);
+        meta.inputs.push('value');
+        meta.inputs.push('checked');
+        meta.outputs.push('onchange');
+        meta.host['[class.checked]']='checked';
+        return meta;
     }
+
+    constructor(ele: ElementRef) {
+        super(ele); 
+        var el:any = this.ele.nativeElement;
+        el.setAttribute('ai-toggle',''); 
+    }  
+
     toggle():void{
         if(!this.disabled){
-            this.value=!this.value;
+            this.checked=!this.checked;
         }
     }
 
-    onClick(){
-        this.toggle();
-    }
     
-    get current(): string {
-        if(this.value) return this._down;
-        return this._up;
-    }
-    set current(v: string) {
-    }
-
-
-    get up(): string {
-        return this._up;
-    }
-    set up(v: string) {
-        this._up = v;
-    }
-
-    get down(): string {
-        return this._down;
-    }
-    set down(v: string) {
-        this._down = v;
-        this.current=v;
-    }
-
 } 
-  
-   
- 
-  

@@ -50,7 +50,6 @@ export class AiRadioGroup extends AiControl implements OnChanges{
     
     /** Change handler invoked when bindings are resolved or when bindings have changed. */
     ngOnChanges(_) {
-
         // If the value of this radio-group has been set or changed, we have to look through the
         // child radio buttons and select the one that has a corresponding value (if any).
         if (isPresent(this.value) && this.value != '') {

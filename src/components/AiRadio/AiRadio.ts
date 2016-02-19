@@ -1,32 +1,24 @@
 import {Component,ElementRef,OnInit,Host,SkipSelf,Attribute,Optional} from 'angular2/core';
 import {isPresent, StringWrapper, NumberWrapper} from 'angular2/src/facade/lang';
 import {ObservableWrapper,EventEmitter} from 'angular2/src/facade/async';
-import {AiControl} from '../AiControl/AiControl';
+import {AiToggle} from '../AiToggle/AiToggle';
 import {AiRadioGroup} from './AiRadioGroup';
 import {AiRadioDispatcher} from './AiRadioDispatcher';
 
 var _uniqueIdCounter: number = 0;
 
-@Component(AiControl.meta({
+@Component(AiToggle.meta({
     templateUrl:'package:src/components/AiRadio/AiRadio.html',
     selector: 'ai-radio',
-    inputs:['id', 'name', 'value', 'checked'],
-    host:{ 
-        '[class.checked]': 'value',
-    },
+    inputs:['id', 'name']
 }))     
-export class AiRadio extends AiControl implements OnInit{ 
-    /** Whether this radio is checked. */
-    checked: boolean=false;
-    
+export class AiRadio extends AiToggle implements OnInit{ 
+
     /** The unique ID for the radio button. */
     id: string;
     
     /** Analog to HTML 'name' attribute used to group radios for unique selection. */
     name: string;
-    
-    /** Value assigned to this radio. Used to assign the value to the parent RadioGroup. */
-    value: any=null;
     
     /** The parent radio group. May or may not be present. */
     radioGroup: AiRadioGroup;

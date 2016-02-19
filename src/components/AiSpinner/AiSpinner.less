@@ -1,0 +1,52 @@
+@import "../AiControl/Definition";
+
+@spinner-color-default  : rgba(98,105,116,.9); 
+@spinner-color-primary  : rgba(21, 126, 251,.9); 
+@spinner-color-red  : rgba(252, 61, 57,.9);    
+@spinner-color-green  : rgba(81, 212, 102,.9);
+@spinner-color-yellow  : rgba(255, 193, 7,.9); 
+@spinner-color-white  : rgba(238, 238, 238,.9); 
+
+ai-spinner {
+    stroke: @spinner-color-default;
+    box-sizing: border-box;
+    margin: 6px 0px;
+    svg{
+        width:28px;
+        height:28px;
+    }
+}
+
+ai-spinner[large] {
+    svg{
+        width:56px;
+        height:56px;
+    }
+}
+
+ai-spinner[small] {
+    svg{
+        width:16px;
+        height:16px;
+    }
+}
+
+ai-spinner[primary]{
+    stroke: @spinner-color-primary;
+}
+
+ai-spinner[red]{
+    stroke: @spinner-color-red;
+}
+
+ai-spinner[green]{
+    stroke: @spinner-color-green;
+}
+
+ai-spinner[yellow]{
+    stroke: @spinner-color-yellow;
+}
+
+ai-spinner[white]{
+    stroke: @spinner-color-white;
+}
