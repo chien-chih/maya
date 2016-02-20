@@ -6,13 +6,14 @@
 
 ai-progress {
     display: inline-block;
+    margin: 6px 0px;
     width: 180px;
     height: @progress-linear-bar-height;
     overflow: hidden;
     position: relative;
     transition: all .3s linear;
     transform: translate(0, 0) scale(1, 1);
-    background-color: rgba(180, 180, 180,.5);
+    background: rgba(180, 180, 180,.5);
 
     .bar {
         box-sizing: border-box;
@@ -20,9 +21,20 @@ ai-progress {
         position: absolute;
         width: 100%;
         transition: all 0.2s linear;
-        background-color: rgba(15, 124, 254,.9);
+        background: rgba(15, 124, 254,.9);
     }
 }
+
+
+ai-progress[primary] {
+    background: none;
+    .bar {
+          background: -webkit-linear-gradient(to right, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);
+          background: -moz-linear-gradient(to right, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);
+          background: linear-gradient(to right, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);
+        }
+}
+
 
 ai-progress[red] {
     .bar {

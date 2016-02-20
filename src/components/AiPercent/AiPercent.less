@@ -1,0 +1,198 @@
+@import "../AiControl/Definition";
+
+@progress-border-width : 8px;
+@progress-circular-size : 10 * @progress-border-width;
+
+@progress-border-width-large : 20px;
+@progress-circular-size-large : 10 * @progress-border-width-large;
+
+@progress-border-width-small : 4px;
+@progress-circular-size-small : 2 * @progress-border-width-large;
+
+@progress-color-back : rgba(140, 140, 140,.1);
+@progress-color-value : rgba(140, 140, 140,1);
+@progress-primary-back : rgba(140, 140, 140,.1);
+@progress-primary-value : rgba(21, 126, 251,1);
+@progress-red-back : rgba(252, 61, 57,.1);
+@progress-red-value : rgba(252, 61, 57,1);
+@progress-green-back : rgba(81, 212, 102,.1);
+@progress-green-value : rgba(81, 212, 102,1);
+@progress-yellow-back : rgba(255, 193, 7,.1);
+@progress-yellow-value : rgba(255, 193, 7,1);
+
+ai-percent {
+    display: inline-block;
+    position: relative;
+    width: @progress-circular-size;
+    height: @progress-circular-size;
+    margin:0 6px;
+    z-index: 2; // Used to fix a Chrome bug with spinner animation
+    overflow: hidden;    
+    .label{
+        padding-top:30px;
+        text-align:center;
+        position: absolute;
+        top: 0;
+        height: @progress-circular-size;
+        width: @progress-circular-size;
+        font-size: 18px;
+        font-weight: 500;
+        color:#666;
+    }
+    .left, .right {
+        position: absolute;
+        top: 0;
+        height: @progress-circular-size;
+        width: @progress-circular-size * 0.50;
+        overflow: hidden;
+        .half-circle {
+           position: absolute;
+           top: 0;
+           width: @progress-circular-size;
+           height: @progress-circular-size;
+           box-sizing: border-box;
+           border-color:@progress-color-value;
+           border-bottom-color: @progress-color-back;
+           border-width: @progress-border-width;
+           border-style: solid;
+           border-radius: 50%;
+        }
+     }
+     .left {
+        left: 0;
+        .half-circle {
+           left: 0;
+           border-right-color: @progress-color-back;
+        }
+     }
+    .right {
+        right: 0;
+        .half-circle {
+           right: 0;
+           border-left-color: @progress-color-back;
+        }
+    }
+}
+
+ai-percent[primary] {
+    .left, .right {
+        .half-circle {
+           border-color:@progress-primary-value;
+           border-bottom-color: @progress-primary-back;
+        }
+    }
+    .left {
+        .half-circle {
+           border-bottom-color: @progress-primary-back;
+        }
+    }
+    .right {
+        .half-circle {
+           border-bottom-color: @progress-primary-back;
+        }
+    }
+}
+ai-percent[red] {
+    .label{
+        color:@progress-red-value;
+    }
+    .left, .right {
+        .half-circle {
+           border-color:@progress-red-value;
+           border-bottom-color: @progress-red-back;
+        }
+    }
+    .left {
+        .half-circle {
+           border-bottom-color: @progress-red-back;
+        }
+    }
+    .right {
+        .half-circle {
+           border-bottom-color: @progress-red-back;
+        }
+    }
+}
+ai-percent[green] {
+    .label{
+        color:@progress-green-value;
+    }
+    .left, .right {
+        .half-circle {
+           border-color:@progress-green-value;
+           border-bottom-color: @progress-green-back;
+        }
+    }
+    .left {
+        .half-circle {
+           border-bottom-color: @progress-green-back;
+        }
+    }
+    .right {
+        .half-circle {
+           border-bottom-color: @progress-green-back;
+        }
+    }
+}
+ai-percent[yellow] {
+    .label{
+        color:@progress-yellow-value;
+    }
+    .left, .right {
+        .half-circle {
+           border-color:@progress-yellow-value; 
+           border-bottom-color: @progress-yellow-back;
+        }
+    }
+    .left {
+        .half-circle {
+           border-bottom-color: @progress-yellow-back;
+        }
+    }
+    .right {
+        .half-circle {
+           border-bottom-color: @progress-yellow-back;
+        }
+    }
+}
+
+
+ai-percent[large] {
+    width: @progress-circular-size-large;
+    height: @progress-circular-size-large;
+    .label{
+        padding-top:80px;
+        font-size: 42px;
+        height: @progress-circular-size-large;
+        width: @progress-circular-size-large;
+    }
+    .left, .right {
+        height: @progress-circular-size-large;
+        width: @progress-circular-size-large * 0.50;
+        .half-circle {
+           width: @progress-circular-size-large;
+           height: @progress-circular-size-large;
+           border-width: @progress-border-width-large;
+        }
+    }
+}
+
+ai-percent[small] {
+    width: @progress-circular-size-small;
+    height: @progress-circular-size-small;
+    .label{
+        padding-top:14px;
+        font-size: 12px;
+        height: @progress-circular-size-small;
+        width: @progress-circular-size-small;
+    }
+    .left, .right {
+        height: @progress-circular-size-small;
+        width: @progress-circular-size-small * 0.50;
+        .half-circle {
+           width: @progress-circular-size-small;
+           height: @progress-circular-size-small;
+           border-width: @progress-border-width-small;
+        }
+    }
+}

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/platform/browser', 'ai/components/AiApp/AiApp', 'ai/components/AiSpinner/AiSpinner', 'ai/components/AiProgress/AiProgress'], function(exports_1) {
+System.register(['angular2/core', 'angular2/platform/browser', 'ai/components/AiApp/AiApp', 'ai/components/AiSpinner/AiSpinner', 'ai/components/AiProgress/AiProgress', 'ai/components/AiPercent/AiPercent'], function(exports_1) {
     var __extends = (this && this.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
@@ -13,7 +13,7 @@ System.register(['angular2/core', 'angular2/platform/browser', 'ai/components/Ai
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, browser_1, AiApp_1, AiSpinner_1, AiProgress_1;
+    var core_1, browser_1, AiApp_1, AiSpinner_1, AiProgress_1, AiPercent_1;
     var AppComponent;
     return {
         setters:[
@@ -31,6 +31,9 @@ System.register(['angular2/core', 'angular2/platform/browser', 'ai/components/Ai
             },
             function (AiProgress_1_1) {
                 AiProgress_1 = AiProgress_1_1;
+            },
+            function (AiPercent_1_1) {
+                AiPercent_1 = AiPercent_1_1;
             }],
         execute: function() {
             AppComponent = (function (_super) {
@@ -42,7 +45,7 @@ System.register(['angular2/core', 'angular2/platform/browser', 'ai/components/Ai
                     core_1.Component(AiApp_1.AiApp.meta({
                         selector: 'progress-app',
                         templateUrl: 'package:app/progress/ProgressApp.html',
-                        directives: [AiSpinner_1.AiSpinner, AiProgress_1.AiProgress]
+                        directives: [AiSpinner_1.AiSpinner, AiProgress_1.AiProgress, AiPercent_1.AiPercent]
                     })), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
@@ -54,4 +57,4 @@ System.register(['angular2/core', 'angular2/platform/browser', 'ai/components/Ai
     }
 });
 
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInByb2dyZXNzL1Byb2dyZXNzQXBwLnRzIl0sIm5hbWVzIjpbIkFwcENvbXBvbmVudCIsIkFwcENvbXBvbmVudC5jb25zdHJ1Y3RvciJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7WUFPQTtnQkFLbUNBLGdDQUFLQTtnQkFMeENBO29CQUttQ0MsOEJBQUtBO2dCQUV4Q0EsQ0FBQ0E7Z0JBUEREO29CQUFDQSxnQkFBU0EsQ0FBQ0EsYUFBS0EsQ0FBQ0EsSUFBSUEsQ0FBQ0E7d0JBQ2xCQSxRQUFRQSxFQUFFQSxjQUFjQTt3QkFDeEJBLFdBQVdBLEVBQUNBLHVDQUF1Q0E7d0JBQ25EQSxVQUFVQSxFQUFFQSxDQUFDQSxxQkFBU0EsRUFBQ0EsdUJBQVVBLENBQUNBO3FCQUNyQ0EsQ0FBQ0EsQ0FBQ0E7O2lDQUdGQTtnQkFBREEsbUJBQUNBO1lBQURBLENBUEEsQUFPQ0EsRUFGa0MsYUFBSyxFQUV2QztZQVBELHVDQU9DLENBQUE7WUFFRCxtQkFBUyxDQUFDLFlBQVksQ0FBQyxDQUFDIiwiZmlsZSI6InByb2dyZXNzL1Byb2dyZXNzQXBwLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHtDb21wb25lbnR9IGZyb20gJ2FuZ3VsYXIyL2NvcmUnO1xuaW1wb3J0IHtib290c3RyYXB9ICAgIGZyb20gJ2FuZ3VsYXIyL3BsYXRmb3JtL2Jyb3dzZXInO1xuaW1wb3J0IHtBaUFwcH0gZnJvbSAnYWkvY29tcG9uZW50cy9BaUFwcC9BaUFwcCc7XG5pbXBvcnQge0FpU3Bpbm5lcn0gZnJvbSAnYWkvY29tcG9uZW50cy9BaVNwaW5uZXIvQWlTcGlubmVyJztcbmltcG9ydCB7QWlQcm9ncmVzc30gZnJvbSAnYWkvY29tcG9uZW50cy9BaVByb2dyZXNzL0FpUHJvZ3Jlc3MnO1xuXG5cbkBDb21wb25lbnQoQWlBcHAubWV0YSh7XG4gICAgc2VsZWN0b3I6ICdwcm9ncmVzcy1hcHAnLFxuICAgIHRlbXBsYXRlVXJsOidwYWNrYWdlOmFwcC9wcm9ncmVzcy9Qcm9ncmVzc0FwcC5odG1sJyxcbiAgICBkaXJlY3RpdmVzOiBbQWlTcGlubmVyLEFpUHJvZ3Jlc3NdICBcbn0pKVxuZXhwb3J0IGNsYXNzIEFwcENvbXBvbmVudCAgZXh0ZW5kcyBBaUFwcHsgIFxuICAgIFxufSAgICAgICAgICAgICAgXG5cbmJvb3RzdHJhcChBcHBDb21wb25lbnQpOyAiXSwic291cmNlUm9vdCI6Ii9zb3VyY2UvIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInByb2dyZXNzL1Byb2dyZXNzQXBwLnRzIl0sIm5hbWVzIjpbIkFwcENvbXBvbmVudCIsIkFwcENvbXBvbmVudC5jb25zdHJ1Y3RvciJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7WUFRQTtnQkFLbUNBLGdDQUFLQTtnQkFMeENBO29CQUttQ0MsOEJBQUtBO2dCQUV4Q0EsQ0FBQ0E7Z0JBUEREO29CQUFDQSxnQkFBU0EsQ0FBQ0EsYUFBS0EsQ0FBQ0EsSUFBSUEsQ0FBQ0E7d0JBQ2xCQSxRQUFRQSxFQUFFQSxjQUFjQTt3QkFDeEJBLFdBQVdBLEVBQUNBLHVDQUF1Q0E7d0JBQ25EQSxVQUFVQSxFQUFFQSxDQUFDQSxxQkFBU0EsRUFBQ0EsdUJBQVVBLEVBQUNBLHFCQUFTQSxDQUFDQTtxQkFDL0NBLENBQUNBLENBQUNBOztpQ0FHRkE7Z0JBQURBLG1CQUFDQTtZQUFEQSxDQVBBLEFBT0NBLEVBRmtDLGFBQUssRUFFdkM7WUFQRCx1Q0FPQyxDQUFBO1lBRUQsbUJBQVMsQ0FBQyxZQUFZLENBQUMsQ0FBQyIsImZpbGUiOiJwcm9ncmVzcy9Qcm9ncmVzc0FwcC5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7Q29tcG9uZW50fSBmcm9tICdhbmd1bGFyMi9jb3JlJztcbmltcG9ydCB7Ym9vdHN0cmFwfSAgICBmcm9tICdhbmd1bGFyMi9wbGF0Zm9ybS9icm93c2VyJztcbmltcG9ydCB7QWlBcHB9IGZyb20gJ2FpL2NvbXBvbmVudHMvQWlBcHAvQWlBcHAnO1xuaW1wb3J0IHtBaVNwaW5uZXJ9IGZyb20gJ2FpL2NvbXBvbmVudHMvQWlTcGlubmVyL0FpU3Bpbm5lcic7XG5pbXBvcnQge0FpUHJvZ3Jlc3N9IGZyb20gJ2FpL2NvbXBvbmVudHMvQWlQcm9ncmVzcy9BaVByb2dyZXNzJztcbmltcG9ydCB7QWlQZXJjZW50fSBmcm9tICdhaS9jb21wb25lbnRzL0FpUGVyY2VudC9BaVBlcmNlbnQnO1xuXG5cbkBDb21wb25lbnQoQWlBcHAubWV0YSh7XG4gICAgc2VsZWN0b3I6ICdwcm9ncmVzcy1hcHAnLFxuICAgIHRlbXBsYXRlVXJsOidwYWNrYWdlOmFwcC9wcm9ncmVzcy9Qcm9ncmVzc0FwcC5odG1sJyxcbiAgICBkaXJlY3RpdmVzOiBbQWlTcGlubmVyLEFpUHJvZ3Jlc3MsQWlQZXJjZW50XSAgXG59KSlcbmV4cG9ydCBjbGFzcyBBcHBDb21wb25lbnQgIGV4dGVuZHMgQWlBcHB7ICBcbiAgICAgXG59ICAgICAgICAgICAgICBcblxuYm9vdHN0cmFwKEFwcENvbXBvbmVudCk7ICJdLCJzb3VyY2VSb290IjoiL3NvdXJjZS8ifQ==
