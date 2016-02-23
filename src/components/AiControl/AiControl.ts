@@ -5,6 +5,10 @@ import {KeyboardEvent,MouseEvent} from 'angular2/src/facade/browser';
 import {NumberWrapper} from 'angular2/src/facade/lang';
 import {CONST} from 'angular2/src/facade/lang';
 import {ObservableWrapper,EventEmitter} from 'angular2/src/facade/async';
+import {DOM} from 'angular2/src/platform/dom/dom_adapter';
+//import {BrowserDomAdapter} from "angular2/src/platform/browser/browser_adapter";
+//BrowserDomAdapter.makeCurrent();
+
 //import * as utils from 'ai/components/utils';
 //import {StringChain} from './utils';
 //import {Reflector} from 'angular2/src/core/reflection/reflector';
@@ -95,7 +99,7 @@ export class AiControl {
     constructor(protected ele: ElementRef) {
         var el:any = this.ele.nativeElement;
         el.setAttribute('ai-control',''); 
-        
+
         var tabindex = el.getAttribute('tabindex');
         if(tabindex) this.tabindex = NumberWrapper.parseInt(tabindex, 10);
     }  
@@ -105,6 +109,9 @@ export class AiControl {
         return this.tabindex;
     }
 
+    isDisabled(){
+        return this.disabled? "disabled" : null;
+    }
 
     protected onClick(){}
     protected onMouseOver() {}

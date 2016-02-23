@@ -1,0 +1,2 @@
+<input [disabled]="isDisabled()" class="input" *ngIf="!textareaMode" [value]="value" (input)="updateValue($event)" (focus)="setHasFocus(true)" (blur)="setHasFocus(false)" />
+<textarea  [disabled]="isDisabled()" class="input" *ngIf="textareaMode"  [value]="value" (input)="updateValue($event)" (focus)="setHasFocus(true)" (blur)="setHasFocus(false)" ></textarea>
