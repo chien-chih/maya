@@ -1,4 +1,4 @@
-import {ElementRef,Attribute} from 'angular2/core';
+import {ElementRef,Attribute,OnChanges} from 'angular2/core';
 import {TimerWrapper} from 'angular2/src/facade/async';
 //import {isPresent} from 'angular2/src/facade/lang';
 import {KeyboardEvent,MouseEvent} from 'angular2/src/facade/browser';
@@ -6,6 +6,7 @@ import {NumberWrapper} from 'angular2/src/facade/lang';
 import {CONST} from 'angular2/src/facade/lang';
 import {ObservableWrapper,EventEmitter} from 'angular2/src/facade/async';
 import {DOM} from 'angular2/src/platform/dom/dom_adapter';
+
 //import {BrowserDomAdapter} from "angular2/src/platform/browser/browser_adapter";
 //BrowserDomAdapter.makeCurrent();
 
@@ -30,7 +31,7 @@ export class KeyCodes {
   
 }
 
-export class AiControl { 
+export class AiControl implements OnChanges{ 
     tabindex: number=0;
     disabled:boolean=false;
     isFocus: boolean = false;
@@ -40,6 +41,24 @@ export class AiControl {
     keyCode:number=0;
     visible: boolean = true;
     
+    hint:string='';
+    icon:string='';
+    error:string='';
+
+    onclick: EventEmitter<any>=new EventEmitter();
+
+    protected onClick(){}
+    protected onMouseOver() {}
+    protected onMouseOut() {}
+    protected onMouseDown(event: MouseEvent) {}
+    protected onMouseUp(event: MouseEvent) {}
+    protected onKeyDown(event: KeyboardEvent) {}
+    protected onKeyUp(event: KeyboardEvent) {}
+    protected onTouchStart(event) {}
+    protected onTouchEnd(event) {}
+    protected onFocus() {}
+    protected onBlur() {}
+    
     static mobile:boolean=AiControl.init();
     static init():boolean{
         var userAgent = navigator.userAgent;
@@ -47,15 +66,16 @@ export class AiControl {
         document.body.setAttribute(mobile?'mobile':'desktop','');
         return mobile;
     }
-
-    onclick: EventEmitter<any>=new EventEmitter();
-    
     static meta(meta:any,options?:any):any{
         if(!options) options={}; 
         if(!meta.inputs) meta.inputs=[];
         if(!meta.outputs) meta.outputs=[];
         if(!meta.host) meta.host={};
 
+//        meta.inputs.push('label');
+  //      meta.inputs.push('hint');
+    //    meta.inputs.push('icon');
+      //  meta.inputs.push('error');
         meta.inputs.push('visible');
         meta.host['[class.hide]']='!visible';
         if(!options.ignoreDisabled){
@@ -92,10 +112,6 @@ export class AiControl {
         return meta;
     }
 
-    enableMaterial(){
-        this.ele.nativeElement.setAttribute('ai-material','');
-    }
-
     constructor(protected ele: ElementRef) {
         var el:any = this.ele.nativeElement;
         el.setAttribute('ai-control',''); 
@@ -103,6 +119,14 @@ export class AiControl {
         var tabindex = el.getAttribute('tabindex');
         if(tabindex) this.tabindex = NumberWrapper.parseInt(tabindex, 10);
     }  
+
+    ngOnChanges(_) {
+        //alert(this.spinning);
+    }
+
+    enableMaterial(){
+        this.ele.nativeElement.setAttribute('ai-material','');
+    }
 
     getTabIndex(){
         if(this.disabled || !this.visible) return -1;
@@ -113,18 +137,6 @@ export class AiControl {
         return this.disabled? "disabled" : null;
     }
 
-    protected onClick(){}
-    protected onMouseOver() {}
-    protected onMouseOut() {}
-    protected onMouseDown(event: MouseEvent) {}
-    protected onMouseUp(event: MouseEvent) {}
-    protected onKeyDown(event: KeyboardEvent) {}
-    protected onKeyUp(event: KeyboardEvent) {}
-    protected onTouchStart(event) {}
-    protected onTouchEnd(event) {}
-    protected onFocus() {}
-    protected onBlur() {}
-    
     fireClickEvent(){
         if (!this.disabled && !this.isFire) {
             try{
@@ -229,3 +241,12 @@ export class AiControl {
 
     
 } 
+
+
+/*  
+document.addEventListener('DOMContentLoaded', function() {
+    alert('hello');
+    //debugger
+    //document.body.setAttribute('mobile','a');
+});
+*/ 

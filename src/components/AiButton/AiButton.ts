@@ -1,5 +1,7 @@
 import {Component,ElementRef,Attribute} from 'angular2/core';
 import {AiControl} from '../AiControl/AiControl';
+//import {UiService} from '../UiService';
+//,uiService:UiService
 
 @Component(AiControl.meta({
     templateUrl:'package:src/components/AiButton/AiButton.html',

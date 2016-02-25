@@ -1,19 +1,15 @@
 @import "../AiControl/Definition";
+@import "../AiSection/Definition";
 
-@input-border-width-default: 1px;
-@input-border-width-focused: 2px;
-@input-line-height: 26px;
-@input-padding-top: 2px;
 
 ai-input {
-    display:inline-block;
-    box-sizing: border-box;
     .input
     {
         appearance: none;
         background: none;        
         outline: none;
-        display: block;
+        width: 100%;
+        box-sizing: border-box;
         background: none;
         padding: @input-padding-top 2px @input-border-width-focused - @input-border-width-default;
         border-width: 0 0 @input-border-width-default 0;
@@ -21,6 +17,7 @@ ai-input {
         -ms-flex-preferred-size: @input-line-height; // IE10
         border-radius: 0;  
     
+        
         color: rgba(0,0,0,0.87);
         border-color: rgba(0,0,0,0.12);
         font-size: 100%;
@@ -36,32 +33,42 @@ ai-input {
 
 ai-input.disabled{
     .input {
-            background-position: 0 bottom;
-            background-size: 4px 1px;
-            background-repeat: repeat-x;
-            margin-bottom: -1px;
-    
-            border-bottom-color: transparent;
-            color: rgba(0,0,0,0.26);
-            background-image: linear-gradient(to right, rgba(0,0,0,0.26) 0%, rgba(0,0,0,0.26) 33%, transparent 0%);
-        }
-}
-
-ai-input[primary]{
-    .input{
-        border-color: rgba(21, 126, 251,1);
+        background-position: 0 bottom;
+        background-size: 4px 1px;
+        background-repeat: repeat-x;
+        margin-bottom: -1px;
+        border-bottom-color: transparent;
+        color: rgba(0,0,0,0.26);
+        background-image: linear-gradient(to right, rgba(0,0,0,0.26) 0%, rgba(0,0,0,0.26) 33%, transparent 0%);
     }
 }
+ai-input.focus{
+    .input {
+        border-color: rgba(21, 126, 251,1);
+        padding-bottom: 0; // Increase border width by 1px, decrease padding by 1
+        border-width: 0 0 @input-border-width-focused 0;
+    }
+}
+´
+ai-input[primary]{
+    .input{
+        border-color: rgba(221,44,0,1);
+    }
+}
+
+
 ai-input[red]{
     .input{
         border-color: rgba(252, 61, 57,1);
     }
 }
+
 ai-input[green]{
     .input{
         border-color: rgba(81, 212, 102,1);
     }
 }
+
 ai-input[yellow]{
     .input{
         border-color: rgba(255, 193, 7,1);

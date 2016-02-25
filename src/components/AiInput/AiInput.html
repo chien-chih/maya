@@ -1,2 +1,8 @@
-<input [disabled]="isDisabled()" class="input" *ngIf="!textareaMode" [value]="value" (input)="updateValue($event)" (focus)="setHasFocus(true)" (blur)="setHasFocus(false)" />
-<textarea  [disabled]="isDisabled()" class="input" *ngIf="textareaMode"  [value]="value" (input)="updateValue($event)" (focus)="setHasFocus(true)" (blur)="setHasFocus(false)" ></textarea>
+<label *ngIf="isLabelExist()">{{label}}</label>
+<input [disabled]="isDisabled()" class="input" [maxLength]="getMaxLength()" *ngIf="!textareaMode" [value]="value" (input)="updateValue($event)" (focus)="setHasFocus(true)" (blur)="setHasFocus(false)" />
+<textarea  [disabled]="isDisabled()" class="input" [maxLength]="getMaxLength()" *ngIf="textareaMode"  [value]="value" (input)="updateValue($event)" (focus)="setHasFocus(true)" (blur)="setHasFocus(false)" ></textarea>
+<message *ngIf="isMessageExist()">{{message}}</message>
+<div class="spacer">
+<word *ngIf="isWordExist()">{{word}}</word>
+</div>
+<error >{{error}}</error>

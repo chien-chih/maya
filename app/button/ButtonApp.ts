@@ -1,15 +1,10 @@
 import {Component,ElementRef} from 'angular2/core';
-import {bootstrap}    from 'angular2/platform/browser';
-import * as ai from 'ai/ai';
-import * as sample from 'ai/sample/sample';
 import {AiButton} from 'ai/components/AiButton/AiButton';
 import {AiIcon} from 'ai/components/AiIcon/AiIcon';
 import {AiApp} from 'ai/components/AiApp/AiApp';
-
 @Component(AiApp.meta({
     selector: 'button-app',
     templateUrl:'package:app/button/ButtonApp.html',
-    //template: `<ai-button>normal</ai-button>`,
     directives: [AiButton,AiIcon]
 }))
 export class AppComponent extends AiApp{ 
@@ -51,4 +46,4 @@ export class AppComponent extends AiApp{
   }  
 }              
 
-bootstrap(AppComponent);  
+AiApp.boot(AppComponent);  

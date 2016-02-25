@@ -1,5 +1,4 @@
 import {Component} from 'angular2/core';
-import {bootstrap}    from 'angular2/platform/browser';
 import {AiApp} from 'ai/components/AiApp/AiApp';
 import {AiCheckbox} from 'ai/components/AiCheckbox/AiCheckbox';
 import {AiCheck} from 'ai/components/AiCheck/AiCheck';
@@ -15,5 +14,4 @@ import {AiRadioGroup} from 'ai/components/AiRadio/AiRadioGroup';
 export class AppComponent  extends AiApp{  
     
 }              
-
-bootstrap(AppComponent); 
+AiApp.boot(AppComponent);  

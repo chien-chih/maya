@@ -1,0 +1,139 @@
+@import "../AiControl/Definition";
+@import "./Definition";
+  
+[ai-section] {
+    .color-default(.4);
+    display:inline-block;
+    box-sizing: border-box;
+    margin: 18px 0;
+    position: relative;
+    vertical-align: middle;    
+    padding: 2px 0;
+
+    label{
+        display:inline-block;
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        right: auto;        
+        order: 1;
+        pointer-events: none;
+        padding-left: @input-container-padding;
+        z-index: 1;
+        transform: translate3d(0, @input-label-default-offset, 0) scale(@input-label-default-scale);
+        transform-origin: left top;
+        transition: transform @swift-ease-out-timing-function 0.25s;   
+    }
+    
+    message{
+        display:block;
+        position: absolute;
+        left: 2px;
+        right: auto;
+        bottom: 7px;
+        font-size: 12px;
+        line-height: 14px;
+        transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+        .color-default(.7);
+    }
+
+    word{
+        display:block;
+        text-align: right;
+        padding-right: 2px;
+        padding-left: 0;        font-size: 12px;
+        line-height: 14px;
+        overflow: hidden;
+        transition: all .3s cubic-bezier(.55,0,.55,.2);
+        opacity: 1;
+        margin-top: 0;
+        padding-top: 5px;
+        color: rgba(0,0,0,0.87);
+    }
+
+    
+    .spacer{
+        float: right;
+        min-height: 24px;
+        min-width: 1px;
+    }
+    
+    error{
+        display:block;
+        font-size: 12px;
+        min-height:19px;
+        line-height: 14px;
+        overflow: hidden;
+        transition: all .3s cubic-bezier(.55,0,.55,.2);
+        opacity: 1;
+        margin-top: 24px;
+        padding-top: 5px;
+        color: rgb(221,44,0);
+    }
+}
+
+ai-input.valued{
+    label{
+        transform: translate3d(0,@input-label-float-offset,0) scale(@input-label-float-scale);
+        color: rgba(0,0,0,0.54);
+        font-size: 18px;
+    }
+}
+[ai-section].focus.valued{
+    label{
+        color: rgba(21, 126, 251,1);
+    }
+}
+
+[ai-section][primary]{
+    label{
+        .color-primary(.4);        
+    }
+}
+[ai-section][primary].valued{
+    label{
+        .color-primary(.9);
+    }
+}
+
+[ai-section][red]{
+    label{
+        .color-red(.4);
+    }
+    word{
+        .color-red(1);
+    }
+}
+[ai-section][red].valued{
+    label{
+        .color-red(.9);
+    }
+}
+
+[ai-section][green]{
+    label{
+        .color-green(.4);
+    }
+    word{
+        .color-green(1);
+    }
+}
+[ai-section][green].valued{
+    label{
+        .color-green(.9);
+    }
+}
+
+[ai-section][yellow]{
+    label{
+        .color-yellow(.4);
+    }
+    word{
+        .color-yellow(1);
+    }
+}
+[ai-section][yellow].valued{
+    label{
+        .color-yellow(.9);
+    }
+}

@@ -1,14 +1,14 @@
 import {Component,ElementRef,Attribute} from 'angular2/core';
-//import {NgIf} from 'angular2/angular2';
 import {ObservableWrapper, EventEmitter} from 'angular2/src/facade/async';
-import {AiControl} from '../AiControl/AiControl';
+import {AiSection} from '../AiSection/AiSection';
 
-@Component(AiControl.meta({
+@Component(AiSection.meta({
         templateUrl:'package:src/components/AiInput/AiInput.html',
         selector: 'ai-input',
-        inputs: [],
+        inputs:['showCounter','maxLength'],
         host: {
             '[class.focus]': 'isFocus',
+            '[class.valued]': 'hasValue()',
         },       
     },{
         ignoreActive:1,
@@ -16,9 +16,11 @@ import {AiControl} from '../AiControl/AiControl';
         ignoreHover:1
     }
 ))    
-export class AiInput extends AiControl { 
+export class AiInput extends AiSection { 
     textareaMode:boolean=false;
     value: string; 
+    showCounter:boolean=false;
+    maxLength:number=255;
 
     // Events emitted by this directive. We use these special 'md-' events to communicate
     // to the parent MdInputContainer.
@@ -31,12 +33,32 @@ export class AiInput extends AiControl {
         this.value = value == null ? '' : value;
     }
 
+    hasValue(){
+        return this.value.length > 0;
+    }
+
+    ngOnChanges(_) {
+        this.updateCounter();
+    }
     updateValue(event) {
         this.value = event.target.value;
+        this.updateCounter();
+        this.error='';
+    }
+    
+    updateCounter(){
+        if(this.showCounter){
+            this.word= this.value.length + "/" + this.maxLength;
+        }
     }
     
     setHasFocus(hasFocus: boolean) {
         this.isFocus=hasFocus;
     }
+
+    getMaxLength(){
+        return this.maxLength;
+    }    
+
 } 
   
