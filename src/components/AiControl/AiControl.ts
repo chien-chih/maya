@@ -72,10 +72,6 @@ export class AiControl implements OnChanges{
         if(!meta.outputs) meta.outputs=[];
         if(!meta.host) meta.host={};
 
-//        meta.inputs.push('label');
-  //      meta.inputs.push('hint');
-    //    meta.inputs.push('icon');
-      //  meta.inputs.push('error');
         meta.inputs.push('visible');
         meta.host['[class.hide]']='!visible';
         if(!options.ignoreDisabled){
@@ -89,8 +85,6 @@ export class AiControl implements OnChanges{
             meta.host['(blur)']='blur()';
             meta.host['[tabindex]']='getTabIndex()';
         }        
-        else
-            meta.host['[tabindex]']='-1';
 
 
         if(!options.ignoreHover){

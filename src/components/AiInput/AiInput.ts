@@ -5,10 +5,11 @@ import {AiSection} from '../AiSection/AiSection';
 @Component(AiSection.meta({
         templateUrl:'package:src/components/AiInput/AiInput.html',
         selector: 'ai-input',
-        inputs:['showCounter','maxLength'],
+        inputs:['showCounter','maxLength','type','readonly'],
         host: {
             '[class.focus]': 'isFocus',
             '[class.valued]': 'hasValue()',
+            '[class.readonly]': 'readonly',
         },       
     },{
         ignoreActive:1,
@@ -21,6 +22,8 @@ export class AiInput extends AiSection {
     value: string; 
     showCounter:boolean=false;
     maxLength:number=255;
+    type:string='text';
+    readonly:boolean=false;
 
     // Events emitted by this directive. We use these special 'md-' events to communicate
     // to the parent MdInputContainer.
@@ -54,10 +57,20 @@ export class AiInput extends AiSection {
     
     setHasFocus(hasFocus: boolean) {
         this.isFocus=hasFocus;
+        if(!hasFocus)
+            this.validate(this.value);
     }
 
     getMaxLength(){
         return this.maxLength;
+    }    
+
+    getType(){
+        return this.type;
+    }    
+
+    isReadonly(){
+        return this.readonly ? 'true':null;
     }    
 
 } 

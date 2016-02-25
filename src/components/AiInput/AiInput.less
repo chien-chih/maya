@@ -31,6 +31,12 @@ ai-input {
     }
 }
 
+ai-input.readonly{
+    .input {
+        color: rgba(0,0,0,0.26);
+    }
+}
+
 ai-input.disabled{
     .input {
         background-position: 0 bottom;
@@ -49,10 +55,16 @@ ai-input.focus{
         border-width: 0 0 @input-border-width-focused 0;
     }
 }
-´
+
+ai-input.error{
+    .input{
+        .border-red(.8);
+    }
+}
+
 ai-input[primary]{
     .input{
-        border-color: rgba(221,44,0,1);
+        .border-primary(.7);
     }
 }
 

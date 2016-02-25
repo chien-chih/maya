@@ -1,3 +1,17 @@
+<div class='sample'>
+    
+    <ai-input [required]="'true'" [minLength]="'4'" [label]="'Account Name'" [message]="'Tell us what we should call you!'" [maxLength]="'64'" [showCounter]="'true'" [icon]="'account_box'" ></ai-input>
+</div>
+
+<div class='sample'>
+    
+    <ai-input [label]="'Password'" [type]="'password'"></ai-input>
+    <ai-input [label]="'Readonly'" value='readonly' [readonly]="'true'"></ai-input>
+</div>
+
+
+<br/>
+
 <ai-input [label]="'normal'" [message]="'How can we reach you?'" ></ai-input>
 <ai-input [label]="'primary'" primary [maxLength]="'5'" [showCounter]="'true'"></ai-input>
 <ai-input [label]="'red'" red [word]="'*Require'" [error]="'Your email must be between 10 and 100 characters long and look like an e-mail address.'">

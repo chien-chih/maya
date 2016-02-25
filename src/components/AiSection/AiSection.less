@@ -25,12 +25,13 @@
         transition: transform @swift-ease-out-timing-function 0.25s;   
     }
     
+    
     message{
         display:block;
         position: absolute;
         left: 2px;
         right: auto;
-        bottom: 7px;
+        top: 34px;
         font-size: 12px;
         line-height: 14px;
         transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
@@ -41,24 +42,27 @@
         display:block;
         text-align: right;
         padding-right: 2px;
-        padding-left: 0;        font-size: 12px;
+        padding-left: 0;        
+        font-size: 12px;
         line-height: 14px;
         overflow: hidden;
         transition: all .3s cubic-bezier(.55,0,.55,.2);
         opacity: 1;
         margin-top: 0;
-        padding-top: 5px;
+        padding-top: 2px;
         color: rgba(0,0,0,0.87);
     }
 
     
     .spacer{
         float: right;
-        min-height: 24px;
+        min-height: 14px;
         min-width: 1px;
     }
     
     error{
+        margin-top: 14px;
+        padding:5px 0 0 2px;
         display:block;
         font-size: 12px;
         min-height:19px;
@@ -66,24 +70,64 @@
         overflow: hidden;
         transition: all .3s cubic-bezier(.55,0,.55,.2);
         opacity: 1;
-        margin-top: 24px;
-        padding-top: 5px;
         color: rgb(221,44,0);
+    }
+    
+    icon{
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        right: auto;
+        font-size:36px;    
+        margin: auto;
+        background-repeat: no-repeat no-repeat;
+        display: inline-block;
+        vertical-align: middle;
+        height: 24px;
+        width: 24px;
     }
 }
 
-ai-input.valued{
+[ai-section].icon {
+    padding-left: 38px;
+    padding-right: 0;
+    transition: margin-top .5s cubic-bezier(.25,.8,.25,1);
+    
+    label{
+        left: 38px;
+    }
+    
+    message{
+        left: 40px;
+    }
+}
+
+[ai-section].valued{
     label{
         transform: translate3d(0,@input-label-float-offset,0) scale(@input-label-float-scale);
         color: rgba(0,0,0,0.54);
         font-size: 18px;
     }
 }
-[ai-section].focus.valued{
-    label{
+
+[ai-section].focus{
+    icon{
         color: rgba(21, 126, 251,1);
     }
 }
+[ai-section].focus.valued{
+    label,icon{
+        color: rgba(21, 126, 251,1);
+    }
+}
+
+[ai-section].error{
+    icon{
+        .color-red(.8);
+    }
+}
+
+
 
 [ai-section][primary]{
     label{
