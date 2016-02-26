@@ -1,7 +1,7 @@
 import {ElementRef} from 'angular2/core';
 import {AiControl} from '../AiControl/AiControl';
 
-export class AiSection extends AiControl{
+export class AiFormControl extends AiControl{
  
     label:string='';
     message:string='';
@@ -31,7 +31,7 @@ export class AiSection extends AiControl{
     constructor(ele: ElementRef) {
         super(ele); 
         var el:any = this.ele.nativeElement;
-        el.setAttribute('ai-section',''); 
+        el.setAttribute('ai-form-control',''); 
     }  
 
     isLabelExist(){

@@ -1,0 +1,15 @@
+<label *ngIf="isLabelExist()">{{label}} <span *ngIf="required" class='labelRequired'>(required*)</span></label>
+<icon ai-material *ngIf="isIconExist()">{{icon}}</icon>
+
+<textarea class="input" (input)="updateValue($event)" (focus)="setHasFocus(true)" (blur)="setHasFocus(false)"
+    [disabled]="isDisabled()"
+    [readonly]="isReadonly()" 
+    [maxLength]="getMaxLength()"   
+    [value]="value" 
+    ></textarea>
+    
+<div class="spacer">
+<message *ngIf="isMessageExist()">{{message}}</message>
+<word *ngIf="isWordExist()">{{word}}</word>
+</div>
+<error >{{error}}</error>

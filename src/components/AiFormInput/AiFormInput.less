@@ -1,8 +1,9 @@
 @import "../AiControl/Definition";
-  
-ai-input {
-    
-    .ai-native{
+
+
+[ai-form-input] {
+    .input
+    {
         appearance: none;
         background: none;        
         outline: none;
@@ -14,23 +15,29 @@ ai-input {
         line-height: @input-line-height;
         -ms-flex-preferred-size: @input-line-height; // IE10
         border-radius: 0;  
-
+    
+        
         color: rgba(0,0,0,0.87);
         border-color: rgba(0,0,0,0.12);
         font-size: 100%;
     }
+    textarea {
+        resize: none;
+        overflow: hidden;
+    }    
+    input{
+        
+    }
 }
 
-ai-input.readonly{
-    .ai-native {
+[ai-form-input].readonly{
+    .input {
         color: rgba(0,0,0,0.26);
     }
 }
 
-
-ai-input.disabled {
-
-    .ai-native{
+[ai-form-input].disabled{
+    .input {
         background-position: 0 bottom;
         background-size: 4px 1px;
         background-repeat: repeat-x;
@@ -40,37 +47,41 @@ ai-input.disabled {
         background-image: linear-gradient(to right, rgba(0,0,0,0.26) 0%, rgba(0,0,0,0.26) 33%, transparent 0%);
     }
 }
-
-ai-input.focus{
-    .ai-native {
+[ai-form-input].focus{
+    .input {
         border-color: rgba(21, 126, 251,1);
         padding-bottom: 0; // Increase border width by 1px, decrease padding by 1
         border-width: 0 0 @input-border-width-focused 0;
     }
 }
 
+[ai-form-input].error{
+    .input{
+        .border-red(.8);
+    }
+}
 
-ai-input[primary]{
-    .ai-native{
+[ai-form-input][primary]{
+    .input{
         .border-primary(.7);
     }
 }
 
 
-ai-input[red]{
-    .ai-native{
+[ai-form-input][red]{
+    .input{
         border-color: rgba(252, 61, 57,1);
     }
 }
 
-ai-input[green]{
-    .ai-native{
+[ai-form-input][green]{
+    .input{
         border-color: rgba(81, 212, 102,1);
     }
 }
 
-ai-input[yellow]{
-    .ai-native{
+[ai-form-input][yellow]{
+    .input{
         border-color: rgba(255, 193, 7,1);
     }
 }

@@ -7,16 +7,24 @@
 <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
 <link href='index.css' rel='stylesheet' type='text/css'>
 <link href='ai.css' rel='stylesheet' type='text/css'>
-<script>System.config({packages: { progress: {defaultExtension: 'js'},ai: {defaultExtension: 'js'}} });System.import('progress/ProgressApp');</script> 
-    <title>Progress</title>
+<script>System.config({packages: { forminput: {defaultExtension: 'js'},ai: {defaultExtension: 'js'}} });System.import('forminput/ForminputApp');</script> 
+    <title>input</title>
 
     <style>
-      
+    .sample{
+      width:500px;
+      padding:20px;
+      border:solid 1px #eee;
+      margin-bottom:20px;
+    }
+    .sample ai-form-input{
+      display:block;
+    }  
     </style>
     
   </head>
 
   <body>
-    <progress-app>Loading...</progress-app>
+    <forminput-app>Loading...</forminput-app>
   </body>
 </html>

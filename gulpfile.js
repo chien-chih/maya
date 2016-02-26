@@ -460,8 +460,9 @@ function processHtml(mode) {
             
             replaceTo=
                 "<head>"+includeFiles+
-                "\n<link rel='stylesheet' type='text/css' href='index.css'>"+
-                "\n<link rel='stylesheet' type='text/css' href='"+project.name+".css'>"+
+                "\n<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>"+
+                "\n<link href='index.css' rel='stylesheet' type='text/css'>"+
+                "\n<link href='"+project.name+".css' rel='stylesheet' type='text/css'>"+
                 "\n<script>"+
                     "System.config({packages: { "+filename+": {defaultExtension: 'js'},"+project.name+": {defaultExtension: 'js'}} });"+
                     "System.import('"+filename+"/"+firstCharUppercase(filename)+"App');"+
