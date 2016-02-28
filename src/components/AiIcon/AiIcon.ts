@@ -5,10 +5,8 @@ import {AiControl} from '../AiControl/AiControl';
         templateUrl:'package:src/components/AiIcon/AiIcon.html',
         selector: 'ai-icon',
     },{
-        ignoreActive:1,
         ignoreDisabled:1,
-        ignoreFocus:1,
-        ignoreHover:1
+        ignoreFocus:1
     }
 ))    
 export class AiIcon extends AiControl { 

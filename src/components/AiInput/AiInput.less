@@ -2,7 +2,7 @@
   
 ai-input {
     display:inline-block;
-    min-width:160px;
+    width:160px;
     margin:6px;
     position:relative;
     
@@ -73,8 +73,10 @@ ai-input.disabled .ai-input-box{
     background-image: linear-gradient(to right, rgba(0,0,0,0.26) 0%, rgba(0,0,0,0.26) 33%, transparent 0%);
 }
 
-ai-input.focus .ai-input-box{
-    .border-primary(.7);
+ai-input.focus {
+    .ai-input-box{
+        .border-primary(.7);
+    }
 }
 
 

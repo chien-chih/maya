@@ -1,6 +1,6 @@
 
-<ai-input value='default'></ai-input> 
-<ai-input value='default' primary  left='search' right='cancel'></ai-input>  
+<ai-input value='default' cancel></ai-input> 
+<ai-input value='default' primary  left='search' right='cancel' (onclickleft)="onLeftClick()" (onclickright)="onRightClick()"></ai-input>  
 <ai-input value='default' red  left='search' right='cancel'></ai-input> 
 <ai-input value='default' green left='search' right='cancel'></ai-input> 
 <ai-input value='default' yellow  left='search' right='cancel'></ai-input>

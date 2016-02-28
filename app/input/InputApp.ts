@@ -14,5 +14,14 @@ export class AppComponent  extends AiApp{
     onSpinButtonClick(){
         this.spinButtonSpinning=!this.spinButtonSpinning;         
     }
+
+    onRightClick(){
+        alert('right');
+    }
+    
+    onLeftClick(){
+        alert('left');
+    }
+
 }
 AiApp.boot(AppComponent);  

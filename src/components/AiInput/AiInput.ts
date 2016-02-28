@@ -1,18 +1,21 @@
-import {Component,ElementRef} from 'angular2/core';
+import {Component,ElementRef,Attribute} from 'angular2/core';
 import {ObservableWrapper,EventEmitter} from 'angular2/src/facade/async';
 import {AiControl} from '../AiControl/AiControl';
+import {AiIcon} from '../AiIcon/AiIcon';
 
 @Component(AiControl.meta({
     templateUrl:'package:src/components/AiInput/AiInput.html',
     selector: 'ai-input',
-    inputs:['maxLength','type','readonly','value','left','right'],
+    inputs:['maxlength','readonly','value'],
+    outputs:['onclickleft','onclickright'],
     host: {
         '[class.focus]': 'isFocus',
         '[class.valued]': 'hasValue()',
         '[class.readonly]': 'readonly',
         '[class.ai-input-left]': 'isLeftExist()',
         '[class.ai-input-right]': 'isRightExist()'
-    }       
+    },
+    directives: [AiIcon]  
     },{
         ignoreActive:1,
         ignoreFocus:1,
@@ -21,13 +24,42 @@ import {AiControl} from '../AiControl/AiControl';
 export class AiInput extends AiControl{ 
     left:string='';
     right:string='';
-    value: string=""; 
-    maxLength:number=255;
+    value: string=''; 
+    maxlength:number=255;
     type:string='text';
     readonly:boolean=false;
+    cancel:boolean=false;
+    onclickright: EventEmitter<any>=new EventEmitter();
+    onclickleft: EventEmitter<any>=new EventEmitter();
 
-    constructor(ele: ElementRef) {  
+    constructor(ele: ElementRef,
+        @Attribute("cancel") cancel,
+        @Attribute("type") type,
+        @Attribute("left") left,
+        @Attribute("right") right
+        ) {  
         super(ele); 
+        if(type != null) this.type = type;
+        if(left != null) this.left = left;
+        if(right != null) this.right = right;
+        
+        if(cancel != null){
+            this.cancel = true;
+            this.updateCancelIcon();
+        }
+    }
+
+    updateCancelIcon(){
+        if(this.cancel){
+            if(this.value.length > 0)
+                this.right='cancel';            
+            else    
+                this.right='';            
+        }
+    }
+
+    ngOnChanges(_) {
+        this.updateCancelIcon();
     }
 
     hasValue(){
@@ -35,7 +67,8 @@ export class AiInput extends AiControl{
     } 
 
     updateValue(event) {
-        this.value = event.target.value;
+        if(event) this.value = event.target.value;
+        this.updateCancelIcon();
     }
     
     setHasFocus(hasFocus: boolean) {
@@ -43,7 +76,7 @@ export class AiInput extends AiControl{
     }
 
     getMaxLength(){
-        return this.maxLength;
+        return this.maxlength;
     }    
 
     getType(){
@@ -60,6 +93,19 @@ export class AiInput extends AiControl{
 
     isRightExist(){
         return this.right.length > 0;
+    }
+ 
+    onLeftClick(){
+        ObservableWrapper.callEmit(this.onclickleft, null);
+    }
+
+    onRightClick(){
+        if(this.cancel){
+            this.value='';
+            this.updateValue(null);
+        }
+        else
+            ObservableWrapper.callEmit(this.onclickright, null);
     }
  
 } 

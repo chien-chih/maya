@@ -28,7 +28,7 @@ export class KeyCodes {
   @CONST() static UP = 38;
   @CONST() static RIGHT = 39;
   @CONST() static DOWN = 40;
-  
+   
 }
 
 export class AiControl implements OnChanges{ 

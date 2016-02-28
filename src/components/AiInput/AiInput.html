@@ -5,5 +5,5 @@
     [maxLength]="getMaxLength()" 
     [value]="value"  
 />
-<span class='ai-input-icon ai-input-left' ai-material *ngIf="isLeftExist()">{{left}}</span>
-<span class='ai-input-icon ai-input-right' ai-material *ngIf="isRightExist()">{{right}}</span>
+<ai-icon class='ai-input-icon ai-input-left' ai-material *ngIf="isLeftExist()" (onclick)="onLeftClick()">{{left}}</ai-icon>
+<ai-icon class='ai-input-icon ai-input-right' ai-material *ngIf="isRightExist()" (onclick)="onRightClick()">{{right}}</ai-icon>
