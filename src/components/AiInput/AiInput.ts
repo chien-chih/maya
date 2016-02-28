@@ -5,11 +5,13 @@ import {AiControl} from '../AiControl/AiControl';
 @Component(AiControl.meta({
     templateUrl:'package:src/components/AiInput/AiInput.html',
     selector: 'ai-input',
-    inputs:['maxLength','type','readonly','value'],
+    inputs:['maxLength','type','readonly','value','left','right'],
     host: {
         '[class.focus]': 'isFocus',
         '[class.valued]': 'hasValue()',
-        '[class.readonly]': 'readonly'
+        '[class.readonly]': 'readonly',
+        '[class.ai-input-left]': 'isLeftExist()',
+        '[class.ai-input-right]': 'isRightExist()'
     }       
     },{
         ignoreActive:1,
@@ -17,7 +19,8 @@ import {AiControl} from '../AiControl/AiControl';
         ignoreHover:1
     }))    
 export class AiInput extends AiControl{ 
-
+    left:string='';
+    right:string='';
     value: string=""; 
     maxLength:number=255;
     type:string='text';
@@ -50,6 +53,14 @@ export class AiInput extends AiControl{
     isReadonly(){
         return this.readonly ? 'true':null;
     }    
+    
+    isLeftExist(){
+        return this.left.length > 0;
+    }
+
+    isRightExist(){
+        return this.right.length > 0;
+    }
  
 } 
   
