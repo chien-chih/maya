@@ -1,9 +1,11 @@
 import {Component,ElementRef,Attribute} from 'angular2/core';
 import {ObservableWrapper, EventEmitter} from 'angular2/src/facade/async';
 import {AiFormControl} from '../AiFormControl/AiFormControl';
+import {AiInput} from '../AiInput/AiInput';
 
 @Component(AiFormControl.meta({
         templateUrl:'package:src/components/AiFormInput/AiFormInput.html',
+        directives: [AiInput],
         selector: 'ai-form-input',
         inputs:['showCounter','maxLength','type','readonly','value'],
         host: {
@@ -32,8 +34,7 @@ export class AiFormInput extends AiFormControl {
   
     constructor(ele: ElementRef) { 
         super(ele);
-        var el:any = this.ele.nativeElement;
-        el.setAttribute('ai-form-input',''); 
+        this.nativeElement.setAttribute('ai-form-input',''); 
     }
 
     hasValue(){
@@ -43,8 +44,8 @@ export class AiFormInput extends AiFormControl {
     ngOnChanges(_) {
         this.updateCounter();
     }
-    updateValue(event) {
-        this.value = event.target.value;
+    updateValue(value) {
+        this.value = value;
         this.updateCounter();
         this.error='';
     }

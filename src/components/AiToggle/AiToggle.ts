@@ -24,8 +24,7 @@ export class AiToggle extends AiControl {
 
     constructor(ele: ElementRef) {
         super(ele); 
-        var el:any = this.ele.nativeElement;
-        el.setAttribute('ai-toggle',''); 
+        this.nativeElement.setAttribute('ai-toggle',''); 
     }  
 
     toggle():void{

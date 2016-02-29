@@ -30,8 +30,7 @@ export class AiFormControl extends AiControl{
     
     constructor(ele: ElementRef) {
         super(ele); 
-        var el:any = this.ele.nativeElement;
-        el.setAttribute('ai-form-control',''); 
+        this.nativeElement.setAttribute('ai-form-control',''); 
     }  
 
     isLabelExist(){

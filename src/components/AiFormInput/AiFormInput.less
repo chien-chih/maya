@@ -2,6 +2,13 @@
 
 
 [ai-form-input] {
+    .input{
+        width:100%;
+        display:block;
+        margin:0;
+    }    
+    
+    /*
     .input
     {
         appearance: none;
@@ -21,13 +28,11 @@
         border-color: rgba(0,0,0,0.12);
         font-size: 100%;
     }
+    */
     textarea {
         resize: none;
         overflow: hidden;
     }    
-    input{
-        
-    }
 }
 
 [ai-form-input].readonly{
@@ -37,6 +42,7 @@
 }
 
 [ai-form-input].disabled{
+    /*
     .input {
         background-position: 0 bottom;
         background-size: 4px 1px;
@@ -45,14 +51,14 @@
         border-bottom-color: transparent;
         color: rgba(0,0,0,0.26);
         background-image: linear-gradient(to right, rgba(0,0,0,0.26) 0%, rgba(0,0,0,0.26) 33%, transparent 0%);
-    }
+    }*/
 }
 [ai-form-input].focus{
-    .input {
+    /*.input {
         border-color: rgba(21, 126, 251,1);
         padding-bottom: 0; // Increase border width by 1px, decrease padding by 1
         border-width: 0 0 @input-border-width-focused 0;
-    }
+    }*/
 }
 
 [ai-form-input].error{

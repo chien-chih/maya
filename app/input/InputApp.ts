@@ -23,5 +23,10 @@ export class AppComponent  extends AiApp{
         alert('left');
     }
 
+    onValueChange(value){
+        debugger
+        alert(value);
+    }
+
 }
 AiApp.boot(AppComponent);  

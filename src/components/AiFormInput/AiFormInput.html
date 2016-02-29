@@ -1,6 +1,6 @@
 <label *ngIf="isLabelExist()">{{label}} <span *ngIf="required" class='labelRequired'>(required*)</span></label>
 <icon ai-material *ngIf="isIconExist()">{{icon}}</icon>
-
+<!--
 <input class="input" (input)="updateValue($event)" (focus)="setHasFocus(true)" (blur)="setHasFocus(false)"
     [disabled]="isDisabled()" 
     [type]="getType()" 
@@ -8,7 +8,8 @@
     [maxLength]="getMaxLength()" 
     [value]="value"  
     />
-
+-->
+<ai-input class="input" line (onfocuschange)="setHasFocus($event)" (onvalue)="updateValue($event)"></ai-input>
 <div class="spacer">
 <message *ngIf="isMessageExist()">{{message}}</message>
 <word *ngIf="isWordExist()">{{word}}</word>

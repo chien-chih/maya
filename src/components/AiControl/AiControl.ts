@@ -32,6 +32,7 @@ export class KeyCodes {
 }
 
 export class AiControl implements OnChanges{ 
+    nativeElement:any;
     tabindex: number=0;
     disabled:boolean=false;
     isFocus: boolean = false;
@@ -105,12 +106,12 @@ export class AiControl implements OnChanges{
         }
         return meta;
     }
+  
+    constructor(ele: ElementRef) {
+        this.nativeElement = ele.nativeElement;
+        this.nativeElement.setAttribute('ai-control',''); 
 
-    constructor(protected ele: ElementRef) {
-        var el:any = this.ele.nativeElement;
-        el.setAttribute('ai-control',''); 
-
-        var tabindex = el.getAttribute('tabindex');
+        var tabindex = this.nativeElement.getAttribute('tabindex');
         if(tabindex) this.tabindex = NumberWrapper.parseInt(tabindex, 10);
     }  
 
@@ -119,7 +120,7 @@ export class AiControl implements OnChanges{
     }
 
     enableMaterial(){
-        this.ele.nativeElement.setAttribute('ai-material','');
+        this.nativeElement.setAttribute('ai-material','');
     }
 
     getTabIndex(){

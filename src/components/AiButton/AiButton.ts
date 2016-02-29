@@ -19,8 +19,7 @@ export class AiButton extends AiControl{
 
     constructor(ele: ElementRef) { 
         super(ele); 
-        var el:any = this.ele.nativeElement;
-        if(el.getAttribute('fab')==="" || el.getAttribute('icon')==="") {
+        if(this.nativeElement.getAttribute('fab')==="" || this.nativeElement.getAttribute('icon')==="") {
           this.enableMaterial();
         }
           

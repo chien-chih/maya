@@ -5,17 +5,17 @@ import {AiIcon} from '../AiIcon/AiIcon';
 
 @Component(AiControl.meta({
     templateUrl:'package:src/components/AiInput/AiInput.html',
+    directives: [AiIcon],
     selector: 'ai-input',
     inputs:['maxlength','readonly','value'],
-    outputs:['onclickleft','onclickright'],
+    outputs:['onclickleft','onclickright','onfocuschange','onvalue'],
     host: {
         '[class.focus]': 'isFocus',
         '[class.valued]': 'hasValue()',
         '[class.readonly]': 'readonly',
         '[class.ai-input-left]': 'isLeftExist()',
         '[class.ai-input-right]': 'isRightExist()'
-    },
-    directives: [AiIcon]  
+    }
     },{
         ignoreActive:1,
         ignoreFocus:1,
@@ -31,6 +31,8 @@ export class AiInput extends AiControl{
     cancel:boolean=false;
     onclickright: EventEmitter<any>=new EventEmitter();
     onclickleft: EventEmitter<any>=new EventEmitter();
+    onfocuschange: EventEmitter<any>=new EventEmitter();
+    onvalue: EventEmitter<any>=new EventEmitter();
 
     constructor(ele: ElementRef,
         @Attribute("cancel") cancel,
@@ -69,10 +71,12 @@ export class AiInput extends AiControl{
     updateValue(event) {
         if(event) this.value = event.target.value;
         this.updateCancelIcon();
+        ObservableWrapper.callEmit(this.onvalue, this.value);
     }
     
     setHasFocus(hasFocus: boolean) {
         this.isFocus=hasFocus;
+        ObservableWrapper.callEmit(this.onfocuschange,hasFocus);
     }
 
     getMaxLength(){
@@ -103,6 +107,9 @@ export class AiInput extends AiControl{
         if(this.cancel){
             this.value='';
             this.updateValue(null);
+            try{
+                this.nativeElement.childNodes[0].focus();
+            }catch(e){}
         }
         else
             ObservableWrapper.callEmit(this.onclickright, null);
