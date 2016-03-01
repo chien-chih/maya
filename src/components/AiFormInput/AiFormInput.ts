@@ -1,5 +1,6 @@
-import {Component,ElementRef,Attribute} from 'angular2/core';
-import {ObservableWrapper, EventEmitter} from 'angular2/src/facade/async';
+import {Component,ElementRef,Input,Output,forwardRef,Provider} from 'angular2/core';
+import {NG_VALUE_ACCESSOR} from 'angular2/common';
+import {ObservableWrapper,EventEmitter} from 'angular2/src/facade/async';
 import {AiFormControl} from '../AiFormControl/AiFormControl';
 import {AiInput} from '../AiInput/AiInput';
 
@@ -7,12 +8,11 @@ import {AiInput} from '../AiInput/AiInput';
         templateUrl:'package:src/components/AiFormInput/AiFormInput.html',
         directives: [AiInput],
         selector: 'ai-form-input',
-        inputs:['showCounter','maxLength','type','readonly','value'],
         host: {
             '[class.focus]': 'isFocus',
-            '[class.valued]': 'hasValue()',
             '[class.readonly]': 'readonly',
-        },       
+        },
+        providers: [new Provider(NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => AiFormInput), multi: true})]
     },{
         ignoreActive:1,
         ignoreFocus:1,
@@ -20,42 +20,46 @@ import {AiInput} from '../AiInput/AiInput';
     }
 ))    
 export class AiFormInput extends AiFormControl { 
-    //textareaMode:boolean=false;
-    value: string=""; 
-    showCounter:boolean=false;
-    maxLength:number=255;
+
+    @Input() 
     type:string='text';
+
+    @Input()  
+    max_length:number=255;
+
+    @Input()  
+    min_length:number=0;
+
+    @Input() 
     readonly:boolean=false;
 
-    // Events emitted by this directive. We use these special 'md-' events to communicate
-    // to the parent MdInputContainer.
-    //mdChange: EventEmitter<any>;
-    //mdFocusChange: EventEmitter<any>;
-  
+    @Input() 
+    counter:boolean=false;
+
+    @Input() 
+    validated:boolean=false;
+
     constructor(ele: ElementRef) { 
         super(ele);
-        this.nativeElement.setAttribute('ai-form-input',''); 
     }
 
-    hasValue(){
-        return this.value.length > 0;
-    } 
+    updateValue(value:any) {
+        if(this.counter && value)
+            this.word= value.length + "/" + this.max_length;
+        super.updateValue(value);
+    }
 
-    ngOnChanges(_) {
-        this.updateCounter();
-    }
-    updateValue(value) {
-        this.value = value;
-        this.updateCounter();
-        this.error='';
-    }
-    
-    updateCounter(){
-        if(this.showCounter){
-            this.word= this.value.length + "/" + this.maxLength;
+    validate(text:string):boolean{
+        if(super.validate(text)){
+            
+            if(this.min_length > 0 && text.length < this.min_length){
+                this.error=this.label+' minimum length is '+this.min_length;
+                return false;
+            }
         }
-    }
-    
+        return true;
+    }    
+
     setHasFocus(hasFocus: boolean) {
         this.isFocus=hasFocus;
         if(!hasFocus)
@@ -63,7 +67,7 @@ export class AiFormInput extends AiFormControl {
     }
 
     getMaxLength(){
-        return this.maxLength;
+        return this.max_length;
     }    
 
     getType(){
@@ -73,6 +77,17 @@ export class AiFormInput extends AiFormControl {
     isReadonly(){
         return this.readonly ? 'true':null;
     }    
+
+    getSymbolIcon(){
+        
+        if(this.hasError())
+            return "error";
+        else if (this.validated)
+            return "done";
+        
+        return '';
+    }
+
 
 } 
   

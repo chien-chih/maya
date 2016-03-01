@@ -1,17 +1,19 @@
 input value : {{valueA}}
 <br/>
-min&max:<ai-input [(ngModel)]="valueA"></ai-input> 
-
-<!--
-
+two-way-binding:<ai-input [(ngModel)]="valueA" maxlength='3'></ai-input> 
+maxlength:<ai-input value='1' maxlength='3'></ai-input>
+<br/>
+readonly:<ai-input value='readonly' readonly='true'></ai-input>
+disabled:<ai-input value='disabled' disabled='true'></ai-input>
+<br/>
 password:<ai-input value='password' type='password'></ai-input> 
 number:<ai-input value='' type='number'></ai-input>
 <br/>
-<ai-input value='minMaxLength' [cancel]="true"  (_value_change)='onValueChange($event)'></ai-input> 
-<ai-input value='default' primary [symbol]="'error'" left='search' right='cancel' (_click_left)="onLeftClick()" (_click_right)="onRightClick()"></ai-input>  
-<ai-input value='default' red  left='search' right='cancel' [symbol]="'done'"></ai-input> 
-<ai-input value='default' green left='search' right='cancel'></ai-input> 
-<ai-input value='default' yellow  left='search' right='cancel'></ai-input>
+<ai-input value='minMaxLength' [cancel_button]="true"  (_value_change)='onValueChange($event)'></ai-input> 
+<ai-input value='default' primary [symbol_icon]="'error'" left_icon='search' right_icon='cancel' (_click_left_icon)="onleft_iconClick()" (_click_right)="onRightClick()"></ai-input>  
+<ai-input value='default' red  left_icon='search' right_icon='cancel' [symbol_icon]="'done'"></ai-input> 
+<ai-input value='default' green left_icon='search' right_icon='cancel'></ai-input> 
+<ai-input value='default' yellow  left_icon='search' right_icon='cancel'></ai-input>
 <br/>
 <ai-input round value='round'></ai-input> <ai-input round value='round' primary></ai-input>  
 <ai-input round value='round' red></ai-input> <ai-input round value='round' green></ai-input> <ai-input round value='round' yellow></ai-input>
@@ -19,7 +21,7 @@ number:<ai-input value='' type='number'></ai-input>
 <ai-input ellipse value='ellipse'></ai-input> <ai-input ellipse value='ellipse' primary></ai-input>  
 <ai-input ellipse value='ellipse' red></ai-input> <ai-input ellipse value='ellipse' green></ai-input> <ai-input ellipse value='default' yellow></ai-input>
 <br/>
-<ai-input line value='line' [cancel]="true" [symbol]="'done'"></ai-input> <ai-input line value='line' primary [symbol]="'error'"></ai-input>  
+<ai-input line value='line' [cancel_button]="true" [symbol_icon]="'done'"></ai-input> <ai-input line value='line' primary [symbol_icon]="'error'"></ai-input>  
 <ai-input line value='line' red></ai-input> <ai-input line value='line' green></ai-input> <ai-input line value='line' yellow></ai-input>
 <br/>
 <ai-input none value='none'></ai-input>
@@ -40,23 +42,23 @@ number:<ai-input value='' type='number'></ai-input>
 <div style='margin:20px;height:2px;background:#999'></div>
 
 
-<ai-input small       value='search' left='search' right='cancel'></ai-input>
-<ai-input small round value='search' left='search' right='cancel'></ai-input>
-<ai-input small ellipse value='search' left='search' right='cancel'></ai-input>
-<ai-input small line value='search' left='search' right='cancel'></ai-input>
-<ai-input small none value='search' left='search' right='cancel'></ai-input>
+<ai-input small       value='search' left_icon='search' right_icon='cancel'></ai-input>
+<ai-input small round value='search' left_icon='search' right_icon='cancel'></ai-input>
+<ai-input small ellipse value='search' left_icon='search' right_icon='cancel'></ai-input>
+<ai-input small line value='search' left_icon='search' right_icon='cancel'></ai-input>
+<ai-input small none value='search' left_icon='search' right_icon='cancel'></ai-input>
 <br/>
-<ai-input       value='search' left='search' right='cancel'></ai-input>
-<ai-input round value='search' left='search' right='cancel'></ai-input>
-<ai-input ellipse value='search' left='search' right='cancel'></ai-input>
-<ai-input line value='search' left='search' right='cancel'></ai-input>
-<ai-input none value='search' left='search' right='cancel'></ai-input>
+<ai-input       value='search' left_icon='search' right_icon='cancel'></ai-input>
+<ai-input round value='search' left_icon='search' right_icon='cancel'></ai-input>
+<ai-input ellipse value='search' left_icon='search' right_icon='cancel'></ai-input>
+<ai-input line value='search' left_icon='search' right_icon='cancel'></ai-input>
+<ai-input none value='search' left_icon='search' right_icon='cancel'></ai-input>
 <br/>
-<ai-input large       value='search' left='search' right='cancel'></ai-input>
-<ai-input large round value='search' left='search' right='cancel'></ai-input>
-<ai-input large ellipse value='search' left='search' right='cancel'></ai-input>
-<ai-input large line value='search' left='search' right='cancel'></ai-input>
-<ai-input large none value='search' left='search' right='cancel'></ai-input>
+<ai-input large       value='search' left_icon='search' right_icon='cancel'></ai-input>
+<ai-input large round value='search' left_icon='search' right_icon='cancel'></ai-input>
+<ai-input large ellipse value='search' left_icon='search' right_icon='cancel'></ai-input>
+<ai-input large line value='search' left_icon='search' right_icon='cancel'></ai-input>
+<ai-input large none value='search' left_icon='search' right_icon='cancel'></ai-input>
 <br/>
 
 
@@ -88,4 +90,3 @@ number:<ai-input value='' type='number'></ai-input>
     <ai-input line value='line'></ai-input>
     <ai-input none value='none'></ai-input>        
 </div>
--->

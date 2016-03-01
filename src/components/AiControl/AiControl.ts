@@ -72,7 +72,8 @@ export class AiControl implements OnChanges{
         if(!meta.inputs) meta.inputs=[];
         if(!meta.outputs) meta.outputs=[];
         if(!meta.host) meta.host={};
-
+ //       if(!meta.providers) meta.providers=[];
+ 
         meta.inputs.push('visible');
         meta.host['[class.hide]']='!visible';
         if(!options.ignoreDisabled){

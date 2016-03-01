@@ -1,10 +1,11 @@
 <input class="ai-input-box" (input)="updateValue($event)" (focus)="setHasFocus(true)" (blur)="setHasFocus(false)"
     [disabled]="isDisabled()" 
     [type]="getType()" 
-    [readonly]="isReadonly()" 
+    [readonly]="isReadonly()"
+    [tabIndex]="getInputTabIndex()" 
     [maxLength]="getMaxLength()" 
     [value]="value"  
 />
-<ai-icon class='ai-input-icon ai-input-left' ai-material *ngIf="isLeftExist()" (_click)="onLeftClick()">{{left}}</ai-icon>
-<ai-icon class='ai-input-icon ai-input-right' ai-material *ngIf="isRightExist()" (_click)="onRightClick()">{{right}}</ai-icon>
-<ai-icon class='ai-input-icon ai-input-symbol {{symbol}}' ai-material *ngIf="isSymbolExist()">{{symbol}}</ai-icon>
+<ai-icon class='ai-input-icon ai-input-left' ai-material *ngIf="hasLeftIcon()" (_click)="onLeftClick()">{{left_icon}}</ai-icon>
+<ai-icon class='ai-input-icon ai-input-right' ai-material *ngIf="hasRightIcon()" (_click)="onRightClick()">{{right_icon}}</ai-icon>
+<ai-icon class='ai-input-icon ai-input-symbol {{symbol_icon}}' ai-material *ngIf="hasSymbolIcon()">{{symbol_icon}}</ai-icon>

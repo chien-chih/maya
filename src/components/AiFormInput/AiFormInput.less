@@ -1,48 +1,21 @@
 @import "../AiControl/Definition";
 
 
-[ai-form-input] {
+ai-form-input {
     .input{
         width:100%;
         display:block;
         margin:0;
     }    
-    
-    /*
-    .input
-    {
-        appearance: none;
-        background: none;        
-        outline: none;
-        width: 100%;
-        box-sizing: border-box;
-        background: none;
-        padding: @input-padding-top 2px @input-border-width-focused - @input-border-width-default;
-        border-width: 0 0 @input-border-width-default 0;
-        line-height: @input-line-height;
-        -ms-flex-preferred-size: @input-line-height; // IE10
-        border-radius: 0;  
-    
-        
-        color: rgba(0,0,0,0.87);
-        border-color: rgba(0,0,0,0.12);
-        font-size: 100%;
-    }
-    */
+
     textarea {
         resize: none;
         overflow: hidden;
     }    
 }
 
-[ai-form-input].readonly{
-    .input {
-        color: rgba(0,0,0,0.26);
-    }
-}
-
-[ai-form-input].disabled{
-    /*
+ai-form-input.disabled{
+    
     .input {
         background-position: 0 bottom;
         background-size: 4px 1px;
@@ -51,9 +24,9 @@
         border-bottom-color: transparent;
         color: rgba(0,0,0,0.26);
         background-image: linear-gradient(to right, rgba(0,0,0,0.26) 0%, rgba(0,0,0,0.26) 33%, transparent 0%);
-    }*/
+    }
 }
-[ai-form-input].focus{
+ai-form-input.focus{
     /*.input {
         border-color: rgba(21, 126, 251,1);
         padding-bottom: 0; // Increase border width by 1px, decrease padding by 1
@@ -61,34 +34,34 @@
     }*/
 }
 
-[ai-form-input].error{
-    .input{
+ai-form-input.error{
+    input{
         .border-red(.8);
     }
 }
 
-[ai-form-input][primary]{
-    .input{
+ai-form-input[primary]{
+    input{
         .border-primary(.7);
     }
 }
 
 
-[ai-form-input][red]{
-    .input{
-        border-color: rgba(252, 61, 57,1);
+ai-form-input[red]{
+    input{
+        border-color: rgba(252, 61, 57,1)!important;
     }
 }
 
-[ai-form-input][green]{
-    .input{
-        border-color: rgba(81, 212, 102,1);
+ai-form-input[green]{
+    input{
+        border-color: rgba(81, 212, 102,1)!important;
     }
 }
 
-[ai-form-input][yellow]{
-    .input{
-        border-color: rgba(255, 193, 7,1);
+ai-form-input[yellow]{
+    input{
+        border-color: rgba(255, 193, 7,1)!important;
     }
 }
 

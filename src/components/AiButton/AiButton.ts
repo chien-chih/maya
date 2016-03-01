@@ -15,7 +15,7 @@ import {AiControl} from '../AiControl/AiControl';
 //color:red,green,yellow
 export class AiButton extends AiControl{ 
     //type:string;
-    border:string;
+    //border:string;
 
     constructor(ele: ElementRef) { 
         super(ele); 

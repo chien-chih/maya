@@ -10,6 +10,7 @@ import {AiFormTextarea} from 'ai/components/AiFormTextarea/AiFormTextarea';
     directives: [AiFormInput,AiFormTextarea]  
 }))
 export class AppComponent  extends AiApp{  
-     
+    value:string='1234';
+
 }
 AiApp.boot(AppComponent);  

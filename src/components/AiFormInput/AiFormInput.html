@@ -1,17 +1,15 @@
-<label *ngIf="isLabelExist()">{{label}} <span *ngIf="required" class='labelRequired'>(required*)</span></label>
-<icon ai-material *ngIf="isIconExist()">{{icon}}</icon>
-<!--
-<input class="input" (input)="updateValue($event)" (focus)="setHasFocus(true)" (blur)="setHasFocus(false)"
+<label *ngIf="hasLabel()">{{label}} <span *ngIf="required" class='labelRequired'>(required*)</span></label>
+<icon ai-material *ngIf="hasIcon()">{{icon}}</icon>
+<ai-input class="input" line (_focus_change)="setHasFocus($event)" (_value_change)="updateValue($event)"
     [disabled]="isDisabled()" 
     [type]="getType()" 
-    [readonly]="isReadonly()" 
-    [maxLength]="getMaxLength()" 
-    [value]="value"  
-    />
--->
-<ai-input class="input" line (_focus_change)="setHasFocus($event)" (_value_change)="updateValue($event)"></ai-input>
+    [readonly]="isReadonly()"
+    [maxlength]="getMaxLength()" 
+    [value]="value"
+    [symbol_icon]="getSymbolIcon()"
+    ></ai-input>
 <div class="spacer">
-<message *ngIf="isMessageExist()">{{message}}</message>
-<word *ngIf="isWordExist()">{{word}}</word>
+<message *ngIf="hasMessage()">{{message}}</message>
+<word *ngIf="hasWord()">{{word}}</word>
 </div>
 <error >{{error}}</error>

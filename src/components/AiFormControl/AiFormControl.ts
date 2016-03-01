@@ -1,9 +1,11 @@
-import {ElementRef} from 'angular2/core';
+import {Component,ElementRef,Input,Output} from 'angular2/core';
+import {ControlValueAccessor} from 'angular2/common';
+import {ObservableWrapper,EventEmitter} from 'angular2/src/facade/async';
 import {AiControl} from '../AiControl/AiControl';
 
-export class AiFormControl extends AiControl{
- 
-    label:string='';
+export class AiFormControl extends AiControl implements ControlValueAccessor{
+    value:any=null;
+    label:string=''; 
     message:string='';
     word:string='';
     error:string='';
@@ -11,20 +13,23 @@ export class AiFormControl extends AiControl{
     
     //validation
     required:boolean=false;
-    minLength:number=-1;
-    
+
+    @Output()
+    _value_change: EventEmitter<any>=new EventEmitter();
+
     static meta(meta:any,options?:any):any{
         meta=AiControl.meta(meta,options);
+        meta.inputs.push('value');
         meta.inputs.push('label');
         meta.inputs.push('message');
         meta.inputs.push('word');
         meta.inputs.push('error');
         meta.inputs.push('icon');
         meta.inputs.push('required');
-        meta.inputs.push('minLength');
-        meta.host['[class.icon]']='isIconExist()';
+        meta.host['[class.valued]']='hasValue()';
+        meta.host['[class.icon]']='hasIcon()';
         meta.host['[class.required]']='required';
-        meta.host['[class.error]']='isErrorExist()';
+        meta.host['[class.error]']='hasError()';
         return meta;
     }
     
@@ -33,38 +38,56 @@ export class AiFormControl extends AiControl{
         this.nativeElement.setAttribute('ai-form-control',''); 
     }  
 
-    isLabelExist(){
+    onChange = (_) => {};
+    onTouched = () => {};
+    registerOnChange(fn: (_: any) => void): void { this.onChange = fn; }
+    registerOnTouched(fn: () => void): void { this.onTouched = fn; }
+
+    writeValue(value: any): void {
+        if(value) this.value=value;
+    }
+
+    updateValue(value:any) {
+        this.error='';
+        this.value = value;
+        this.onChange(this.value);
+        ObservableWrapper.callEmit(this._value_change, this.value);
+    }
+
+    hasValue(){
+        return this.value != null && this.value.length > 0;
+    } 
+
+
+    hasLabel(){
         return this.label.length > 0;
     }
 
-    isMessageExist(){
+    hasMessage(){
         return this.message.length > 0;
     }
 
-    isWordExist(){
+    hasWord(){
         return this.word.length > 0;
     }
 
-    isIconExist(){
+    hasIcon(){
         return this.icon.length > 0;
     }
 
-    isErrorExist(){
+    hasError(){
         return this.error.length > 0;
     }
 
-    validate(text:string){
+    validate(text:string):boolean{
         this.error='';
         if(this.required && text.length==0) {
             this.error=this.label+' is required';
+            return false;
         }
-        else if(this.minLength > 0 && text.length < this.minLength){
-            this.error=this.label+' minimum length is '+this.minLength;
-        }
-        
-
-
+        return true;
     }    
-
+ 
 }
 
+ 

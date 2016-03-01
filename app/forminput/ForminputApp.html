@@ -1,10 +1,16 @@
 <div class='sample'>
+    input value : {{value}}
     
-    <ai-form-input [required]="'true'" [minLength]="'4'" [label]="'Account Name'" [message]="'Tell us what we should call you!'" [maxLength]="'64'" [showCounter]="'true'" [icon]="'account_box'" ></ai-form-input>
+    <ai-form-input [(ngModel)]="value"
+        [counter]='true'
+        [max_length]='128'
+        [min_length]='4'
+        [validated]='true'
+        [required]="'true'"  [label]="'Account Name'" [message]="'Tell us what we should call you!'"  [icon]="'account_box'" ></ai-form-input>
 </div>
 
+
 <div class='sample'>
-    
     <ai-form-input [label]="'Password'" [type]="'password'"></ai-form-input>
     <ai-form-input [label]="'Readonly'" [value]="'readonly'" [readonly]="'true'"></ai-form-input>
 </div>
@@ -12,8 +18,9 @@
 
 <br/>
 
+<ai-form-input [label]="'disabled'" [value]="'disabled value'" [message]="'this is disabled control'" disabled='true' ></ai-form-input>
 <ai-form-input [label]="'normal'" [message]="'How can we reach you?'" ></ai-form-input>
-<ai-form-input [label]="'primary'" primary [maxLength]="'5'" [showCounter]="'true'"></ai-form-input>
+<ai-form-input [label]="'primary'" primary [maxLength]="'5'" [counter]='true'></ai-form-input>
 <ai-form-input [label]="'red'" red [word]="'*Require'" [error]="'Your email must be between 10 and 100 characters long and look like an e-mail address.'">
     
 </ai-form-input> <ai-form-input [label]="'green'" green></ai-form-input> <ai-form-input [label]="'yellow'" yellow></ai-form-input>
@@ -26,7 +33,7 @@
 <ai-form-input value='red' red></ai-form-input>
 <ai-form-input value='green' green></ai-form-input>
 <ai-form-input value='yellow' yellow></ai-form-input>
-
+<!-- 
 <br/>
 <ai-form-textarea value='World'></ai-form-textarea> <ai-form-textarea value='World' [disabled]="true"></ai-form-textarea>
 <ai-form-textarea value='primary' primary></ai-form-textarea>
@@ -35,7 +42,6 @@
 <ai-form-textarea value='yellow' yellow></ai-form-textarea>
 
 
-
-
+-->
 
  
