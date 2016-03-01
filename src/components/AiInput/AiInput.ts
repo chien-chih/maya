@@ -1,14 +1,24 @@
-import {Component,ElementRef,Attribute} from 'angular2/core';
+import {Component,ElementRef,Attribute,Input,Output,forwardRef,Provider} from 'angular2/core';
+import {NgControl,ControlValueAccessor,NG_VALUE_ACCESSOR} from 'angular2/common';
+import {CONST_EXPR} from 'angular2/src/facade/lang';
+
+
 import {ObservableWrapper,EventEmitter} from 'angular2/src/facade/async';
 import {AiControl} from '../AiControl/AiControl';
 import {AiIcon} from '../AiIcon/AiIcon';
+
+
+const CUSTOM_VALUE_ACCESSOR = CONST_EXPR(new Provider(
+  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => AiInput), multi: true}));
+
+//const CUSTOM_VALUE_ACCESSOR = new Provider(
+  //  NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => LabelsValueAccessor), multi: true});
+
 
 @Component(AiControl.meta({
     templateUrl:'package:src/components/AiInput/AiInput.html',
     directives: [AiIcon],
     selector: 'ai-input',
-    inputs:['maxlength','readonly','value'],
-    outputs:['onclickleft','onclickright','onfocuschange','onvalue'],
     host: {
         '[class.focus]': 'isFocus',
         '[class.valued]': 'hasValue()',
@@ -16,67 +26,108 @@ import {AiIcon} from '../AiIcon/AiIcon';
         '[class.ai-input-left]': 'isLeftExist()',
         '[class.ai-input-right]': 'isRightExist()'
     }
+    ,providers: [CUSTOM_VALUE_ACCESSOR]
     },{
         ignoreActive:1,
         ignoreFocus:1,
         ignoreHover:1
     }))    
-export class AiInput extends AiControl{ 
-    left:string='';
-    right:string='';
+export class AiInput extends AiControl implements ControlValueAccessor{ 
+    @Input() 
     value: string=''; 
-    maxlength:number=255;
+    
+    @Input() 
     type:string='text';
-    readonly:boolean=false;
-    cancel:boolean=false;
-    onclickright: EventEmitter<any>=new EventEmitter();
-    onclickleft: EventEmitter<any>=new EventEmitter();
-    onfocuschange: EventEmitter<any>=new EventEmitter();
-    onvalue: EventEmitter<any>=new EventEmitter();
 
-    constructor(ele: ElementRef,
-        @Attribute("cancel") cancel,
-        @Attribute("type") type,
-        @Attribute("left") left,
-        @Attribute("right") right
-        ) {  
+    @Input() 
+    cancel:boolean=false;
+
+    @Input() 
+    symbol:string='';
+
+    @Input() 
+    left:string='';
+
+    @Input() 
+    right:string='';
+
+    @Input() 
+    maxlength:number=255;
+
+    @Input() 
+    minlength:number=255;
+
+    @Input() 
+    readonly:boolean=false;
+
+    @Input() 
+    required:boolean=false;
+    
+    @Output()
+    _click_right: EventEmitter<any>=new EventEmitter();
+
+    @Output()
+    _click_left: EventEmitter<any>=new EventEmitter();
+
+    @Output()
+    _focus_change: EventEmitter<any>=new EventEmitter();
+
+    @Output()
+    _value_change: EventEmitter<any>=new EventEmitter();
+
+    constructor(ele: ElementRef) {  
         super(ele); 
-        if(type != null) this.type = type;
-        if(left != null) this.left = left;
-        if(right != null) this.right = right;
-        
-        if(cancel != null){
-            this.cancel = true;
-            this.updateCancelIcon();
-        }
+        //, ngControl: NgControl
+        //if(ngControl) {
+           // this.ngControl.valueAccessor = this;
+        //}
     }
 
-    updateCancelIcon(){
+    
+    onChange = (_) => {};
+    onTouched = () => {};
+    writeValue(value: any): void {
+        if(value) this.value=value;
+    //    this.host.writeLabelsValue(value);
+    }
+    registerOnChange(fn: (_: any) => void): void { this.onChange = fn; }
+    registerOnTouched(fn: () => void): void { this.onTouched = fn; }
+  
+    //writeValue(obj: any): void{ 
+        //this.value=obj;
+    //}
+    //registerOnChange(fn: any): void{
+  //      this.onChange = fn;
+        
+    //}
+    //registerOnTouched(fn: any): void{
+//        this.onTouched = fn;
+        
+    //}
+
+    ngOnInit() {
+        this.updateValue(null);
+    }
+
+    updateValue(event) {
+        if(event) this.value = event.target.value.trim();
         if(this.cancel){
             if(this.value.length > 0)
                 this.right='cancel';            
             else    
                 this.right='';            
         }
-    }
-
-    ngOnChanges(_) {
-        this.updateCancelIcon();
+        this.onChange(this.value);
+        ObservableWrapper.callEmit(this._value_change, this.value);
     }
 
     hasValue(){
         return this.value.length > 0;
     } 
-
-    updateValue(event) {
-        if(event) this.value = event.target.value;
-        this.updateCancelIcon();
-        ObservableWrapper.callEmit(this.onvalue, this.value);
-    }
     
     setHasFocus(hasFocus: boolean) {
         this.isFocus=hasFocus;
-        ObservableWrapper.callEmit(this.onfocuschange,hasFocus);
+        ObservableWrapper.callEmit(this._focus_change,hasFocus);
     }
 
     getMaxLength(){
@@ -98,9 +149,13 @@ export class AiInput extends AiControl{
     isRightExist(){
         return this.right.length > 0;
     }
+
+    isSymbolExist(){
+        return this.symbol.length > 0;
+    }
  
     onLeftClick(){
-        ObservableWrapper.callEmit(this.onclickleft, null);
+        ObservableWrapper.callEmit(this._click_left, null);
     }
 
     onRightClick(){
@@ -112,7 +167,7 @@ export class AiInput extends AiControl{
             }catch(e){}
         }
         else
-            ObservableWrapper.callEmit(this.onclickright, null);
+            ObservableWrapper.callEmit(this._click_right, null);
     }
  
 } 

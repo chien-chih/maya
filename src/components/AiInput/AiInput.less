@@ -3,7 +3,7 @@
 ai-input {
     display:inline-block;
     width:160px;
-    margin:6px;
+    margin:20px;
     position:relative;
     
     .ai-input-box{
@@ -43,6 +43,17 @@ ai-input {
     .ai-input-right{
         left: auto;
         right:6px;
+    }
+
+    .ai-input-symbol{
+        left: auto;
+        right:-18px;
+    }
+    .ai-input-symbol.done{
+        .color-green(.9)!important;
+    }
+    .ai-input-symbol.error{
+        .color-red(.8)!important;
     }
 }
 

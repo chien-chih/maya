@@ -75,7 +75,7 @@
         <ai-button link small  yellow>small</ai-button><ai-button link [disabled]="true" yellow>disabled</ai-button>
         <br/>
 
-        <ai-button raised (onclick)='onClick()'>normal</ai-button><ai-button large raised>large</ai-button>
+        <ai-button raised (_click)='onClick()'>normal</ai-button><ai-button large raised>large</ai-button>
         <ai-button small raised>small</ai-button><ai-button [disabled]="true" raised (onclick)='onClick()'>disabled</ai-button>
         
         <ai-button raised primary>normal</ai-button><ai-button large raised primary>large</ai-button>

@@ -46,7 +46,7 @@ export class AiControl implements OnChanges{
     icon:string='';
     error:string='';
 
-    onclick: EventEmitter<any>=new EventEmitter();
+    _click: EventEmitter<any>=new EventEmitter();
 
     protected onClick(){}
     protected onMouseOver() {}
@@ -95,7 +95,7 @@ export class AiControl implements OnChanges{
         }        
 
         if(!options.ignoreActive){
-            meta.outputs.push('onclick');
+            meta.outputs.push('_click');
             meta.host['[class.active]']='isActive';
             meta.host['(mouseup)']='mouseUp($event)';
             meta.host['(mousedown)']='mouseDown($event)';
@@ -137,7 +137,7 @@ export class AiControl implements OnChanges{
             try{
                 this.onClick();
                 this.isFire=true;
-                ObservableWrapper.callEmit(this.onclick, null);
+                ObservableWrapper.callEmit(this._click, null);
             }finally{
                 this.isFire=false;
             }

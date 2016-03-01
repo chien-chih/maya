@@ -10,7 +10,9 @@ import {AiInput} from 'ai/components/AiInput/AiInput';
 }))
 export class AppComponent  extends AiApp{  
     spinButtonSpinning:boolean=false;
+    valueA:string='1234';
     
+
     onSpinButtonClick(){
         this.spinButtonSpinning=!this.spinButtonSpinning;         
     }
@@ -20,12 +22,10 @@ export class AppComponent  extends AiApp{
     }
     
     onLeftClick(){
-        alert('left');
+        alert('click left');
     }
 
     onValueChange(value){
-        debugger
-        alert(value);
     }
 
 }

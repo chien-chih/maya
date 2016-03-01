@@ -1,7 +1,15 @@
+input value : {{valueA}}
+<br/>
+min&max:<ai-input [(ngModel)]="valueA"></ai-input> 
 
-<ai-input value='default' cancel (onvalue)='onValueChange($event)'></ai-input> 
-<ai-input value='default' primary  left='search' right='cancel' (onclickleft)="onLeftClick()" (onclickright)="onRightClick()"></ai-input>  
-<ai-input value='default' red  left='search' right='cancel'></ai-input> 
+<!--
+
+password:<ai-input value='password' type='password'></ai-input> 
+number:<ai-input value='' type='number'></ai-input>
+<br/>
+<ai-input value='minMaxLength' [cancel]="true"  (_value_change)='onValueChange($event)'></ai-input> 
+<ai-input value='default' primary [symbol]="'error'" left='search' right='cancel' (_click_left)="onLeftClick()" (_click_right)="onRightClick()"></ai-input>  
+<ai-input value='default' red  left='search' right='cancel' [symbol]="'done'"></ai-input> 
 <ai-input value='default' green left='search' right='cancel'></ai-input> 
 <ai-input value='default' yellow  left='search' right='cancel'></ai-input>
 <br/>
@@ -11,14 +19,13 @@
 <ai-input ellipse value='ellipse'></ai-input> <ai-input ellipse value='ellipse' primary></ai-input>  
 <ai-input ellipse value='ellipse' red></ai-input> <ai-input ellipse value='ellipse' green></ai-input> <ai-input ellipse value='default' yellow></ai-input>
 <br/>
-<ai-input line value='line'></ai-input> <ai-input line value='line' primary></ai-input>  
+<ai-input line value='line' [cancel]="true" [symbol]="'done'"></ai-input> <ai-input line value='line' primary [symbol]="'error'"></ai-input>  
 <ai-input line value='line' red></ai-input> <ai-input line value='line' green></ai-input> <ai-input line value='line' yellow></ai-input>
 <br/>
 <ai-input none value='none'></ai-input>
 
 <div style='margin:20px;height:2px;background:#999'></div>
 
-<!--size-->
 
 <ai-input value='default' small></ai-input> <ai-input value='default'></ai-input> <ai-input value='default' large></ai-input>  
 <br/>
@@ -32,7 +39,7 @@
 
 <div style='margin:20px;height:2px;background:#999'></div>
 
-<!--control-->
+
 <ai-input small       value='search' left='search' right='cancel'></ai-input>
 <ai-input small round value='search' left='search' right='cancel'></ai-input>
 <ai-input small ellipse value='search' left='search' right='cancel'></ai-input>
@@ -56,7 +63,7 @@
 
 <div style='margin:20px;height:2px;background:#999'></div>
 
-<!--color-->
+
 <div style='border:solid 1px #fefefe;padding:10px'>
     <ai-input value='default'></ai-input>
     <ai-input round value='round'></ai-input>
@@ -81,3 +88,4 @@
     <ai-input line value='line'></ai-input>
     <ai-input none value='none'></ai-input>        
 </div>
+-->
