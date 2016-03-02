@@ -1,4 +1,4 @@
-import {Component,ElementRef,Input,Output,forwardRef,Provider,HostBinding} from 'angular2/core';
+import {Component,ElementRef,forwardRef,Provider,HostBinding} from 'angular2/core';
 import {ControlValueAccessor,NG_VALUE_ACCESSOR} from 'angular2/common';
 import {ObservableWrapper,EventEmitter} from 'angular2/src/facade/async';
 import {AiControl} from '../AiControl/AiControl';
@@ -8,58 +8,56 @@ import {AiIcon} from '../AiIcon/AiIcon';
     templateUrl:'package:src/components/AiInput/AiInput.html',
     directives: [AiIcon],
     selector: 'ai-input',
-    host: {
-        '[class.focus]': 'isFocus',
-        '[class.valued]': 'hasValue()',
-        '[class.readonly]': 'readonly',
-        '[class.ai-input-left]': 'hasLeftIcon()',
-        '[class.ai-input-right]': 'hasRightIcon()'
-    }
-    ,providers: [new Provider(NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => AiInput), multi: true})]
+    inputs: AiInput.inputs,
+    outputs: AiInput.outputs,
+    host: AiInput.host,
+    providers: [new Provider(NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => AiInput), multi: true})]
     },{
         ignoreActive:1,
         ignoreFocus:1,
         ignoreHover:1
-    }))    
+    }))   
 export class AiInput extends AiControl implements ControlValueAccessor{ 
-    @Input() 
+
+    static inputs=['value','type','maxlength','readonly','cancel_button','symbol_icon','right_icon','pattern'];
+    static outputs=['_click_right','_click_left','_focus_change','_value_change'];
+    static host={
+            '[class.focus]': 'isFocus',
+            '[class.valued]': 'hasValue()',
+            '[class.readonly]': 'readonly',
+            '[class.ai-input-left]': 'hasLeftIcon()',
+            '[class.ai-input-right]': 'hasRightIcon()'
+        };
+
     value: string=''; 
     
-    @Input() 
     type:string='text';
 
-    @Input() 
     maxlength:number=255;
 
-    @Input() 
     readonly:boolean=false;
 
-    @Input() 
     cancel_button:boolean=false;
 
-    @Input() 
     symbol_icon:string='';
 
-    @Input() 
+    pattern:string='';
+
     left_icon:string='';
 
-    @Input() 
     right_icon:string='';
 
-    @Output()
     _click_right: EventEmitter<any>=new EventEmitter();
 
-    @Output()
     _click_left: EventEmitter<any>=new EventEmitter();
 
-    @Output()
     _focus_change: EventEmitter<any>=new EventEmitter();
 
-    @Output()
     _value_change: EventEmitter<any>=new EventEmitter();
 
     constructor(ele: ElementRef) {  
         super(ele); 
+        this.nativeElement.setAttribute('ai-input',''); 
     }
 
     onChange = (_) => {};

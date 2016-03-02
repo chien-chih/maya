@@ -116,6 +116,19 @@ export class AiControl implements OnChanges{
         if(tabindex) this.tabindex = NumberWrapper.parseInt(tabindex, 10);
     }  
 
+    inhieritAttributesToChilds(i){
+        var attributes=['primary','red','green','yellow','large','small'];
+        this.inhieritAttributes(attributes,i);
+    }
+
+    inhieritAttributes(attributes,i){
+        var ele=this.nativeElement;
+        attributes.forEach(attr => {
+            if(ele.getAttribute(attr) != null)
+                ele.childNodes[i].setAttribute(attr,'');
+        });
+    }
+
     ngOnChanges(_) {
         //alert(this.spinning);
     }

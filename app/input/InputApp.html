@@ -1,3 +1,12 @@
+
+
+<ai-textarea value='textarea' ></ai-textarea>
+<ai-textarea round value='round' ></ai-textarea>
+<ai-textarea ellipse value='ellipse' ></ai-textarea>
+<ai-textarea line value='line' ></ai-textarea>
+<ai-textarea none value='none' ></ai-textarea>
+<br/>
+
 input value : {{valueA}}
 <br/>
 two-way-binding:<ai-input [(ngModel)]="valueA" maxlength='3'></ai-input> 
@@ -20,9 +29,11 @@ number:<ai-input value='' type='number'></ai-input>
 <br/>
 <ai-input ellipse value='ellipse'></ai-input> <ai-input ellipse value='ellipse' primary></ai-input>  
 <ai-input ellipse value='ellipse' red></ai-input> <ai-input ellipse value='ellipse' green></ai-input> <ai-input ellipse value='default' yellow></ai-input>
+<ai-input ellipse disabled='true' value='disabled' red></ai-input> <ai-input ellipse disabled='true' value='disabled' green></ai-input> <ai-input disabled='true' ellipse value='disabled' yellow></ai-input>
 <br/>
 <ai-input line value='line' [cancel_button]="true" [symbol_icon]="'done'"></ai-input> <ai-input line value='line' primary [symbol_icon]="'error'"></ai-input>  
 <ai-input line value='line' red></ai-input> <ai-input line value='line' green></ai-input> <ai-input line value='line' yellow></ai-input>
+<ai-input line disabled='true' value='disabled' red></ai-input> <ai-input line disabled='true' value='disabled' green></ai-input> <ai-input line disabled='true' value='disabled' yellow></ai-input>
 <br/>
 <ai-input none value='none'></ai-input>
 
@@ -81,6 +92,14 @@ number:<ai-input value='' type='number'></ai-input>
     <ai-input white ellipse value='ellipse'></ai-input>  
     <ai-input white line value='line'></ai-input>
     <ai-input white none value='none'></ai-input>        
+    <br/>
+    <ai-input disabled='true' white value='disabled'></ai-input>
+    <ai-input disabled='true' white round value='disabled'></ai-input>
+    <ai-input disabled='true' white ellipse value='disabled'></ai-input>  
+    <ai-input disabled='true' white line value='disabled'></ai-input>
+    <ai-input disabled='true' white none value='disabled'></ai-input>        
+    
+    
 </div>
 <br/>
 <div style='background:linear-gradient(to bottom, #888 0%,#999 50%,#aaa 51%,#bbb 888%);padding:10px;'>
@@ -88,5 +107,12 @@ number:<ai-input value='' type='number'></ai-input>
     <ai-input round value='round'></ai-input>
     <ai-input ellipse value='ellipse'></ai-input>  
     <ai-input line value='line'></ai-input>
-    <ai-input none value='none'></ai-input>        
+    <ai-input none value='none'></ai-input>       
+    <br/>
+    <ai-input disabled='true' value='disabled'></ai-input>
+    <ai-input disabled='true' round value='disabled'></ai-input>
+    <ai-input disabled='true' ellipse value='disabled'></ai-input>  
+    <ai-input disabled='true' line value='disabled'></ai-input>
+    <ai-input disabled='true' none value='disabled'></ai-input>        
+    
 </div>

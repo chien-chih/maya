@@ -1,4 +1,4 @@
-import {Component,ElementRef,Input,Output,forwardRef,Provider} from 'angular2/core';
+import {Component,ElementRef,forwardRef,Provider} from 'angular2/core';
 import {NG_VALUE_ACCESSOR} from 'angular2/common';
 import {ObservableWrapper,EventEmitter} from 'angular2/src/facade/async';
 import {AiFormControl} from '../AiFormControl/AiFormControl';
@@ -8,10 +8,8 @@ import {AiInput} from '../AiInput/AiInput';
         templateUrl:'package:src/components/AiFormInput/AiFormInput.html',
         directives: [AiInput],
         selector: 'ai-form-input',
-        host: {
-            '[class.focus]': 'isFocus',
-            '[class.readonly]': 'readonly',
-        },
+        inputs: AiFormInput.inputs,
+        host: AiFormInput.host,
         providers: [new Provider(NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => AiFormInput), multi: true})]
     },{
         ignoreActive:1,
@@ -21,28 +19,41 @@ import {AiInput} from '../AiInput/AiInput';
 ))    
 export class AiFormInput extends AiFormControl { 
 
-    @Input() 
+    static inputs=['type','maxlength','min_length','readonly','counter','validated'];
+    static host={
+            '[class.focus]': 'isFocus',
+            '[class.readonly]': 'readonly',
+        };
+
     type:string='text';
 
-    @Input()  
     max_length:number=255;
 
-    @Input()  
     min_length:number=0;
 
-    @Input() 
     readonly:boolean=false;
 
-    @Input() 
     counter:boolean=false;
 
-    @Input() 
     validated:boolean=false;
 
     constructor(ele: ElementRef) { 
         super(ele);
+        this.nativeElement.setAttribute('ai-form-input',''); 
+        this.inhieritAttributesToChilds(0);
+        var child=this.nativeElement.childNodes[0];
+        if(this.nativeElement.getAttribute('round') != null)
+            child.setAttribute('round','');
+        else if(this.nativeElement.getAttribute('ellipse') != null)
+            child.setAttribute('ellipse','');
+        else if(this.nativeElement.getAttribute('none') != null)
+            child.setAttribute('none','');
+        else if(this.nativeElement.getAttribute('rect') != null)
+            child.setAttribute('rect','');
+        else 
+            child.setAttribute('line','');
     }
-
+    
     updateValue(value:any) {
         if(this.counter && value)
             this.word= value.length + "/" + this.max_length;

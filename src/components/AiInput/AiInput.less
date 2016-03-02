@@ -1,11 +1,16 @@
 @import "../AiControl/Definition";
   
-ai-input {
+[ai-input] {
     display:inline-block;
     width:160px;
     margin:20px;
     position:relative;
     
+    textarea {
+        resize: none;
+        overflow: hidden;
+    }    
+
     .ai-input-box{
         appearance: none;
         background: rgba(255,255,255,.95);
@@ -57,41 +62,38 @@ ai-input {
     }
 }
 
-ai-input .ai-input-box:focus {
+[ai-input].disabled .ai-input-box{
+    .color-default(.3);
+}
+[ai-input][white].disabled .ai-input-box{
+    .color-default(.9);
+}
+
+[ai-input] .ai-input-box:focus {
     outline: none;
 }
 
-ai-input.ai-input-left .ai-input-box{
+[ai-input].ai-input-left .ai-input-box{
     padding-left:26px;
 }
 
-ai-input.ai-input-right .ai-input-box{
+[ai-input].ai-input-right .ai-input-box{
     padding-right:26px;
 }
 
 
-ai-input.readonly .ai-input-box{
+[ai-input].readonly .ai-input-box{
     color: rgba(0,0,0,0.26);
 }
 
-ai-input.disabled .ai-input-box{
-    background-position: 0 bottom;
-    background-size: 4px 1px;
-    background-repeat: repeat-x;
-    margin-bottom: -1px;
-    border-bottom-color: transparent;
-    color: rgba(0,0,0,0.26);
-    background-image: linear-gradient(to right, rgba(0,0,0,0.26) 0%, rgba(0,0,0,0.26) 33%, transparent 0%);
-}
-
-ai-input.focus {
+[ai-input].focus {
     .ai-input-box{
         .border-primary(.7);
     }
 }
 
 
-ai-input[primary] {
+[ai-input][primary] {
     .ai-input-box{
         .border-primary(.4);
     }
@@ -99,11 +101,11 @@ ai-input[primary] {
         .color-primary(.8);
     }
 }
-ai-input[primary].focus .ai-input-box{
+[ai-input][primary].focus .ai-input-box{
     .border-primary(.9);
 }
 
-ai-input[red] {
+[ai-input][red] {
     .ai-input-box{
         .border-red(.4);
     }
@@ -111,14 +113,14 @@ ai-input[red] {
         .color-red(.8);
     }
 }
-ai-input[red].focus .ai-input-box{
+[ai-input][red].focus .ai-input-box{
     .border-red(.9);
 }
-ai-input[red] ::selection {
+[ai-input][red] ::selection {
     .background-red(.3);
 }
 
-ai-input[green] {
+[ai-input][green] {
     .ai-input-box{
         .border-green(.4);
     }
@@ -127,14 +129,14 @@ ai-input[green] {
     }
 }
 
-ai-input[green].focus .ai-input-box{
+[ai-input][green].focus .ai-input-box{
     .border-green(.9);
 }
-ai-input[green] ::selection {
+[ai-input][green] ::selection {
     .background-green(.3);
 }
 
-ai-input[yellow] {
+[ai-input][yellow] {
     .ai-input-box{
         .border-yellow(.4);
     }
@@ -142,33 +144,33 @@ ai-input[yellow] {
         .color-yellow(.8);
     }
 }
-ai-input[yellow].focus .ai-input-box{
+[ai-input][yellow].focus .ai-input-box{
     .border-yellow(.9);
 }
-ai-input[yellow] ::selection {
+[ai-input][yellow] ::selection {
     .background-yellow(.3);
 }
 
 
-ai-input[white] .ai-input-box{
+[ai-input][white] .ai-input-box{
     color:#fff;
     background: rgba(200,200,200,.55);
 }
-ai-input[white].focus .ai-input-box{
+[ai-input][white].focus .ai-input-box{
     border-color:transparent;
 }
-ai-input[white] ::selection {
+[ai-input][white] ::selection {
   background: #efefef;
 }
 
 
 /*round*/
-ai-input[round] .ai-input-box{
+[ai-input][round] .ai-input-box{
     border-radius: 4px;
 }
 
 /*ellipse*/
-ai-input[ellipse] {
+[ai-input][ellipse] {
     .ai-input-box{
         border-radius: 20px;
         padding:2px 16px;
@@ -186,15 +188,15 @@ ai-input[ellipse] {
     }
 
 }
-ai-input[ellipse].ai-input-left .ai-input-box{
+[ai-input][ellipse].ai-input-left .ai-input-box{
     padding-left:26px;
 }
 
-ai-input[ellipse].ai-input-right .ai-input-box{
+[ai-input][ellipse].ai-input-right .ai-input-box{
     padding-right:26px;
 }
 
-ai-input[ellipse][large] {
+[ai-input][ellipse][large] {
     .ai-input-left{
         left: 10px;
         right: auto;
@@ -205,24 +207,24 @@ ai-input[ellipse][large] {
         right:10px;
     }
 }
-ai-input[ellipse][large].ai-input-left .ai-input-box{
+[ai-input][ellipse][large].ai-input-left .ai-input-box{
     padding-left:32px;
 }
 
-ai-input[ellipse][large].ai-input-right .ai-input-box{
+[ai-input][ellipse][large].ai-input-right .ai-input-box{
     padding-right:32px;
 }
-ai-input[ellipse][small].ai-input-left .ai-input-box{
+[ai-input][ellipse][small].ai-input-left .ai-input-box{
     padding-left:18px;
 }
 
-ai-input[ellipse][small].ai-input-right .ai-input-box{
+[ai-input][ellipse][small].ai-input-right .ai-input-box{
     padding-right:18px;
 }
 
 
 /*line*/
-ai-input[line] {
+[ai-input][line] {
     .ai-input-box{
         padding: @input-padding-top 2px @input-border-width-focused - @input-border-width-default;
         border-width: 0 0 @input-border-width-default 0;
@@ -240,15 +242,42 @@ ai-input[line] {
     }
 
 }
-ai-input[line].ai-input-left .ai-input-box{
+[ai-input][line].ai-input-left .ai-input-box{
     padding-left:22px;
 }
 
-ai-input[line].ai-input-right .ai-input-box{
+[ai-input][line].ai-input-right .ai-input-box{
     padding-right:22px;
 }
 
-ai-input[line][large] {
+[ai-input][line].disabled .ai-input-box{
+    background-position: 0 bottom;
+    background-size: 4px 1px;
+    background-repeat: repeat-x;
+    margin-bottom: -1px;
+    border-bottom-color: transparent;
+    color: rgba(0,0,0,0.26);
+    background-image: linear-gradient(to right, rgba(0,0,0,0.26) 0%, rgba(0,0,0,0.26) 33%, transparent 0%);
+}
+[ai-input][line][red].disabled .ai-input-box{
+    .color-red(.3);
+    background-image: linear-gradient(to right, rgba(252, 61, 57,0.26) 0%, rgba(252, 61, 57,0.26) 33%, transparent 0%);
+}
+
+[ai-input][line][green].disabled .ai-input-box{
+    .color-green(.3);
+    background-image: linear-gradient(to right, rgba(81, 212, 102,0.26) 0%, rgba(81, 212, 102,0.26) 33%, transparent 0%);
+}
+[ai-input][line][yellow].disabled .ai-input-box{
+    .color-yellow(.3);
+    background-image: linear-gradient(to right, rgba(255, 193, 7,0.26) 0%, rgba(255, 193, 7,0.26) 33%, transparent 0%);
+}
+[ai-input][line][white].disabled .ai-input-box{
+    .color-default(1);
+    background-image: linear-gradient(to right, rgba(255, 255, 255,0.26) 0%, rgba(255, 255, 255,0.26) 33%, transparent 0%);
+}
+
+[ai-input][line][large] {
     .ai-input-left{
         left: 2px;
         right: auto;
@@ -260,7 +289,7 @@ ai-input[line][large] {
     }
 }
 
-ai-input[line][small] {
+[ai-input][line][small] {
     .ai-input-left{
         left: 1px;
         right: auto;
@@ -272,38 +301,38 @@ ai-input[line][small] {
     }
 }
 
-ai-input[line].focus .ai-input-box{
+[ai-input][line].focus .ai-input-box{
     border-color: rgba(21, 126, 251,1);
     padding-bottom: 0; // Increase border width by 1px, decrease padding by 1
     border-width: 0 0 @input-border-width-focused 0;
 }
-ai-input[line][red] .ai-input-box{
+[ai-input][line][red]:not(.disabled) .ai-input-box{
     border-color: rgba(252, 61, 57,1);
 }
 
-ai-input[line][green] .ai-input-box{
+[ai-input][line][green]:not(.disabled) .ai-input-box{
     border-color: rgba(81, 212, 102,1);
 }
 
-ai-input[line][yellow] .ai-input-box{
+[ai-input][line][yellow]:not(.disabled) .ai-input-box{
     border-color: rgba(255, 193, 7,1);
 }
-ai-input[line][white] .ai-input-box{
+[ai-input][line][white]:not(.disabled) .ai-input-box{
     border-color: rgba(255, 255, 255,.9);
 }
 
 /*none*/
-ai-input[none] .ai-input-box{
+[ai-input][none] .ai-input-box{
     border:none;
 }
-ai-input[none][white] .ai-input-box{
+[ai-input][none][white] .ai-input-box{
     background:none;
     
 }
 
 /*size*/
 
-ai-input[large] {
+[ai-input][large] {
     .ai-input-box{
         font-size: 100%;
         padding:1px 8px 1px 8px;
@@ -327,26 +356,26 @@ ai-input[large] {
         right:6px;
     }
 }
-ai-input[large].ai-input-left .ai-input-box{
+[ai-input][large].ai-input-left .ai-input-box{
     padding-left:26px;
 }
 
-ai-input[large].ai-input-right .ai-input-box{
+[ai-input][large].ai-input-right .ai-input-box{
     padding-right:26px;
 }
-ai-input[small].ai-input-left .ai-input-box{
+[ai-input][small].ai-input-left .ai-input-box{
     padding-left:18px;
 }
 
-ai-input[small].ai-input-right .ai-input-box{
+[ai-input][small].ai-input-right .ai-input-box{
     padding-right:18px;
 }
 
-ai-input[large][ellipse] .ai-input-box{
+[ai-input][large][ellipse] .ai-input-box{
     padding:2px 16px;
 }
 
-ai-input[small] { 
+[ai-input][small] { 
     .ai-input-box{
         font-size: 11px;
         padding:1px 4px 1px 4px;
@@ -370,6 +399,6 @@ ai-input[small] {
         right:6px;
     }
 }
-ai-input[small][ellipse] .ai-input-box{
+[ai-input][small][ellipse] .ai-input-box{
     padding:2px 10px;
 }

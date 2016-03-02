@@ -1,5 +1,6 @@
 <div class='sample'>
-    input value : {{value}}
+    input value : {{value}}, value2 : {{valueX}}
+
     
     <ai-form-input [(ngModel)]="value"
         [counter]='true'
@@ -33,15 +34,20 @@
 <ai-form-input value='red' red></ai-form-input>
 <ai-form-input value='green' green></ai-form-input>
 <ai-form-input value='yellow' yellow></ai-form-input>
-<!-- 
 <br/>
-<ai-form-textarea value='World'></ai-form-textarea> <ai-form-textarea value='World' [disabled]="true"></ai-form-textarea>
-<ai-form-textarea value='primary' primary></ai-form-textarea>
-<ai-form-textarea value='red' red></ai-form-textarea>
-<ai-form-textarea value='green' green></ai-form-textarea>
-<ai-form-textarea value='yellow' yellow></ai-form-textarea>
+<ai-form-input [label]="'normal'" [message]="'How can we reach you?'" rect value='primary' primary></ai-form-input>
+<ai-form-input [label]="'normal'" [message]="'How can we reach you?'" none value='red' red></ai-form-input>
+<ai-form-input [label]="'normal'" [message]="'How can we reach you?'" ellipse value='green' green></ai-form-input>
+<ai-form-input [label]="'normal'" [message]="'How can we reach you?'" round value='yellow' yellow></ai-form-input>
+
+<br/>
+<ai-form-textarea [(ngModel)]="valueX" [label]="'normal'" ></ai-form-textarea> <ai-form-textarea value='World' [disabled]="true"></ai-form-textarea>
+<ai-form-textarea [label]="'primary'" value='primary' primary></ai-form-textarea>
+<ai-form-textarea [label]="'red'" value='red' red></ai-form-textarea>
+<ai-form-textarea [label]="'green'" value='green' green></ai-form-textarea>
+<ai-form-textarea [label]="'yellow'" value='yellow' yellow></ai-form-textarea>
 
 
--->
+
 
  

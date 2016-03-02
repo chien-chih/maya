@@ -1,6 +1,4 @@
-<label *ngIf="hasLabel()">{{label}} <span *ngIf="required" class='labelRequired'>(required*)</span></label>
-<icon ai-material *ngIf="hasIcon()">{{icon}}</icon>
-<ai-input class="input" line (_focus_change)="setHasFocus($event)" (_value_change)="updateValue($event)"
+<ai-input class="input" (_focus_change)="setHasFocus($event)" (_value_change)="updateValue($event)"
     [disabled]="isDisabled()" 
     [type]="getType()" 
     [readonly]="isReadonly()"
@@ -8,6 +6,8 @@
     [value]="value"
     [symbol_icon]="getSymbolIcon()"
     ></ai-input>
+<label *ngIf="hasLabel()">{{label}} <span *ngIf="required" class='labelRequired'>(required*)</span></label>
+<icon ai-material *ngIf="hasIcon()">{{icon}}</icon>
 <div class="spacer">
 <message *ngIf="hasMessage()">{{message}}</message>
 <word *ngIf="hasWord()">{{word}}</word>
