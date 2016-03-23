@@ -2,6 +2,9 @@ import {Component,ElementRef} from 'angular2/core';
 import {AiButton} from 'ai/components/AiButton/AiButton';
 import {AiIcon} from 'ai/components/AiIcon/AiIcon';
 import {AiApp} from 'ai/components/AiApp/AiApp';
+//import {PatternParser} from 'ai/components/AiInput/AiFormatter';
+//import {PatternMatcher} from 'ai/components/AiInput/AiFormatter';
+
 @Component(AiApp.meta({
     selector: 'button-app',
     templateUrl:'package:app/button/ButtonApp.html',
@@ -33,17 +36,21 @@ export class AppComponent extends AiApp{
     }
     i:number=0;
     onClick() {
-        //alert('mouseout:'+this.isEventSupported('mouseout'));
-        this.i=this.i +1;
-        console.log(this.i.toString());
+/*  
+      var pp=new PatternParser(); 
+      var result = pp.parse('({{9A*}}) {{9A*}}-{{AAAA}}');
+      
+      var patternMatcher=new PatternMatcher();
+      patternMatcher.add('^abc$','{{*}}-{{*}}-{{*}}');
 
-        //var strings = ['Hello', '98052', 10];
-        //var l = new ai.LettersOnlyValidator();
-        //if(l.isAcceptable('hello'))
-           // alert("true");
-            //else
-            //alert("false");
+      var result1=patternMatcher.getPattern('abc');
+      
+      debugger
+      */ 
   }  
-}              
+}   
+
+
+ 
 
 AiApp.boot(AppComponent);  

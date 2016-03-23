@@ -184,6 +184,7 @@ export class AiControl implements OnChanges{
     
     mouseUp(event: MouseEvent) {
         //console.log('mouseup');
+
         this.isActive = false;
         if (!this.disabled && event.button==0) {
             this.onMouseUp(event);

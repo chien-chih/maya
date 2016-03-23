@@ -3,6 +3,7 @@ import {ControlValueAccessor,NG_VALUE_ACCESSOR} from 'angular2/common';
 import {ObservableWrapper,EventEmitter} from 'angular2/src/facade/async';
 import {AiControl} from '../AiControl/AiControl';
 import {AiIcon} from '../AiIcon/AiIcon';
+import {AiFormatter} from './AiFormatter';
 
 @Component(AiControl.meta({
     templateUrl:'package:src/components/AiInput/AiInput.html',
@@ -19,9 +20,10 @@ import {AiIcon} from '../AiIcon/AiIcon';
     }))   
 export class AiInput extends AiControl implements ControlValueAccessor{ 
 
-    static inputs=['value','type','maxlength','readonly','cancel_button','symbol_icon','right_icon','pattern'];
+    static inputs=['value','type','maxlength','readonly','cancel_button','symbol_icon','right_icon','format'];
     static outputs=['_click_right','_click_left','_focus_change','_value_change'];
     static host={
+            '[class.formatted]': 'hasFormat()',
             '[class.focus]': 'isFocus',
             '[class.valued]': 'hasValue()',
             '[class.readonly]': 'readonly',
@@ -41,8 +43,8 @@ export class AiInput extends AiControl implements ControlValueAccessor{
 
     symbol_icon:string='';
 
-    pattern:string='';
-
+    format:string='';
+    
     left_icon:string='';
 
     right_icon:string='';
@@ -66,15 +68,25 @@ export class AiInput extends AiControl implements ControlValueAccessor{
     registerOnTouched(fn: () => void): void { this.onTouched = fn; }
     writeValue(value: any): void {
         this.value=value?value:'';
-        
+    }
+    
+    hasFormat(){
+        return this.format.length > 0;
     }
   
     ngOnInit() {
+        
+        if(this.hasFormat()){
+            var nativeInput=this.nativeElement.childNodes[0];
+            var formatter=new AiFormatter(nativeInput,this.format,this.value);
+            this.value=formatter.value;
+        }
         this.updateValue(null);
     }
 
     updateValue(event) {
         if(event) this.value = event.target.value.trim();
+            
         if(this.cancel_button){
             if(this.value.length > 0)
                 this.right_icon='cancel';            
