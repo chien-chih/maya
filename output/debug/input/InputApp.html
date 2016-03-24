@@ -1,8 +1,9 @@
 
-hello:<ai-input format='({999}) {999}-{9999}' value='12312' right_icon='cancel'></ai-input>
+hello:<ai-input  format='({999}) {999}-{9999}' [(ngModel)]="valueA" ></ai-input>
 
-
+<ai-input [(ngModel)]="valueA" ></ai-input> 
 <!--
+
 <ai-textarea value='textarea' ></ai-textarea>
 <ai-textarea round value='round' ></ai-textarea>
 <ai-textarea ellipse value='ellipse' ></ai-textarea>

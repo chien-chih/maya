@@ -2,14 +2,15 @@
     input value : {{value}}, value2 : {{valueX}}
 
     
-    <ai-form-input [(ngModel)]="value"
+    <ai-form-input format='{99999}' numberinput match='^\d{5}$' [(ngModel)]="value" 
         [counter]='true'
         [max_length]='128'
-        [min_length]='4'
+        
         [validated]='true'
         [required]="'true'"  [label]="'Account Name'" [message]="'Tell us what we should call you!'"  [icon]="'account_box'" ></ai-form-input>
 </div>
-
+<!--
+[min_length]='4'
 
 <div class='sample'>
     <ai-form-input [label]="'Password'" [type]="'password'"></ai-form-input>
@@ -46,7 +47,7 @@
 <ai-form-textarea [label]="'red'" value='red' red></ai-form-textarea>
 <ai-form-textarea [label]="'green'" value='green' green></ai-form-textarea>
 <ai-form-textarea [label]="'yellow'" value='yellow' yellow></ai-form-textarea>
-
+-->
 
 
 

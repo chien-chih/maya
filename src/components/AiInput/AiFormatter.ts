@@ -261,15 +261,24 @@ export class AiFormatter {
     private focus:number = 0;
     private delta:any;
     private hldrs:any = {};
-
-    value:string='';
   
+    numberInput:boolean=false;
+    value:string='';
+    onValueChange:any;
 
-    constructor(private inputElement: any,format :string,value:string) {
-        inputElement.value=value;
+    constructor(private inputElement: any,format :string) {
         format=format.replace(/{/g, '{{').replace(/}/g, '}}');
         var patternParser:AiFormatterPatternParser = new AiFormatterPatternParser(); 
         this.pattern = patternParser.parse(format);
+        
+        this.numberInput=true;
+        for(var i=0;i<this.pattern.inputs.length;i++){
+            if(this.pattern.inputs[i] !== '9'){
+                this.numberInput=false;
+                break;
+            }
+        }
+        
         // Add Listeners
         var self=this;
         this.utils.addListener(inputElement, 'keydown', function(evt){
@@ -307,21 +316,21 @@ export class AiFormatter {
         
         // Format on start
         this.processKey('', false);
-        //inputElement.blur();
+        inputElement.blur();
 
         var onfocus=function() {
-          // Wrapped in timeout so that we can grab input selection
-          setTimeout(function () {
-            // Grab selection
-            var selection = self.inputSelector.get(self.inputElement);
-            // Char check
-            var isAfterStart = selection.end > self.focus,
-                isFirstChar  = selection.end === 0;
-            // If clicked in front of start, refocus to start
-            if (isAfterStart || isFirstChar) {
-              self.inputSelector.set(self.inputElement, self.focus);
-            }
-          }, 0);
+            // Wrapped in timeout so that we can grab input selection
+            setTimeout(function () {
+              // Grab selection
+              var selection = self.inputSelector.get(self.inputElement);
+              // Char check
+              var isAfterStart = selection.end > self.focus,
+                  isFirstChar  = selection.end === 0;
+              // If clicked in front of start, refocus to start
+              if (isAfterStart || isFirstChar) {
+                self.inputSelector.set(self.inputElement, self.focus);
+              }
+            }, 0);
         };
 
         // Add Listeners
@@ -330,50 +339,56 @@ export class AiFormatter {
         this.utils.addListener(inputElement, 'touchstart', onfocus);
     }
     
+    setValue(value:string){
+        this.inputElement.value=value;
+        this.processKey('', false);
+    }
+    
     //
     // @private
     // Using the provided key information, alter el value.
     //
     processKey(chars, delKey, ignoreCaret=false) {
-      // Get current state
+        // Get current state
+        
+        this.selection = this.inputSelector.get(this.inputElement);
+        this.value = this.inputElement.value;
       
-      this.selection = this.inputSelector.get(this.inputElement);
-      this.value = this.inputElement.value;
-    
-      // Init values
-      this.delta = 0;
-    
-      // If chars were highlighted, we need to remove them
-      if (this.selection.begin !== this.selection.end) {
-        this.delta = (-1) * Math.abs(this.selection.begin - this.selection.end);
-        this.value   = this.utils.removeChars(this.value, this.selection.begin, this.selection.end);
-      }
-    
-      // Delete key (moves opposite direction)
-      else if (delKey && delKey === 46) {
-        this.delete();
-    
-      // or Backspace and not at start
-      } else if (delKey && this.selection.begin - 1 >= 0) {
-    
-        // Always have a delta of at least -1 for the character being deleted.
-        this.value = this.utils.removeChars(this.value, this.selection.end -1, this.selection.end);
-        this.delta -= 1;
-    
-      // or Backspace and at start - exit
-      } else if (delKey) {
-        return true;
-      }
-    
-      // If the key is not a del key, it should convert to a str
-      if (!delKey) {
-        // Add char at position and increment delta
-        this.value = this.utils.addChars(this.value, chars, this.selection.begin);
-        this.delta += chars.length;
-      }
-    
-      // Format el.value (also handles updating caret position)
-      this.formatValue(ignoreCaret);
+        // Init values
+        this.delta = 0;
+      
+        // If chars were highlighted, we need to remove them
+        if (this.selection.begin !== this.selection.end) {
+          this.delta = (-1) * Math.abs(this.selection.begin - this.selection.end);
+          this.value   = this.utils.removeChars(this.value, this.selection.begin, this.selection.end);
+        }
+      
+        // Delete key (moves opposite direction)
+        else if (delKey && delKey === 46) {
+          this.delete();
+      
+        // or Backspace and not at start
+        } else if (delKey && this.selection.begin - 1 >= 0) {
+      
+          // Always have a delta of at least -1 for the character being deleted.
+          this.value = this.utils.removeChars(this.value, this.selection.end -1, this.selection.end);
+          this.delta -= 1;
+      
+        // or Backspace and at start - exit
+        } else if (delKey) {
+          return true;
+        }
+      
+        // If the key is not a del key, it should convert to a str
+        if (!delKey) {
+          // Add char at position and increment delta
+          this.value = this.utils.addChars(this.value, chars, this.selection.begin);
+          this.delta += chars.length;
+        }
+      
+        // Format el.value (also handles updating caret position)
+        this.formatValue(ignoreCaret);
+        if(this.onValueChange) this.onValueChange(this.inputElement.value);      
     }; 
     
     //

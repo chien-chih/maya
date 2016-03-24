@@ -24,6 +24,7 @@ export class AiFormInput extends AiFormControl {
             '[class.focus]': 'isFocus',
             '[class.readonly]': 'readonly',
         };
+    private matcher:any;
 
     type:string='text';
 
@@ -52,6 +53,20 @@ export class AiFormInput extends AiFormControl {
             child.setAttribute('rect','');
         else 
             child.setAttribute('line','');
+
+        var match=this.nativeElement.getAttribute('match');
+        if(match != null){
+            this.matcher=new RegExp(match);
+        }
+            
+        var format=this.nativeElement.getAttribute('format');
+        if(format != null)
+            child.setAttribute('format',format);
+
+        var numberInput=this.nativeElement.getAttribute('numberinput');
+        if(numberInput != null) 
+            child.setAttribute('numberinput','');
+            
     }
     
     updateValue(value:any) {
@@ -61,10 +76,15 @@ export class AiFormInput extends AiFormControl {
     }
 
     validate(text:string):boolean{
+        
         if(super.validate(text)){
-            
             if(this.min_length > 0 && text.length < this.min_length){
                 this.error=this.label+' minimum length is '+this.min_length;
+                return false;
+            }
+            
+            if(this.matcher && !this.matcher.test(text)){
+                this.error=this.label+' is not valid format ';
                 return false;
             }
         }
@@ -73,8 +93,9 @@ export class AiFormInput extends AiFormControl {
 
     setHasFocus(hasFocus: boolean) {
         this.isFocus=hasFocus;
-        if(!hasFocus)
+        if(!hasFocus && this.value != null){
             this.validate(this.value);
+        }
     }
 
     getMaxLength(){

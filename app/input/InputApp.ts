@@ -11,7 +11,7 @@ import {AiTextarea} from 'ai/components/AiTextarea/AiTextarea';
 }))
 export class AppComponent  extends AiApp{  
     spinButtonSpinning:boolean=false;
-    valueA:string='';
+    valueA:string='Hello';
 
     onSpinButtonClick(){
         this.spinButtonSpinning=!this.spinButtonSpinning;         

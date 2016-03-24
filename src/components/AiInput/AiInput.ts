@@ -20,7 +20,7 @@ import {AiFormatter} from './AiFormatter';
     }))   
 export class AiInput extends AiControl implements ControlValueAccessor{ 
 
-    static inputs=['value','type','maxlength','readonly','cancel_button','symbol_icon','right_icon','format'];
+    static inputs=['value','type','maxlength','readonly','cancel_button','symbol_icon','right_icon'];
     static outputs=['_click_right','_click_left','_focus_change','_value_change'];
     static host={
             '[class.formatted]': 'hasFormat()',
@@ -31,7 +31,9 @@ export class AiInput extends AiControl implements ControlValueAccessor{
             '[class.ai-input-right]': 'hasRightIcon()'
         };
 
-    value: string=''; 
+    private formatter:AiFormatter=null;
+
+    _value: string=''; 
     
     type:string='text';
 
@@ -43,8 +45,6 @@ export class AiInput extends AiControl implements ControlValueAccessor{
 
     symbol_icon:string='';
 
-    format:string='';
-    
     left_icon:string='';
 
     right_icon:string='';
@@ -60,33 +60,62 @@ export class AiInput extends AiControl implements ControlValueAccessor{
     constructor(ele: ElementRef) {  
         super(ele); 
         this.nativeElement.setAttribute('ai-input',''); 
+        
+        var numberInput=this.nativeElement.getAttribute('numberinput');
+        if(numberInput != null) this.setNumberInput();
+        var format=this.nativeElement.getAttribute('format');
+        if(format){
+            var nativeInput=this.nativeElement.childNodes[0];
+            this.formatter=new AiFormatter(nativeInput,format);
+            if(this.formatter.numberInput != null) this.setNumberInput();
+            var that=this;
+            this.formatter.onValueChange=function(value){
+                that._value=value.trim();
+                that.updateValue(null);
+            };
+        }
+
     }
 
     onChange = (_) => {};
     onTouched = () => {};
     registerOnChange(fn: (_: any) => void): void { this.onChange = fn; }
     registerOnTouched(fn: () => void): void { this.onTouched = fn; }
+
     writeValue(value: any): void {
-        this.value=value?value:'';
+        var that=this;
+        setTimeout(function(){ 
+            that.value=value?value:'';
+        }, 1);
+    }
+
+    get value() {
+        return this._value;
+    }
+    
+    set value(v) {
+        if(this.hasFormat()){
+            this.formatter.setValue(v);
+        }else
+            this._value=v;
+    }
+
+    setNumberInput(){
+        this.nativeElement.childNodes[0].setAttribute('pattern','\\d*');
     }
     
     hasFormat(){
-        return this.format.length > 0;
+        return this.formatter != null;
     }
-  
-    ngOnInit() {
-        
-        if(this.hasFormat()){
-            var nativeInput=this.nativeElement.childNodes[0];
-            var formatter=new AiFormatter(nativeInput,this.format,this.value);
-            this.value=formatter.value;
-        }
-        this.updateValue(null);
+    
+    updateInput(){
+        if(this.hasFormat()) return '';
+        return this.value;
     }
 
     updateValue(event) {
+        if(this.hasFormat() && event) return;
         if(event) this.value = event.target.value.trim();
-            
         if(this.cancel_button){
             if(this.value.length > 0)
                 this.right_icon='cancel';            
@@ -98,7 +127,7 @@ export class AiInput extends AiControl implements ControlValueAccessor{
     }
 
     hasValue(){
-        return this.value && this.value.length > 0;
+        return this.value.length > 0;
     } 
     
     setHasFocus(hasFocus: boolean) {
@@ -138,7 +167,7 @@ export class AiInput extends AiControl implements ControlValueAccessor{
     onLeftClick(){
         ObservableWrapper.callEmit(this._click_left, null);
     }
-
+ 
     onRightClick(){
         if(this.cancel_button){
             this.value='';
