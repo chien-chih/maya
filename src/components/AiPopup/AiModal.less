@@ -1,0 +1,47 @@
+@import "../AiControl/Definition";
+
+@zorderPopMask: 100;
+@zorderPopUp: (@zorderPopMask+1);
+@zorderPopOver: (@zorderPopUp+1);
+
+modal-content{
+    display:inline-block;
+}
+
+ai-modal-container{
+    z-index: @zorderPopUp;
+    display:inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+ai-modal-container.autohide,ai-modal-container.mask{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+ai-modal-container.autohide{
+    
+}
+
+ai-modal-container.mask{
+    
+}
+
+ai-modal-container.mask.black{
+     background: rgba(0, 0, 0, .6) none repeat scroll 0 0;
+}
+
+ai-modal-container.mask.white{
+     background: rgba(255, 255, 255, .6) none repeat scroll 0 0;
+}
+
+
+.ai-modal-dialog{
+    
+}
+
