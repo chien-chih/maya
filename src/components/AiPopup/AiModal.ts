@@ -9,16 +9,16 @@ import {
     Optional,
     ApplicationRef
 } from 'angular2/core';
-import {ModalConfig} from './ModalConfig';
-import {ModalInstance} from './ModalInstance';
+import {AiModalConfig} from './AiModalConfig';
+import {AiModalInstance} from './AiModalInstance';
 import {AiModalContainer} from './AiModalContainer';
 import { DOM } from 'angular2/src/platform/dom/dom_adapter';
 
 
 @Injectable()
-export class Modal {
+export class AiModal {
 
-    private _list: ModalInstance[] = [];
+    private _list: AiModalInstance[] = [];
 
     constructor(private componentLoader: DynamicComponentLoader, private appRef: ApplicationRef){
     }
@@ -29,20 +29,22 @@ export class Modal {
      * @param componentType The angular Component to render as modal.
      * @param bindings Resolved providers that will inject into the component provided.
      * @param config A Modal Configuration object.
-     * @returns {Promise<ModalInstance>}
+     * @returns {Promise<AiModalInstance>}
      */
     public open(
         componentType: FunctionConstructor,
         bindings: ResolvedProvider[],
-        config?: ModalConfig
-        ): Promise<ModalInstance> {
+        config?: AiModalConfig
+        ): Promise<AiModalInstance> {
 
-        config = config ?  config : new ModalConfig();
+        config = config ?  config : new AiModalConfig();
 
-        let instance = new ModalInstance(config);
+        let instance = new AiModalInstance(config,this);
         instance.inElement = !!config.anchorName;
 
-        let containerBindings = Injector.resolve([provide(ModalInstance, {useValue: instance})]);
+        let containerBindings = Injector.resolve(
+            [provide(AiModalInstance, {useValue: instance})]
+            );
         let container: Promise<ComponentRef> =this.createContainer( containerBindings, config.anchorName);
         
         return container
@@ -50,7 +52,7 @@ export class Modal {
                 instance.containerRef = containerRef;
 
                 let modalDataBindings = Injector.resolve(
-                    [provide(ModalInstance, {useValue: instance})]).concat(bindings);
+                    [provide(AiModalInstance, {useValue: instance})]).concat(bindings);
 
                 return this.componentLoader.loadIntoLocation(
                     componentType, containerRef.location, 'modalDialog', modalDataBindings)
@@ -64,11 +66,11 @@ export class Modal {
     }
 
     /**
-     * Push a ModalInstance into the stack and manage it so when it's done
+     * Push a AiModalInstance into the stack and manage it so when it's done
      * it will automatically kick itself out of the stack.
      * @param instance
      */
-    push(instance: ModalInstance): void {
+    push(instance: AiModalInstance): void {
         let idx = this._list.indexOf(instance);
         if (idx === -1) this._list.push(instance);
         instance.onLoad();
@@ -82,25 +84,25 @@ export class Modal {
     }
 
     /**
-     * Remove a ModalInstance from the stack.
+     * Remove a AiModalInstance from the stack.
      * @param instance
      */
-    remove(instance: ModalInstance): void {
+    remove(instance: AiModalInstance): void {
         let idx = this._list.indexOf(instance);
         if (idx > -1) this._list.splice(idx, 1);
         instance.onUnload();
 
     }
 
-    position(instance: ModalInstance) {
+    position(instance: AiModalInstance) {
         return this.indexOf(instance);
     }
 
-    index(index: number): ModalInstance {
+    index(index: number): AiModalInstance {
         return this._list[index];
     }
 
-    indexOf(instance: ModalInstance): number {
+    indexOf(instance: AiModalInstance): number {
         return this._list.indexOf(instance);
     }
 
@@ -112,7 +114,7 @@ export class Modal {
      * Creates backdrop element.
      
      * @param {ResolvedProvider[]} Resolved providers,
-     *     must contain the ModalInstance instance for this backdrop.
+     *     must contain the AiModalInstance instance for this backdrop.
      * @param {string} An anchor name, optional.
      *     if not supplied backdrop gets applied next to elementRef, otherwise into it.
      * @returns {Promise<ComponentRef>}

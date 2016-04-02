@@ -4,25 +4,26 @@
 @zorderPopUp: (@zorderPopMask+1);
 @zorderPopOver: (@zorderPopUp+1);
 
-modal-content{
-    display:inline-block;
-}
 
-ai-modal-container{
+
+ai-modal-container.autohide,ai-modal-container.mask{
     z-index: @zorderPopUp;
     display:inline-block;
-    position: absolute;
+    position: fixed;
+    width: 100%;
+    height: 100%;
     left: 0;
     top: 0;
 }
 
-ai-modal-container.autohide,ai-modal-container.mask{
-    position: fixed;
-    width: 100%;
-    height: 100%;
+.ai-modal-dialog{
+    display:inline-block;
+    
 }
 
-
+modal-content{
+    display:inline-block;
+}
 
 ai-modal-container.autohide{
     
@@ -41,7 +42,4 @@ ai-modal-container.mask.white{
 }
 
 
-.ai-modal-dialog{
-    
-}
 

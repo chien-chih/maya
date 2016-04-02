@@ -1,12 +1,13 @@
 import { ComponentRef } from 'angular2/core';
 import {PromiseWrapper} from 'angular2/src/facade/async';
 
-import {ModalConfig} from './ModalConfig';
+import {AiModalConfig} from './AiModalConfig';
+import {AiModal} from './AiModal';
 
 /**
  * API to an open modal window.
  */
-export class ModalInstance {
+export class AiModalInstance {
 
 
     private _resultDefered: any;
@@ -17,8 +18,12 @@ export class ModalInstance {
 
     inElement: boolean;
 
-    constructor(public config: ModalConfig) {
+    constructor(public config: AiModalConfig,private modal:AiModal) {
         this._resultDefered = PromiseWrapper.completer();
+    }
+
+    get isTopModal(){
+        return this.modal.position(this) == this.modal.length - 1;
     }
 
     /**

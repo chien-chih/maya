@@ -1,4 +1,4 @@
-System.register(['./ModalConfig', './ModalInstance', './ModalDialog', './Modal', './yesNoModal'], function(exports_1) {
+System.register(['./AiModalConfig', './AiModalInstance', './AiModalDialog', './AiModal', './yesNoModal'], function(exports_1) {
     function exportStar_1(m) {
         var exports = {};
         for(var n in m) {
@@ -8,17 +8,17 @@ System.register(['./ModalConfig', './ModalInstance', './ModalDialog', './Modal',
     }
     return {
         setters:[
-            function (ModalConfig_1_1) {
-                exportStar_1(ModalConfig_1_1);
+            function (AiModalConfig_1_1) {
+                exportStar_1(AiModalConfig_1_1);
             },
-            function (ModalInstance_1_1) {
-                exportStar_1(ModalInstance_1_1);
+            function (AiModalInstance_1_1) {
+                exportStar_1(AiModalInstance_1_1);
             },
-            function (ModalDialog_1_1) {
-                exportStar_1(ModalDialog_1_1);
+            function (AiModalDialog_1_1) {
+                exportStar_1(AiModalDialog_1_1);
             },
-            function (Modal_1_1) {
-                exportStar_1(Modal_1_1);
+            function (AiModal_1_1) {
+                exportStar_1(AiModal_1_1);
             },
             function (yesNoModal_1_1) {
                 exportStar_1(yesNoModal_1_1);

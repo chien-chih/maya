@@ -2,8 +2,8 @@ import {Component, provide, ElementRef, Injector} from 'angular2/core';
 import {NgIf} from 'angular2/common';
 
 
-import {ModalDialog} from './ModalDialog';
-import {ModalInstance} from './ModalInstance';
+import {AiModalDialog} from './AiModalDialog';
+import {AiModalInstance} from './AiModalInstance';
 
 /**
  * Data definition
@@ -34,10 +34,10 @@ export class YesNoModalContent {
             <button *ngIf="!context.hideNo" class="btn btn-warning" (click)="cancel()">{{context.noText}}</button>
         </div>`
 })
-export class YesNoModal implements ModalDialog {
+export class YesNoModal implements AiModalDialog {
     context: YesNoModalContent;
 
-    constructor(public instance: ModalInstance, modelContentData: YesNoModalContent) {
+    constructor(public instance: AiModalInstance, modelContentData: YesNoModalContent) {
         this.context = <YesNoModalContent>modelContentData;
     }
 
