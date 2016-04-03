@@ -1,4 +1,5 @@
 import {AiModalInstance} from './AiModalInstance';
+import {AiModalConfig} from './AiModalConfig';
 
 
 export interface AiModalDialog {

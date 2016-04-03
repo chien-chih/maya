@@ -1,18 +1,11 @@
 import {Component, provide, ElementRef, Injector} from 'angular2/core';
 import {NgIf} from 'angular2/common';
+import {AiModalInstance,AiModalDialog} from '../Ai';
 
-
-import {AiModalDialog} from './AiModalDialog';
-import {AiModalInstance} from './AiModalInstance';
-
-/**
- * Data definition
- */
-export class YesNoModalContent {
+export class ConfirmContext {
     constructor(
-        public title: string = 'Hello World Title',
-        public body: string = 'Hello World Body!',
-        public hideNo: boolean = false,
+        public title: string = '',
+        public message: string = '',
         public yesText: string = 'YES',
         public noText: string = 'NO'
     ) {}
@@ -34,11 +27,10 @@ export class YesNoModalContent {
             <button *ngIf="!context.hideNo" class="btn btn-warning" (click)="cancel()">{{context.noText}}</button>
         </div>`
 })
-export class YesNoModal implements AiModalDialog {
-    context: YesNoModalContent;
+export class ConfirmDialog implements AiModalDialog {
+    
 
-    constructor(public instance: AiModalInstance, modelContentData: YesNoModalContent) {
-        this.context = <YesNoModalContent>modelContentData;
+    constructor(public instance: AiModalInstance,private context: ConfirmContext) {
     }
 
     ok($event: any) {
@@ -49,4 +41,5 @@ export class YesNoModal implements AiModalDialog {
     cancel() {
         this.instance.dismiss();
     }
+    
 }

@@ -16,15 +16,16 @@ export class AiModalPosition{
         this.align=align;
     }
 
-    static Begin(){
+
+    static get Begin(){
         return new AiModalPosition();
     }
 
-    static Center(){
+    static get Center(){
         return new AiModalPosition('50%',AiModalAlign.Center);
     }
 
-    static End(){
+    static get End(){
         return new AiModalPosition('100%',AiModalAlign.End);
     }
 
@@ -96,9 +97,9 @@ export class AiModalPosition{
 @Injectable()
 export class AiModalConfig {
 
-    x:AiModalPosition=AiModalPosition.Center();
+    x:AiModalPosition=AiModalPosition.Center;
     
-    y:AiModalPosition=AiModalPosition.Begin();
+    y:AiModalPosition=AiModalPosition.Begin;
 
     floating:boolean=false;
 
