@@ -23,8 +23,6 @@ export class AiModalContainer extends AiControl{
     
     constructor(private instance: AiModalInstance,ele: ElementRef) {
         super(ele); 
-        
-        
     }
     
     get Class():string{
@@ -73,7 +71,12 @@ export class AiModalContainer extends AiControl{
     
     onLoad(){
         var that=this;
-        that.resetPosition();
+        //that.resetPosition();
+
+        TimerWrapper.setTimeout(() => {
+            that.resetPosition();
+        }, 1);
+
 
         if(this.instance.config.trackingSizePosition){
             TimerWrapper.setInterval(() => {

@@ -9,7 +9,7 @@ import {
     Optional,
     ApplicationRef
 } from 'angular2/core';
-import {AiModal,AiModalInstance,ConfirmDialog,ConfirmContext,AiModalConfig,AiModalAlign,AiModalPosition} from '../Ai';
+import {AiModal,AiModalInstance,AiAlert,AiConfirm,AiConfirmContext,AiModalConfig,AiModalAlign,AiModalPosition} from '../Ai';
 
 
 @Injectable()
@@ -18,32 +18,52 @@ export class AiDialog{
     constructor(private modal: AiModal){
         
     }
-    
-    confirm(text:string,callback){
-        let config:AiModalConfig =new AiModalConfig();    
-        config.x=AiModalPosition.Center;
-        config.y=new AiModalPosition(100,AiModalAlign.Begin);
-        config.mask='white';
-        config.floating=true;
-
-        let context:ConfirmContext=new ConfirmContext();
-        context.message=text;
+    //text:message|title|ico|yes|no
+    confirm(text:string,callback?:any){
+        var n = text.split("|");
+        let context:AiConfirmContext=new AiConfirmContext(n[0],n[1],n[2],n[3],n[4]);
 
         let bindings = Injector.resolve([
-            provide(ConfirmContext, {useValue: context})
+            provide(AiConfirmContext, {useValue: context})
         ]);
 
-        let dialog:Promise<AiModalInstance> = this.modal.open(<any>ConfirmDialog,bindings,config);
+        let dialog:Promise<AiModalInstance> = this.modal.open(
+            <any>AiConfirm,bindings,AiConfirm.DefaultConfig);
         dialog.then(
             (resultPromise) => {
                 return resultPromise.result.then(
                     (result) => {
-                        callback(true);
+                        if(callback) callback(true);
                     }, 
                     () =>{ 
-                        callback(false);
+                        if(callback) callback(false);
                     }
                 );
             });            
     }
+    
+    //text:message|title|ico|yes
+    alert(text:string,callback?:any){
+        var n = text.split("|");
+        let context:AiConfirmContext=new AiConfirmContext(n[0],n[1],n[2],n[3],n[4]);
+
+        let bindings = Injector.resolve([
+            provide(AiConfirmContext, {useValue: context})
+        ]);
+
+        let dialog:Promise<AiModalInstance> = this.modal.open(
+            <any>AiAlert,bindings,AiAlert.DefaultConfig);
+        dialog.then(
+            (resultPromise) => {
+                return resultPromise.result.then(
+                    (result) => {
+                        if(callback) callback();
+                    }, 
+                    () =>{ 
+                        if(callback) callback();
+                    }
+                );
+            });            
+    }
+    
 }  

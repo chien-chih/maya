@@ -5,4 +5,5 @@ export * from './AiModal/AiModalInstance';
 export * from './AiModal/AiModalDialog';
 export * from './AiModal/AiModal';
 export * from './AiDialog/AiDialog';
-export * from './AiDialog/ConfirmDialog';
+export * from './AiDialog/AiConfirm';
+export * from './AiDialog/AiAlert';

@@ -34,7 +34,6 @@ export class AiModalPosition{
     }
 
     positionLeft(dialog,content,targetElement){
-         
         var x=this.offset;
         if(targetElement){
             var left=targetElement.offsetLeft;

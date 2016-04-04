@@ -1,5 +1,5 @@
 import { Component, provide, ElementRef, Injector, Renderer} from 'angular2/core';
-import {AiApp,AiDialog,AiButton, AiModalInstance,AiModalConfig,AiModalPosition,AiModalAlign, AiModal, ConfirmContext, ConfirmDialog} from 'ai/components/Ai';
+import {AiApp,AiDialog,AiButton, AiModalInstance,AiModalConfig,AiModalPosition,AiModalAlign, AiModal} from 'ai/components/Ai';
 
 @Component(AiApp.meta({
     selector: 'modal-app',
@@ -18,9 +18,11 @@ export class AppComponent  extends AiApp{
     }
                 
     onClick(){
-        this.dialog.confirm('hello',function(value){
-            window.alert(value);
-        });
+        this.dialog.alert('All of the banks have agreed to forgive you your debts|Would you like?|help');
+        
+//        this.dialog.confirm('All of the banks have agreed to forgive you your debts.|Would you like to delete your debt?|help|PLEASE DO IT|SOUND LIKE SCAME',function(value){
+  //          window.alert(value);
+    //    });
         /*
         var modalContent:ConfirmContext = new ConfirmContext('Simple Small modal', 'Press ESC or click OK / outside area to close.');
  

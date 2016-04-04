@@ -1,4 +1,4 @@
-System.register(['./AiApp/AiApp', './AiButton/AiButton', './AiModal/AiModalConfig', './AiModal/AiModalInstance', './AiModal/AiModalDialog', './AiModal/AiModal', './AiDialog/AiDialog', './AiDialog/ConfirmDialog'], function(exports_1) {
+System.register(['./AiApp/AiApp', './AiButton/AiButton', './AiModal/AiModalConfig', './AiModal/AiModalInstance', './AiModal/AiModalDialog', './AiModal/AiModal', './AiDialog/AiDialog', './AiDialog/AiConfirm', './AiDialog/AiAlert'], function(exports_1) {
     function exportStar_1(m) {
         var exports = {};
         for(var n in m) {
@@ -29,8 +29,11 @@ System.register(['./AiApp/AiApp', './AiButton/AiButton', './AiModal/AiModalConfi
             function (AiDialog_1_1) {
                 exportStar_1(AiDialog_1_1);
             },
-            function (ConfirmDialog_1_1) {
-                exportStar_1(ConfirmDialog_1_1);
+            function (AiConfirm_1_1) {
+                exportStar_1(AiConfirm_1_1);
+            },
+            function (AiAlert_1_1) {
+                exportStar_1(AiAlert_1_1);
             }],
         execute: function() {
         }
