@@ -13,6 +13,7 @@ import {UiService} from '../UiService';
 export class AiApp{ 
 
     static boot(appComponentType: Type, customProviders?: Array<any>){
+
         if(!customProviders) customProviders=[];         
         customProviders.push(UiService);
 

@@ -1,10 +1,9 @@
 import {Component,ElementRef,Attribute} from 'angular2/core';
-import {AiControl} from '../AiControl/AiControl';
+import {AiControl,KeyCodes} from '../AiControl/AiControl';
 import {AiModalInstance} from './AiModalInstance';
 import {AiModalConfig,AiModalAlign} from './AiModalConfig';
 import {AiModal} from './AiModal';
 import {TimerWrapper} from "angular2/src/facade/async";
-import { DOM } from 'angular2/src/platform/dom/dom_adapter';
 
 @Component({
     selector: 'ai-modal-container',
@@ -20,8 +19,10 @@ import { DOM } from 'angular2/src/platform/dom/dom_adapter';
 })
 export class AiModalContainer extends AiControl{
 
-    visibility:string='hidden';
     
+
+    visibility:string='hidden';
+
     constructor(private instance: AiModalInstance,ele: ElementRef) {
         super(ele); 
     }
@@ -63,16 +64,13 @@ export class AiModalContainer extends AiControl{
     }
 
     documentKeypress(event: KeyboardEvent) {
-        if (this.instance.isTopModal && 
-            this.instance.config.supportsKey(event.keyCode))
-            {
+        if (this.instance.isTopModal && this.instance.config.ESCHide && event.keyCode==KeyCodes.ESCAPE)
             this.instance.dismiss();
-        }
     }
     
     onLoad(){
-//        debugger
-  //      var body=DOM.query("body");
+//        var body=this.DOM.query("body");
+  //      debugger
         
            
         var that=this;

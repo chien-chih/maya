@@ -110,14 +110,18 @@ export class AiModalConfig {
     
     autoHide:boolean=false;
 
+    ESCHide:boolean=true;
+
     trackingSizePosition:boolean=false;    
 
-    /**
-     * Keyboard value/s that close the modal.
-     * Accepts either a single numeric value or an array of numeric values.
-     * A modal closed by a keyboard stroke will result in a 'reject' notification from the promise.
-     * Defaults to 27, set `null` implicitly to disable.
-     */
+    
+
+    get Position(){
+        return this.floating ? 'fixed':'absolute';
+    }
+
+
+/*
     keyboard: Array<number> | number=[27];
 
 
@@ -125,18 +129,8 @@ export class AiModalConfig {
         keyboard: Array<number> | number = undefined) {
     }
 
-    get Position(){
-        return this.floating ? 'fixed':'absolute';
-    }
-
-
-    /**
-     * Returns true if the config instance supports a given key.
-     * @param key
-     * @returns {boolean}
-     */
     supportsKey(keyCode: number): boolean {
         return (<Array<number>>this.keyboard).indexOf(keyCode) > -1;
-    }
+    }*/
 }
 

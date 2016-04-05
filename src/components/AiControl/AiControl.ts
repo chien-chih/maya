@@ -7,7 +7,7 @@ import {CONST} from 'angular2/src/facade/lang';
 import {ObservableWrapper,EventEmitter} from 'angular2/src/facade/async';
 import {DOM} from 'angular2/src/platform/dom/dom_adapter';
 
-//import {BrowserDomAdapter} from "angular2/src/platform/browser/browser_adapter";
+import {BrowserDomAdapter} from "angular2/src/platform/browser/browser_adapter";
 //BrowserDomAdapter.makeCurrent();
 
 //import * as utils from 'ai/components/utils';
@@ -42,10 +42,6 @@ export class AiControl implements OnChanges{
     keyCode:number=0;
     visible: boolean = true;
     
-    //hint:string='';
-  //  icon:string='';
-//    error:string='';
-
     _click: EventEmitter<any>=new EventEmitter();
 
     protected onClick(){}
@@ -107,7 +103,13 @@ export class AiControl implements OnChanges{
         }
         return meta;
     }
-  
+
+    _dom:BrowserDomAdapter=null;
+    protected get DOM(){
+        if(this._dom==null) this._dom=new BrowserDomAdapter();
+        return this._dom;
+    }
+    
     constructor(ele: ElementRef) {
         this.nativeElement = ele.nativeElement;
         this.nativeElement.setAttribute('ai-control',''); 
