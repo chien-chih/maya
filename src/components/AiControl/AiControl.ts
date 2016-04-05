@@ -42,9 +42,9 @@ export class AiControl implements OnChanges{
     keyCode:number=0;
     visible: boolean = true;
     
-    hint:string='';
-    icon:string='';
-    error:string='';
+    //hint:string='';
+  //  icon:string='';
+//    error:string='';
 
     _click: EventEmitter<any>=new EventEmitter();
 

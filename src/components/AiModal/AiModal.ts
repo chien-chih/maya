@@ -1,19 +1,7 @@
-import {
-    Injectable,
-    DynamicComponentLoader,
-    ComponentRef,
-    ElementRef,
-    Injector,
-    provide,
-    ResolvedProvider,
-    Optional,
-    ApplicationRef
-} from 'angular2/core';
+import {Injectable,DynamicComponentLoader,ComponentRef,ElementRef,Injector,provide,ResolvedProvider,ApplicationRef} from 'angular2/core';
 import {AiModalConfig} from './AiModalConfig';
 import {AiModalInstance} from './AiModalInstance';
 import {AiModalContainer} from './AiModalContainer';
-import { DOM } from 'angular2/src/platform/dom/dom_adapter';
-
 
 @Injectable()
 export class AiModal {
@@ -22,7 +10,6 @@ export class AiModal {
 
     constructor(private componentLoader: DynamicComponentLoader, private appRef: ApplicationRef){
     }
-
 
     /**
      * Opens a modal window inside an existing component.

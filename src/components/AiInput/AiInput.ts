@@ -60,11 +60,16 @@ export class AiInput extends AiControl implements ControlValueAccessor{
     constructor(ele: ElementRef) {  
         super(ele); 
         this.nativeElement.setAttribute('ai-input',''); 
-        
+
+    }
+
+    ngOnInit() {
         var numberInput=this.nativeElement.getAttribute('numberinput');
         if(numberInput != null) this.setNumberInput();
+
         var format=this.nativeElement.getAttribute('format');
         if(format){
+        
             var nativeInput=this.nativeElement.childNodes[0];
             this.formatter=new AiFormatter(nativeInput,format);
             if(this.formatter.numberInput != null) this.setNumberInput();
@@ -74,8 +79,7 @@ export class AiInput extends AiControl implements ControlValueAccessor{
                 that.updateValue(null);
             };
         }
-
-    }
+    } 
 
     onChange = (_) => {};
     onTouched = () => {};
@@ -94,6 +98,7 @@ export class AiInput extends AiControl implements ControlValueAccessor{
     }
     
     set value(v) {
+        if(v==null) v='';
         if(this.hasFormat()){
             this.formatter.setValue(v);
         }else

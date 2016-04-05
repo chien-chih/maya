@@ -16,13 +16,20 @@ export class AppComponent  extends AiApp{
            super(elementRef);    
            
     }
+    
+    onAlert(){
+        this.dialog.alert('All of the banks have agreed to forgive you your debts|Would you like?|help');
+    }
+    
+    onConfirm(){
+        this.dialog.confirm('All of the banks have agreed to forgive you your debts.|Would you like to delete your debt?|help|PLEASE DO IT|SOUND LIKE SCAME',function(value){
+            window.alert(value);
+        });
+    }
+    
                 
     onClick(){
-        this.dialog.alert('All of the banks have agreed to forgive you your debts|Would you like?|help');
         
-//        this.dialog.confirm('All of the banks have agreed to forgive you your debts.|Would you like to delete your debt?|help|PLEASE DO IT|SOUND LIKE SCAME',function(value){
-  //          window.alert(value);
-    //    });
         /*
         var modalContent:ConfirmContext = new ConfirmContext('Simple Small modal', 'Press ESC or click OK / outside area to close.');
  

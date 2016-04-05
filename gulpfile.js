@@ -12,6 +12,7 @@ var gulp = require("gulp"),
     colors = require('colors'),
     rename = require("gulp-rename"),
     runSequence = require('run-sequence'),
+    ignore = require('gulp-ignore'),
     changed = require('gulp-changed');
 
 var project=require("./package.json");
@@ -128,7 +129,7 @@ gulp.task('src:js', function () {
     var tsResult = gulp.src('./src/**/*.ts')
         .pipe(plumber(function () {
                 srcError=true;
-                console.log('There was an issue compiling Sass');
+                console.log('src:js error!!!');
                 this.emit('end');
             }))
         .pipe(sourcemaps.init())
@@ -140,6 +141,7 @@ gulp.task('src:js', function () {
 
     return merge([
     		tsResult.dts
+        		.pipe(ignore.exclude('typing.d.ts'))
     		    .pipe(gulp.dest('./node_modules/'+project.name))
     		    ,
     		tsResult.js

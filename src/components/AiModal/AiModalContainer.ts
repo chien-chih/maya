@@ -4,6 +4,7 @@ import {AiModalInstance} from './AiModalInstance';
 import {AiModalConfig,AiModalAlign} from './AiModalConfig';
 import {AiModal} from './AiModal';
 import {TimerWrapper} from "angular2/src/facade/async";
+import { DOM } from 'angular2/src/platform/dom/dom_adapter';
 
 @Component({
     selector: 'ai-modal-container',
@@ -70,6 +71,10 @@ export class AiModalContainer extends AiControl{
     }
     
     onLoad(){
+//        debugger
+  //      var body=DOM.query("body");
+        
+           
         var that=this;
         //that.resetPosition();
 

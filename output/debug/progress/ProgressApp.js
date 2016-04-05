@@ -1,4 +1,6 @@
-System.register(['angular2/core', 'ai/components/AiApp/AiApp', 'ai/components/AiSpinner/AiSpinner', 'ai/components/AiProgress/AiProgress', 'ai/components/AiPercent/AiPercent'], function(exports_1) {
+System.register(['angular2/core', 'ai/components/AiApp/AiApp', 'ai/components/AiSpinner/AiSpinner', 'ai/components/AiProgress/AiProgress', 'ai/components/AiPercent/AiPercent'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
@@ -47,11 +49,11 @@ System.register(['angular2/core', 'ai/components/AiApp/AiApp', 'ai/components/Ai
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
                 return AppComponent;
-            })(AiApp_1.AiApp);
+            }(AiApp_1.AiApp));
             exports_1("AppComponent", AppComponent);
             AiApp_1.AiApp.boot(AppComponent);
         }
     }
 });
 
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInByb2dyZXNzL1Byb2dyZXNzQXBwLnRzIl0sIm5hbWVzIjpbIkFwcENvbXBvbmVudCIsIkFwcENvbXBvbmVudC5jb25zdHJ1Y3RvciJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7WUFPQTtnQkFLbUNBLGdDQUFLQTtnQkFMeENBO29CQUttQ0MsOEJBQUtBO2dCQUV4Q0EsQ0FBQ0E7Z0JBUEREO29CQUFDQSxnQkFBU0EsQ0FBQ0EsYUFBS0EsQ0FBQ0EsSUFBSUEsQ0FBQ0E7d0JBQ2xCQSxRQUFRQSxFQUFFQSxjQUFjQTt3QkFDeEJBLFdBQVdBLEVBQUNBLHVDQUF1Q0E7d0JBQ25EQSxVQUFVQSxFQUFFQSxDQUFDQSxxQkFBU0EsRUFBQ0EsdUJBQVVBLEVBQUNBLHFCQUFTQSxDQUFDQTtxQkFDL0NBLENBQUNBLENBQUNBOztpQ0FHRkE7Z0JBQURBLG1CQUFDQTtZQUFEQSxDQVBBLEFBT0NBLEVBRmtDLGFBQUssRUFFdkM7WUFQRCx1Q0FPQyxDQUFBO1lBQ0QsYUFBSyxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsQ0FBQyIsImZpbGUiOiJwcm9ncmVzcy9Qcm9ncmVzc0FwcC5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7Q29tcG9uZW50fSBmcm9tICdhbmd1bGFyMi9jb3JlJztcbmltcG9ydCB7QWlBcHB9IGZyb20gJ2FpL2NvbXBvbmVudHMvQWlBcHAvQWlBcHAnO1xuaW1wb3J0IHtBaVNwaW5uZXJ9IGZyb20gJ2FpL2NvbXBvbmVudHMvQWlTcGlubmVyL0FpU3Bpbm5lcic7XG5pbXBvcnQge0FpUHJvZ3Jlc3N9IGZyb20gJ2FpL2NvbXBvbmVudHMvQWlQcm9ncmVzcy9BaVByb2dyZXNzJztcbmltcG9ydCB7QWlQZXJjZW50fSBmcm9tICdhaS9jb21wb25lbnRzL0FpUGVyY2VudC9BaVBlcmNlbnQnO1xuXG5cbkBDb21wb25lbnQoQWlBcHAubWV0YSh7XG4gICAgc2VsZWN0b3I6ICdwcm9ncmVzcy1hcHAnLFxuICAgIHRlbXBsYXRlVXJsOidwYWNrYWdlOmFwcC9wcm9ncmVzcy9Qcm9ncmVzc0FwcC5odG1sJyxcbiAgICBkaXJlY3RpdmVzOiBbQWlTcGlubmVyLEFpUHJvZ3Jlc3MsQWlQZXJjZW50XSAgXG59KSlcbmV4cG9ydCBjbGFzcyBBcHBDb21wb25lbnQgIGV4dGVuZHMgQWlBcHB7ICBcbiAgICAgXG59XG5BaUFwcC5ib290KEFwcENvbXBvbmVudCk7ICAiXSwic291cmNlUm9vdCI6Ii9zb3VyY2UvIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInByb2dyZXNzL1Byb2dyZXNzQXBwLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7WUFZQTtnQkFBbUMsZ0NBQUs7Z0JBQXhDO29CQUFtQyw4QkFBSztnQkFFeEMsQ0FBQztnQkFQRDtvQkFBQyxnQkFBUyxDQUFDLGFBQUssQ0FBQyxJQUFJLENBQUM7d0JBQ2xCLFFBQVEsRUFBRSxjQUFjO3dCQUN4QixXQUFXLEVBQUMsdUNBQXVDO3dCQUNuRCxVQUFVLEVBQUUsQ0FBQyxxQkFBUyxFQUFDLHVCQUFVLEVBQUMscUJBQVMsQ0FBQztxQkFDL0MsQ0FBQyxDQUFDOztnQ0FBQTtnQkFHSCxtQkFBQztZQUFELENBRkEsQUFFQyxDQUZrQyxhQUFLLEdBRXZDO1lBRkQsdUNBRUMsQ0FBQTtZQUNELGFBQUssQ0FBQyxJQUFJLENBQUMsWUFBWSxDQUFDLENBQUMiLCJmaWxlIjoicHJvZ3Jlc3MvUHJvZ3Jlc3NBcHAuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQge0NvbXBvbmVudH0gZnJvbSAnYW5ndWxhcjIvY29yZSc7XG5pbXBvcnQge0FpQXBwfSBmcm9tICdhaS9jb21wb25lbnRzL0FpQXBwL0FpQXBwJztcbmltcG9ydCB7QWlTcGlubmVyfSBmcm9tICdhaS9jb21wb25lbnRzL0FpU3Bpbm5lci9BaVNwaW5uZXInO1xuaW1wb3J0IHtBaVByb2dyZXNzfSBmcm9tICdhaS9jb21wb25lbnRzL0FpUHJvZ3Jlc3MvQWlQcm9ncmVzcyc7XG5pbXBvcnQge0FpUGVyY2VudH0gZnJvbSAnYWkvY29tcG9uZW50cy9BaVBlcmNlbnQvQWlQZXJjZW50JztcblxuXG5AQ29tcG9uZW50KEFpQXBwLm1ldGEoe1xuICAgIHNlbGVjdG9yOiAncHJvZ3Jlc3MtYXBwJyxcbiAgICB0ZW1wbGF0ZVVybDoncGFja2FnZTphcHAvcHJvZ3Jlc3MvUHJvZ3Jlc3NBcHAuaHRtbCcsXG4gICAgZGlyZWN0aXZlczogW0FpU3Bpbm5lcixBaVByb2dyZXNzLEFpUGVyY2VudF0gIFxufSkpXG5leHBvcnQgY2xhc3MgQXBwQ29tcG9uZW50ICBleHRlbmRzIEFpQXBweyAgXG4gICAgIFxufVxuQWlBcHAuYm9vdChBcHBDb21wb25lbnQpOyAgIl0sInNvdXJjZVJvb3QiOiIvc291cmNlLyJ9

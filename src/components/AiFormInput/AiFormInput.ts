@@ -41,6 +41,11 @@ export class AiFormInput extends AiFormControl {
     constructor(ele: ElementRef) { 
         super(ele);
         this.nativeElement.setAttribute('ai-form-input',''); 
+            
+    }
+    
+    ngOnInit() {
+    
         this.inhieritAttributesToChilds(0);
         var child=this.nativeElement.childNodes[0];
         if(this.nativeElement.getAttribute('round') != null)
@@ -66,8 +71,8 @@ export class AiFormInput extends AiFormControl {
         var numberInput=this.nativeElement.getAttribute('numberinput');
         if(numberInput != null) 
             child.setAttribute('numberinput','');
-            
-    }
+    } 
+    
     
     updateValue(value:any) {
         if(this.counter && value)

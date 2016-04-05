@@ -33,7 +33,7 @@ export class AiConfirm implements AiModalDialog {
         let config:AiModalConfig =new AiModalConfig();    
         config.x=AiModalPosition.Center;
         config.y=new AiModalPosition(100,AiModalAlign.Begin);
-        config.mask='black';
+        config.mask='white';
         config.floating=true;
         return config; 
     }    

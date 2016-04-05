@@ -24,6 +24,66 @@
     transform: @arguments;
 }
 
+.aniPosition( @name,@duration, @x1, @y1, @x2, @y2) {
+    .Keyframe(@pre, @post, @vendor) {
+        @keyframe: ~"@{pre}@@{vendor}keyframes @{name} {0%";
+        
+        @{keyframe} {
+            .transform(translate3d(@x1,@y1,0));
+        }
+
+        100% {
+            .transform(translate3d(@x2,@y2,0));
+        }
+
+        .Local() {
+        }
+
+        .Local() when (@post=1) {
+            @local: ~"}.@{name}";
+
+            @{local} {
+                .animation(@name @duration);
+            }
+        }
+
+        .Local;
+    }
+
+    .Keyframe("", 0,"-webkit-");
+    .Keyframe(~"}", 1,"");
+}
+
+
+.aniOpacity( @name,@duration, @x, @y) {
+    .Keyframe(@pre, @post, @vendor) {
+        @keyframe: ~"@{pre}@@{vendor}keyframes @{name} {0%";
+
+        @{keyframe} {
+            opacity: @x;
+        }
+
+        100% {
+            opacity: @y;
+        }
+
+        .Local() {
+        }
+
+        .Local() when (@post=1) {
+            @local: ~"}.@{name}";
+
+            @{local} {
+                .animation(@name @duration);
+            }
+        }
+
+        .Local;
+    }
+
+    .Keyframe("", 0,"-webkit-");
+    .Keyframe(~"}", 1,"");
+}
 
 
 @zorderPopMask: 200;

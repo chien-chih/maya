@@ -12,7 +12,7 @@ import {AiConfirm,AiConfirmContext} from './AiConfirm';
         <span class='ico' ai-material>{{context.ico}}</span>
     </div>
     <div class='bar'>
-        <ai-button class='yes' red raised (_click)='ok()'>{{context.yesText}}</ai-button>    
+        <ai-button class='yes' red (_click)='ok()'>{{context.yesText}}</ai-button>    
     </div>
     `
 })
@@ -32,4 +32,4 @@ export class AiAlert extends AiConfirm {
     }
 
 
-}
+} 
