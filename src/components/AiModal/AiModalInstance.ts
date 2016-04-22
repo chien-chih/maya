@@ -11,9 +11,9 @@ export class AiModalInstance {
 
 
     private _resultDefered: any;
-    
+
     dialogRef: ComponentRef;
-    
+
     containerRef: ComponentRef;
 
     inElement: boolean;
@@ -24,6 +24,14 @@ export class AiModalInstance {
 
     get isTopModal(){
         return this.modal.position(this) == this.modal.length - 1;
+    }
+
+    get isOnlyModal(){
+        return this.modal.length == 1;
+    }
+
+    get isNoModal(){
+        return this.modal.length == 0;
     }
 
     /**
@@ -40,8 +48,12 @@ export class AiModalInstance {
     close(result: any = null) {
         if ( this.dialogRef.instance.beforeClose &&
                 this.dialogRef.instance.beforeClose() === true ) return;
-        this.dispose();
-        this._resultDefered.resolve(result);
+
+        var self=this;
+        this.containerRef.instance.beforeUnload(function(){
+            self.dispose();
+            self._resultDefered.resolve(result);
+        });
     }
 
     /**
@@ -54,19 +66,23 @@ export class AiModalInstance {
     dismiss() {
         if ( this.dialogRef.instance.beforeDismiss &&
             this.dialogRef.instance.beforeDismiss() === true ) return;
-        this.dispose();
-        this._resultDefered.reject();
+
+        var self=this;
+        this.containerRef.instance.beforeUnload(function(){
+            self.dispose();
+            self._resultDefered.reject();
+        });
     }
 
     private dispose() {
         this.containerRef.dispose();
         this.dialogRef.dispose();
     }
-    
+
     onLoad(){
         this.containerRef.instance.onLoad();
     }
-    
+
     onUnload(){
         this.containerRef.instance.onUnload();
     }

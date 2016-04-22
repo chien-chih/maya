@@ -33,7 +33,7 @@ export class AiModal {
             [provide(AiModalInstance, {useValue: instance})]
             );
         let container: Promise<ComponentRef> =this.createContainer( containerBindings, config.anchorName);
-        
+
         return container
             .then( (containerRef: ComponentRef) => {
                 instance.containerRef = containerRef;
@@ -45,11 +45,11 @@ export class AiModal {
                     componentType, containerRef.location, 'modalDialog', modalDataBindings)
                     .then(dialogRef => {
                         instance.dialogRef = dialogRef;
-                        
+
                         this.push(instance);
                         return instance;
                     });
-            }); 
+            });
     }
 
     /**
@@ -63,10 +63,10 @@ export class AiModal {
         instance.onLoad();
         instance.result
             .then(() => {
-                this.remove(instance);   
+                this.remove(instance);
             })
             .catch(() => {
-             this.remove(instance);   
+             this.remove(instance);
             });
     }
 
@@ -78,7 +78,6 @@ export class AiModal {
         let idx = this._list.indexOf(instance);
         if (idx > -1) this._list.splice(idx, 1);
         instance.onUnload();
-
     }
 
     position(instance: AiModalInstance) {
@@ -99,7 +98,7 @@ export class AiModal {
 
     /**
      * Creates backdrop element.
-     
+
      * @param {ResolvedProvider[]} Resolved providers,
      *     must contain the AiModalInstance instance for this backdrop.
      * @param {string} An anchor name, optional.
@@ -110,7 +109,7 @@ export class AiModal {
         bindings: ResolvedProvider[],
         anchorName?: string
         ) : Promise<ComponentRef> {
-            
+
         //The element to block using the modal
         // TODO: appRef.injector.get(APP_COMPONENT) Doesn't work.
         // When it does replace with the hack below.

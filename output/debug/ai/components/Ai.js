@@ -1,4 +1,4 @@
-System.register(['./AiApp/AiApp', './AiButton/AiButton', './AiModal/AiModalConfig', './AiModal/AiModalInstance', './AiModal/AiModal', './AiDialog/AiDialog', './AiDialog/AiConfirm', './AiDialog/AiAlert'], function(exports_1, context_1) {
+System.register(['./AiUtils/AiDOM', './AiApp/AiApp', './AiButton/AiButton', './AiIcon/AiIcon', './AiControl/AiControl', './AiModal/AiModalConfig', './AiModal/AiModalInstance', './AiModal/AiModal', './AiDialog/AiDialog', './AiDialog/AiConfirm', './AiDialog/AiAlert', './AiDialog/AiNotification'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     function exportStar_1(m) {
@@ -10,11 +10,20 @@ System.register(['./AiApp/AiApp', './AiButton/AiButton', './AiModal/AiModalConfi
     }
     return {
         setters:[
+            function (AiDOM_1_1) {
+                exportStar_1(AiDOM_1_1);
+            },
             function (AiApp_1_1) {
                 exportStar_1(AiApp_1_1);
             },
             function (AiButton_1_1) {
                 exportStar_1(AiButton_1_1);
+            },
+            function (AiIcon_1_1) {
+                exportStar_1(AiIcon_1_1);
+            },
+            function (AiControl_1_1) {
+                exportStar_1(AiControl_1_1);
             },
             function (AiModalConfig_1_1) {
                 exportStar_1(AiModalConfig_1_1);
@@ -33,6 +42,9 @@ System.register(['./AiApp/AiApp', './AiButton/AiButton', './AiModal/AiModalConfi
             },
             function (AiAlert_1_1) {
                 exportStar_1(AiAlert_1_1);
+            },
+            function (AiNotification_1_1) {
+                exportStar_1(AiNotification_1_1);
             }],
         execute: function() {
         }

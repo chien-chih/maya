@@ -62,9 +62,9 @@ gulp.task('watch', function () {
 var rimraf = require('rimraf');
 gulp.task('clean', function (cb) {
     rimraf('node_modules/'+project.name+'/*', function(){
-        rimraf(DEBUG_PATH+'**/*', cb);        
+        rimraf(DEBUG_PATH+'**/*', cb);
     });
-    
+
 });
 
 gulp.task('build',['clean'], function () {
@@ -79,7 +79,7 @@ gulp.task('build',['clean'], function () {
 */
 gulp.task('src:css', function () {
     function showError (error) {
-        logError(error.message,error.extract+'');        
+        logError(error.message,error.extract+'');
         this.emit('end');
     }
     return gulp.src('src/**/*.less')
@@ -120,35 +120,32 @@ var srcProject = ts.createProject({
     noImplicitAny: false,
     sortOutput: true,
     declaration: true
+    //,noExternalResolve:true
 });
 gulp.task('src:js', function () {
-    var plumber = require('gulp-plumber');
-    clear(); 
+
+    clear();
     logTypescript('src:js','compile src script');
     srcError=false;
-    var tsResult = gulp.src('./src/**/*.ts')
-        .pipe(plumber(function () {
-                srcError=true;
-                console.log('src:js error!!!');
-                this.emit('end');
-            }))
+    var tsResult = gulp.src(['./src/**/*.ts'])
         .pipe(sourcemaps.init())
 		.pipe(ts(srcProject,{},ts.reporter.fullReporter()))
-    //    .on('error', function () {
-      //      this.emit("end");
-        //})
+		.on('error', function () {
+		    srcError=true;
+            console.log('src:js error!!!');
+            this.emit("end");
+        })
         ;
 
     return merge([
     		tsResult.dts
         		.pipe(ignore.exclude('typing.d.ts'))
     		    .pipe(gulp.dest('./node_modules/'+project.name))
-    		    ,
+		,
     		tsResult.js
 		        .pipe(sourcemaps.write())
 		        .pipe(gulp.dest(DEBUG_PATH+project.name))
-    	]);		
-    	
+    	]);
 });
 
 /*
@@ -185,7 +182,7 @@ var appProject = ts.createProject({
 gulp.task('app:js', function () {
     if(srcError) {
         logIgnore('app:js','skip compile because src error');
-        return;   
+        return;
     }
     logTypescript('app:js','compile app script');
     var tsResult = gulp.src('app/**/*s')
@@ -204,9 +201,9 @@ gulp.task('app:js', function () {
 var cssnano = require('gulp-cssnano');
 
 var currentVersion,srcRepository;
-gulp.task('release:version', function () {clear(); 
+gulp.task('release:version', function () {clear();
     var jeditor = require("gulp-json-editor");
-    return merge([ 
+    return merge([
     gulp.src("./package.json")
         .pipe(jeditor(function(json) {
             var index=json.version.lastIndexOf(".");
@@ -216,7 +213,7 @@ gulp.task('release:version', function () {clear();
             currentVersion=json.version;
             srcRepository=RELEASE_PATH+project.name+'/'+json.version;
             logTypescript('release','prepare release version '+project.name +" "+currentVersion);
-            return json; 
+            return json;
         }))
       .pipe(gulp.dest("./"))
     ]);
@@ -234,7 +231,7 @@ var uglify = require('gulp-uglify');
         warning_level: 'VERBOSE',
         language_out: 'ECMASCRIPT5_STRICT'
     }));
-*/          
+*/
 gulp.task('release:build', function (cb) {
     logTypescript('release','compile script/css/html ');
     var srcRelease = ts.createProject({
@@ -290,7 +287,7 @@ gulp.task('release:build', function (cb) {
         .pipe(sourcemaps.init())
 		.pipe(ts(appRelease,{},ts.reporter.fullReporter()));
 
-    return merge([ 
+    return merge([
     		srcTs.dts
     		        .pipe(concat(project.name+".d.ts"))
     		        .pipe(gulp.dest(srcRepository))
@@ -313,7 +310,7 @@ gulp.task('release:build', function (cb) {
                       }))
 		            .pipe(sourcemaps.write('.'))
     		        .pipe(gulp.dest(RELEASE_PATH))
-        	]);		
+        	]);
 });
 
 gulp.task('release:bootstrapcss', function () {
@@ -322,17 +319,17 @@ gulp.task('release:bootstrapcss', function () {
         function transform(file, cb) {
             var dict = readFileString("./config/stylename.txt");
             dict = dict.replace(/\n/g, "");
-            
+
             var css = String(file.contents);
             css = css.replace(/"/g, "'");
             css = css.replace(/\n/g, "");
             css = styleNameShrink(css, dict);
-        
+
             var js = readFileString("./config/bootcss.js");
             js = js.replace(/\n/g, "");
             js=js.replace("T_DICT",dict);
             js=js.replace("T_CSS",'"'+css+'"');
-    
+
             file.contents = new Buffer(js);
             cb(null, file);
         }
@@ -355,7 +352,7 @@ gulp.task('release:link', function () {
                 readFileString(srcRepository+'/'+project.name+".js")
                 );
             var del = require('del');
-            
+
             del([srcRepository+'/'+project.name+".css"]);
             file.contents = new Buffer(js);
             cb(null, file);
@@ -414,7 +411,7 @@ gulp.task('test', function () {
             compileTest.js
 		        .pipe(sourcemaps.write())
     		    .pipe(gulp.dest(DEBUG_PATH))
-    	]);		
+    	]);
 });
 
 function readFileString(filename) {
@@ -443,13 +440,13 @@ function styleNameShrink(css, styleNames) {
 }
 
 function processHtml(mode) {
-    
+
     function firstCharUppercase(text){
         var c=text.substring(0,1);
         text=c.toUpperCase() + text.substring(1,text.length);
         return text;
     }
-    
+
     function transform(file, cb) {
         var filename=path.basename(file.path,'.html');
         var replaceFrom="<head>";
@@ -459,7 +456,7 @@ function processHtml(mode) {
             var includeFiles="";
             for(var i=0;i<angularInclude.length;i++)
                 includeFiles+="\n<script src='/node_modules/"+angularInclude[i]+"'></script>";
-            
+
             replaceTo=
                 "<head>"+includeFiles+
                 "\n<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>"+

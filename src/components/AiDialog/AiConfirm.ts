@@ -16,27 +16,30 @@ export class AiConfirmContext {
     directives: [AiButton],
     template:
     `<div class='ai-dlg-body' [attr.hasIcon]='hasIcon()'>
-        <div class='title'>{{context.title}}</div>
-        <div class='message'>{{context.message}}</div>
-        <span class='ico' ai-material>{{context.ico}}</span>
+        <h2 class='title'>{{context.title}}</h2>
+        <p class='msg'>{{context.message}}</p>
+        <div class='left'>
+            <span class='ico' ai-material>{{context.ico}}</span>
+        </div>
     </div>
     <div class='bar'>
         <div class='line'></div>
         <ai-button class='no' primary (_click)='cancel()'>{{context.noText}}</ai-button>
-        <ai-button class='yes' primary leftborder (_click)='ok()'>{{context.yesText}}</ai-button>    
+        <ai-button class='yes' primary leftborder (_click)='ok()'>{{context.yesText}}</ai-button>
     </div>
     `
 })
 export class AiConfirm implements AiModalDialog {
 
-    static get DefaultConfig():AiModalConfig{ 
-        let config:AiModalConfig =new AiModalConfig();    
+    static get DefaultConfig():AiModalConfig{
+        let config:AiModalConfig =new AiModalConfig();
         config.x=AiModalPosition.Center;
         config.y=new AiModalPosition(100,AiModalAlign.Begin);
         config.mask='white';
         config.floating=true;
-        return config; 
-    }    
+        config.animation='fade';
+        return config;
+    }
 
     constructor(public instance: AiModalInstance,public context: AiConfirmContext) {
     }
@@ -48,9 +51,9 @@ export class AiConfirm implements AiModalDialog {
     cancel() {
         this.instance.dismiss();
     }
-    
+
     hasIcon(){
         return this.context.ico.length > 0 ? '':null;
     }
-    
+
 }

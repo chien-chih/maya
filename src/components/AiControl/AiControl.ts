@@ -1,13 +1,8 @@
 import {ElementRef,Attribute,OnChanges} from 'angular2/core';
-import {TimerWrapper} from 'angular2/src/facade/async';
-//import {isPresent} from 'angular2/src/facade/lang';
 import {KeyboardEvent,MouseEvent} from 'angular2/src/facade/browser';
-import {NumberWrapper} from 'angular2/src/facade/lang';
-import {CONST} from 'angular2/src/facade/lang';
-import {ObservableWrapper,EventEmitter} from 'angular2/src/facade/async';
-import {DOM} from 'angular2/src/platform/dom/dom_adapter';
+import {CONST,NumberWrapper} from 'angular2/src/facade/lang';
+import {ObservableWrapper,TimerWrapper,EventEmitter} from 'angular2/src/facade/async';
 
-import {BrowserDomAdapter} from "angular2/src/platform/browser/browser_adapter";
 //BrowserDomAdapter.makeCurrent();
 
 //import * as utils from 'ai/components/utils';
@@ -28,10 +23,10 @@ export class KeyCodes {
   @CONST() static UP = 38;
   @CONST() static RIGHT = 39;
   @CONST() static DOWN = 40;
-   
+
 }
 
-export class AiControl implements OnChanges{ 
+export class AiControl implements OnChanges{
     nativeElement:any;
     tabindex: number=0;
     disabled:boolean=false;
@@ -41,7 +36,7 @@ export class AiControl implements OnChanges{
     isFire:boolean=false;
     keyCode:number=0;
     visible: boolean = true;
-    
+
     _click: EventEmitter<any>=new EventEmitter();
 
     protected onClick(){}
@@ -55,7 +50,7 @@ export class AiControl implements OnChanges{
     protected onTouchEnd(event) {}
     protected onFocus() {}
     protected onBlur() {}
-    
+
     static mobile:boolean=AiControl.init();
     static init():boolean{
         var userAgent = navigator.userAgent;
@@ -64,32 +59,32 @@ export class AiControl implements OnChanges{
         return mobile;
     }
     static meta(meta:any,options?:any):any{
-        if(!options) options={}; 
+        if(!options) options={};
         if(!meta.inputs) meta.inputs=[];
         if(!meta.outputs) meta.outputs=[];
         if(!meta.host) meta.host={};
  //       if(!meta.providers) meta.providers=[];
- 
+
         meta.inputs.push('visible');
         meta.host['[class.hide]']='!visible';
         if(!options.ignoreDisabled){
             meta.inputs.push('disabled');
             meta.host['[class.disabled]']='disabled';
         }
-        
+
         if(!options.ignoreFocus){
             meta.host['[class.focus]']='isFocus';
             meta.host['(focus)']='focus()';
             meta.host['(blur)']='blur()';
             meta.host['[tabindex]']='getTabIndex()';
-        }        
+        }
 
 
         if(!options.ignoreHover){
             meta.host['[class.hover]']='isHover';
             meta.host['(mouseover)']='mouseOver()';
             meta.host['(mouseout)']='mouseOut()';
-        }        
+        }
 
         if(!options.ignoreActive){
             meta.outputs.push('_click');
@@ -104,19 +99,14 @@ export class AiControl implements OnChanges{
         return meta;
     }
 
-    _dom:BrowserDomAdapter=null;
-    protected get DOM(){
-        if(this._dom==null) this._dom=new BrowserDomAdapter();
-        return this._dom;
-    }
-    
+
     constructor(ele: ElementRef) {
         this.nativeElement = ele.nativeElement;
-        this.nativeElement.setAttribute('ai-control',''); 
+        this.nativeElement.setAttribute('ai-control','');
 
         var tabindex = this.nativeElement.getAttribute('tabindex');
         if(tabindex) this.tabindex = NumberWrapper.parseInt(tabindex, 10);
-    }  
+    }
 
     inhieritAttributesToChilds(i){
         var attributes=['primary','red','green','yellow','large','small'];
@@ -168,14 +158,14 @@ export class AiControl implements OnChanges{
             this.isHover = true;
         }
     }
-    
+
     mouseOut() {
         this.isHover = false;
         this.isActive = false;
-        if (!this.disabled && !AiControl.mobile) 
+        if (!this.disabled && !AiControl.mobile)
             this.onMouseOut();
     }
-    
+
     mouseDown(event: MouseEvent) {
         //console.log('mousedown');
         if (!this.disabled && event.button==0) {
@@ -183,7 +173,7 @@ export class AiControl implements OnChanges{
             this.isActive = true;
         }
     }
-    
+
     mouseUp(event: MouseEvent) {
         //console.log('mouseup');
 
@@ -193,8 +183,8 @@ export class AiControl implements OnChanges{
             this.fireClickEvent();
         }
     }
-    
-    
+
+
     keyDown(event: KeyboardEvent) {
         //fix ios bluetooth keycode bug
         this.keyCode=event.keyCode;
@@ -208,16 +198,16 @@ export class AiControl implements OnChanges{
             }
         }
     }
-    
+
     keyUp(event: KeyboardEvent) {
         if (!this.disabled) {
             this.onKeyUp(event);
         }
         this.isActive = false;
-        if (this.keyCode == KeyCodes.SPACE) 
+        if (this.keyCode == KeyCodes.SPACE)
             this.fireClickEvent();
     }
-    
+
     touchStart(event) {
         //console.log('touchstart');
         if (!this.disabled) {
@@ -226,7 +216,7 @@ export class AiControl implements OnChanges{
                 this.isActive = true;
         }
     }
-    
+
     touchEnd(event) {
         //console.log('touchend');
         this.isActive = false;
@@ -244,21 +234,21 @@ export class AiControl implements OnChanges{
             this.isFocus = !this.isActive;
         }
     }
-    
+
     blur() {
         if (!this.disabled)
             this.onBlur();
         this.isFocus = false;
     }
 
-    
-} 
+
+}
 
 
-/*  
+/*
 document.addEventListener('DOMContentLoaded', function() {
     alert('hello');
     //debugger
     //document.body.setAttribute('mobile','a');
 });
-*/ 
+*/

@@ -4,45 +4,58 @@
 .ai-dlg-body {
     .userSelect(text);
     margin-top: -2px;
-    padding:15px 25px;
+    padding:15px 25px 20px 25px;
     display: inline-block;
 }
 
 .ai-dlg-body[hasIcon] {
-    padding:15px 25px 15px 70px;
+    padding:20px 25px 20px 100px;
     position:relative;
+}
+
+.ai-dlg-body .left {
+    position: absolute;
+    width:0;
+    top:0;
+    left:0;
+}
+
+.ai-dlg-body[hasIcon] .left {
+    width:100px;
+    height: 100%;
 }
 
 .ai-dlg-body .ico {
     position: absolute;
-    width: 40px;
-    height: 40px;
-    font-size:40px;
-    left: 15px;
-    top: 30px;
+    left:20px;
+    top:30%;
+    width: 60px;
+    height: 60px;
+    font-size:60px;
     color:rgba(21, 126, 251, 0.9);
 }
 
 .ai-dlg-body .title {
     white-space: nowrap;
+    margin-top:0;
     padding: 8px 0 0 0;
     display: block;
-    color: #313131;
-    font-size: 17px;
-    font-weight: bold;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+    color: #333;
+    font-size: 20px;
+    font-weight: 500;
 }
 
-.ai-dlg-body .message {
+.ai-dlg-body .msg {
     margin-bottom: 4px;
     margin-top: 8px;
     overflow: hidden;
     word-wrap: break-word;
 }
 
+/* confirm */
+
 ai-confirm {
     display:inline-block;
-    border-radius:3px;
     box-shadow:rgba(0, 0, 0, 0.4) 0px 5px 12px;
     background: #fff;
     overflow: hidden;
@@ -57,6 +70,8 @@ ai-confirm {
 ai-confirm .bar {
     text-align: center;
     white-space: nowrap;
+    height:60px;
+    position:relative;
 }
 
 ai-confirm .line {
@@ -64,13 +79,27 @@ ai-confirm .line {
     border-bottom:solid 1px #E5E5E5;
 }
 
-ai-confirm .yes,ai-confirm .no {
-    width:45%;
+ai-confirm .no {
+    position:absolute;
     margin:0;
-    height:40px;
-    line-height:40px;
+    left:1px;
+    right:50%;
+    top:1px;
+    height:60px;
+    line-height:60px;
 }
 
+ai-confirm .yes{
+    position:absolute;
+    margin:0;
+    left:50%;
+    right:1px;
+    top:1px;
+    height:60px;
+    line-height:60px;
+}
+
+/* alert */
 
 ai-alert {
     display:inline-block;
@@ -87,7 +116,7 @@ ai-alert {
 }
 
 ai-alert .bar {
-    text-align: right;
+    text-align: center;
     padding:10px;
 }
 
@@ -98,4 +127,82 @@ ai-alert .line {
 
 ai-alert .ai-dlg-body .ico {
     color:rgba(252, 61, 57, 0.9);
+}
+
+/* notification */
+
+ai-notification .body{
+    background: rgba(255,255,255,.85);
+    color: #777;
+    position: relative;
+    padding: 20px 50px 20px 20px;
+    line-height: 1.4;
+    font-size: 90%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+}
+
+ai-notification .body[hasIcon]{
+
+}
+
+ai-notification .msg{
+    margin:0;
+}
+ai-notification [hasIcon] p{
+    margin-left:80px;
+}
+
+ai-notification .ico {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 15px;
+    width: 42px;
+    height: 42px;
+    font-size: 42px;
+}
+
+ai-notification .close {
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px;
+    position: absolute;
+    margin:0;
+    color:#777;
+    background: transparent;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    font-size:20px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+ai-notification .close.hover {
+    color:#000;
+}
+
+ai-notification .ok {
+    line-height: normal;
+    min-height:0;
+    margin:0;
+    min-width:0;
+    font-size:initial;
+    overflow:visible;
+}
+
+ai-notification .body.black{
+    background: rgba(42,45,50,.85);
+    color: rgba(250,251,255,0.95);
+}
+
+ai-notification .body.black[hasIcon]{
+    box-shadow: inset 72px 0 rgba(0,0,0,0.6);
+}
+
+ai-notification .black .close {
+    color:#14151b;
+}
+ai-notification .black .close.hover {
+    color:#fff;
 }

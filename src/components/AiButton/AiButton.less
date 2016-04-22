@@ -1,5 +1,5 @@
 @import "../AiControl/Definition";
-  
+
 ai-button {
     .color-default(.9);
     .margin-default();
@@ -31,14 +31,14 @@ ai-button.focus:not([raised]):not([fab]):not([link]):not([icon]){
     .border-primary(.9);
 }
 
-ai-button.hover:not(.active):not([raised]):not([fab]) {
+ai-button.hover:not(.active):not([raised]):not([fab]):not([round]){
     .background-default(.1);
 }
 
 /*disabled*/
 ai-button.active {
     .background-default(.4)
-}   
+}
 ai-button.disabled{
     .color-default(.3);
 }
@@ -66,12 +66,12 @@ ai-button[primary]{
 ai-button[primary].disabled{
     .color-primary(.3);
 }
-ai-button[primary].hover:not(.active):not([raised]):not([fab]){
+ai-button[primary].hover:not(.active):not([raised]):not([fab]):not([round]){
     .background-primary(.1);
 }
 ai-button[primary].active {
     .background-primary(.4);
-}   
+}
 
 /*red*/
 ai-button[red] {
@@ -80,7 +80,7 @@ ai-button[red] {
 ai-button[red].disabled{
     .color-red(.3);
 }
-ai-button[red].hover:not(.active):not([raised]):not([fab]) {
+ai-button[red].hover:not(.active):not([raised]):not([fab]):not([round]){
     .background-red(.1);
 }
 ai-button[red].active {
@@ -97,12 +97,12 @@ ai-button[green] {
 ai-button[green].disabled{
     .color-green(.3);
 }
-ai-button[green].hover:not(.active):not([raised]):not([fab]) {
+ai-button[green].hover:not(.active):not([raised]):not([fab]):not([round]){
     .background-green(.1);
 }
 ai-button[green].active {
     .background-green(.4);
-}   
+}
 ai-button[green].focus:not([raised]):not([fab]):not([link]):not([icon]){
     .border-green(.9);
 }
@@ -114,24 +114,24 @@ ai-button[yellow] {
 ai-button[yellow].disabled{
     .color-yellow(.3);
 }
-ai-button[yellow].hover:not(.active):not([raised]):not([fab]) {
+ai-button[yellow].hover:not(.active):not([raised]):not([fab]):not([round]){
     .background-yellow(.1);
 }
 ai-button[yellow].active {
     .background-yellow(.4);
-}   
+}
 ai-button[yellow].focus:not([raised]):not([fab]):not([link]):not([icon]){
     .border-yellow(.9);
 }
 
-/******************* 
+/*******************
      icon
 ****************** */
 
 ai-button[icon]{
     border-radius:50%;
     margin: 6px 8px;
-    width: 36px; 
+    width: 36px;
     height: 36px;
     line-height: 36px;
     min-width:initial;
@@ -173,7 +173,7 @@ ai-button[icon][small] {
     font-size: 16px;
 }
 
-/******************* 
+/*******************
      link
 ****************** */
 ai-button[link]:not([red]):not([green]):not([yellow]):not(.disabled){
@@ -192,7 +192,7 @@ ai-button[link].focus,ai-button[link].hover{
     text-decoration: underline;
 }
 
-/******************* 
+/*******************
      fab
 ****************** */
 
@@ -221,11 +221,11 @@ ai-button[fab].active:not(.hover) {
     background:#e5e5e5;
     box-shadow:0 0px 1px rgba(0, 0, 0, .26);
     transform:scale(.95,.95);
-}   
+}
 ai-button[fab].active {
     box-shadow:0 5px 8px rgba(0, 0, 0, .26);
     .gradientBackground(#f3f3f3, #fefefe);
-}   
+}
 ai-button[fab].focus, ai-button[fab].hover:not(.active) {
     box-shadow:0 8px 11px rgba(0, 0, 0, .26);
     transform:scale(1.05,1.05);
@@ -289,7 +289,7 @@ ai-button[fab][yellow].active {
 }
 
 
-/******************* 
+/*******************
      raised
 ****************** */
 
@@ -313,11 +313,11 @@ ai-button[raised].active:not(.hover) {
     background:#e5e5e5;
     box-shadow:0 0px 1px rgba(0, 0, 0, .26);
     transform:scale(.95,.95);
-}   
+}
 ai-button[raised].active {
     .gradientBackground(#f3f3f3, #fefefe);
     box-shadow:0 5px 8px rgba(0, 0, 0, .26);
-}   
+}
 ai-button[raised].focus, ai-button[raised].hover:not(.active) {
     box-shadow:0 8px 11px rgba(0, 0, 0, .26);
     transform:scale(1.05,1.05);
@@ -380,3 +380,70 @@ ai-button[leftborder] {
 ai-button[rightborder] {
     border-right:solid 1px #E5E5E5;
 }
+
+/*******************
+     round
+****************** */
+
+ai-button[round]{
+    margin: 6px 8px;
+    color:rgba(127,127,127,.95);
+    border-radius:5px;
+    background:rgba(127,127,127,.25);
+}
+
+ai-button[round].hover:not(.active) {
+    color:rgba(127,127,127,1);
+    background:rgba(127,127,127,.5) ;
+}
+
+ai-button[round][white]{
+    color:rgba(255,255,255,.95);
+    background:rgba(255,255,255,.25);
+}
+
+ai-button[round][white].hover:not(.active) {
+    color:rgba(255,255,255,1);
+    background:rgba(255,255,255,.5) ;
+}
+
+ai-button[round][primary]{
+    .color-primary(.95);
+    .background-primary(.3);
+}
+
+ai-button[round][primary].hover:not(.active) {
+    .color-primary(1);
+    .background-primary(.5);
+}
+
+ai-button[round][red]{
+    .color-red(.95);
+    .background-red(.3);
+}
+
+ai-button[round][red].hover:not(.active) {
+    .color-red(1);
+    .background-red(.5);
+}
+
+ai-button[round][green]{
+    .color-green(.95);
+    .background-green(.3);
+}
+
+ai-button[round][green].hover:not(.active) {
+    .color-green(1);
+    .background-green(.5);
+}
+
+ai-button[round][yellow]{
+    .color-yellow(.95);
+    .background-yellow(.3);
+}
+
+ai-button[round][yellow].hover:not(.active) {
+    .color-yellow(1);
+    .background-yellow(.5);
+}
+

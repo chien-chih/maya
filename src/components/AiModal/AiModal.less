@@ -4,7 +4,10 @@
 @zorderPopUp: (@zorderPopMask+1);
 @zorderPopOver: (@zorderPopUp+1);
 
-
+.positionAnimation(ai-top-in,.5s,cubic-bezier(0.7,0,0.3,1),0,-100%,0,0);
+.positionAnimation(ai-top-out,.5s,cubic-bezier(0.7,0,0.3,1),0,0,0,-100%);
+.opacityAnimation(ai-fade-in,.3s,cubic-bezier(0.7,0,0.3,1),0,100%);
+.opacityAnimation(ai-fade-out,.3s,cubic-bezier(0.7,0,0.3,1),100%,0);
 
 ai-modal-container.autohide,ai-modal-container.mask{
     z-index: @zorderPopUp;
@@ -21,11 +24,11 @@ ai-modal-container.autohide,ai-modal-container.mask{
 }
 
 ai-modal-container.autohide{
-    
+
 }
 
 ai-modal-container.mask{
-    
+
 }
 
 ai-modal-container.mask.black{

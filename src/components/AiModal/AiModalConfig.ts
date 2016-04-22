@@ -3,14 +3,14 @@ import {Injectable} from 'angular2/core';
 
 export enum AiModalAlign{
     Begin,Center,End
-}    
+}
 
 export class AiModalPosition{
-    
+
     offset:any;
-    
+
     align:AiModalAlign;
-    
+
     constructor(offset:any=0,align:AiModalAlign=AiModalAlign.Begin) {
         this.offset=offset;
         this.align=align;
@@ -41,11 +41,11 @@ export class AiModalPosition{
                 var width=targetElement.offsetWidth;
                 var noffset:number=this.numberOffset();
                 x=left+ (width * noffset)/100;
-                
+
             }else
                 x=left+x;
         }
-        
+
         dialog.style.left=x;
         switch(this.align){
             case AiModalAlign.Begin:
@@ -68,12 +68,12 @@ export class AiModalPosition{
                 var height=targetElement.offsetHeight;
                 var noffset:number=this.numberOffset();
                 y=top+ (height * noffset)/100;
-                
+
             }else
                 y=top+y;
         }
-        
-        dialog.style.top=y;            
+
+        dialog.style.top=y;
         switch(this.align){
             case AiModalAlign.Begin:
                 content.style.top=0;
@@ -97,8 +97,12 @@ export class AiModalPosition{
 export class AiModalConfig {
 
     x:AiModalPosition=AiModalPosition.Center;
-    
+
     y:AiModalPosition=AiModalPosition.Begin;
+
+    width:string=null;
+
+    height:string=null;
 
     floating:boolean=false;
 
@@ -107,30 +111,20 @@ export class AiModalConfig {
     anchorName:string=null;
 
     mask : string=null; //null,'white','black'
-    
+
     autoHide:boolean=false;
 
     ESCHide:boolean=true;
 
-    trackingSizePosition:boolean=false;    
+    TimeHide:number=0;//seconds to hide
 
-    
+    trackingSizePosition:boolean=false;
+
+    animation:string=null;//SlideTop,FadeIn
 
     get Position(){
         return this.floating ? 'fixed':'absolute';
     }
 
-
-/*
-    keyboard: Array<number> | number=[27];
-
-
-    constructor(
-        keyboard: Array<number> | number = undefined) {
-    }
-
-    supportsKey(keyCode: number): boolean {
-        return (<Array<number>>this.keyboard).indexOf(keyCode) > -1;
-    }*/
 }
 

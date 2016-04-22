@@ -1,24 +1,34 @@
 <ai-icon>android</ai-icon><ai-icon [visible]='false' >android</ai-icon>
 
+<div style='padding:20px;border:solid 1px #333'>
+    <ai-icon>clear</ai-icon>
+    <ai-button round>CANCEL</ai-button><ai-button round primary>OK</ai-button><ai-button round red>OK</ai-button><ai-button round green>OK</ai-button><ai-button round yellow>OK</ai-button>
+</div>
+
+<div style='background:#333;padding:20px'>
+    <ai-icon>clear</ai-icon>
+    <ai-button round white>CANCEL</ai-button><ai-button round white>OK</ai-button>
+</div>
+
 <br/>
-<ai-button (_click)='onClick()'>Cancel</ai-button><ai-button  primary leftborder>OK</ai-button>
-<ai-button tabindex='-1' large>Cancel</ai-button><ai-button  large primary leftborder>OK</ai-button>
-<ai-button  small>Cancel</ai-button><ai-button  small primary leftborder>OK</ai-button>
+<ai-button (_click)='onClick()'>Cancel</ai-button><ai-button primary leftborder>OK</ai-button>
+<ai-button tabindex='-1' large>Cancel</ai-button><ai-button large primary leftborder>OK</ai-button>
+<ai-button small>Cancel</ai-button><ai-button small primary leftborder>OK</ai-button>
 <br>
-<ai-button>Cancel</ai-button><ai-button  large>large</ai-button>
-<ai-button  small>small</ai-button><ai-button  [disabled]="true">disabled</ai-button>
+<ai-button>Cancel</ai-button><ai-button large>large</ai-button>
+<ai-button small>small</ai-button><ai-button [disabled]="true">disabled</ai-button>
 
-<ai-button  primary>normal</ai-button><ai-button  large primary>large</ai-button>
-<ai-button  small primary>small</ai-button><ai-button  [disabled]="true" primary>disabled</ai-button>
+<ai-button primary>normal</ai-button><ai-button large primary>large</ai-button>
+<ai-button small primary>small</ai-button><ai-button [disabled]="true" primary>disabled</ai-button>
 
-<ai-button  red>normal</ai-button><ai-button  large red>large</ai-button>
-<ai-button  small red>small</ai-button><ai-button  [disabled]="true" red>disabled</ai-button>
+<ai-button red>normal</ai-button><ai-button large red>large</ai-button>
+<ai-button small red>small</ai-button><ai-button [disabled]="true" red>disabled</ai-button>
 
-<ai-button  green>normal</ai-button><ai-button  large green>large</ai-button>
-<ai-button  small green>small</ai-button><ai-button  [disabled]="true" green>disabled</ai-button>
+<ai-button green>normal</ai-button><ai-button large green>large</ai-button>
+<ai-button small green>small</ai-button><ai-button [disabled]="true" green>disabled</ai-button>
 
-<ai-button  yellow>normal</ai-button><ai-button  large yellow>large</ai-button>
-<ai-button  small  yellow>small</ai-button><ai-button  [disabled]="true" yellow>disabled</ai-button>
+<ai-button yellow>normal</ai-button><ai-button large yellow>large</ai-button>
+<ai-button small yellow>small</ai-button><ai-button [disabled]="true" yellow>disabled</ai-button>
 <br/>
 
 
@@ -72,7 +82,7 @@
 <ai-button link small green>small</ai-button><ai-button link [disabled]="true" green>disabled</ai-button>
 
 <ai-button link yellow>normal</ai-button><ai-button link large yellow>large</ai-button>
-<ai-button link small  yellow>small</ai-button><ai-button link [disabled]="true" yellow>disabled</ai-button>
+<ai-button link small yellow>small</ai-button><ai-button link [disabled]="true" yellow>disabled</ai-button>
 <br/>
 
 <ai-button raised (_click)='onClick()'>normal</ai-button><ai-button large raised>large</ai-button>
