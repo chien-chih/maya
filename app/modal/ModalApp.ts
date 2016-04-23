@@ -35,22 +35,99 @@ export class AppComponent  extends AiApp{
         this.dialog.confirm('MacBook Light. Years ahead.|Our goal with MacBook was to do the impossible.|help');
     }
 
-    onNotification(){
-        this.dialog.notify('Our goal with MacBook was to do the impossible|||Undo',function(v){
+    //slidedown
+    onSlidedown(){
+        this.dialog.slidedown('Our goal with MacBook was to do the impossible||Undo',function(v){
             window.alert('pressed '+v);
         });
     }
 
-    onNotificationWithIcon(){
-        this.dialog.notify('Our goal with MacBook was to do the impossible.|help|white');
+    onSlidedownWithIcon(){
+        this.dialog.slidedown('Our goal with MacBook was to do the impossible.|help|Undo');
     }
 
-    onBlackNotification(){
-        this.dialog.notify('Our goal with MacBook was to do the impossible||black|Undo');
+    onDarkSlidedown(){
+        this.dialog.slidedownDark('Our goal with MacBook was to do the impossible||Undo');
     }
 
-    onBlackNotificationWithIcon(){
-        this.dialog.notify('Our goal with MacBook was to do the impossible.|help|black');
+    onDarkSlidedownWithIcon(){
+        this.dialog.slidedownDark('Our goal with MacBook was to do the impossible.|help');
+    }
+
+    //corner
+    onCorner(){
+        this.dialog.corner('Our goal with MacBook was to do the impossible||Undo',function(v){
+            window.alert('pressed '+v);
+        });
+    }
+
+    onCornerWithIcon(){
+        this.dialog.corner('Our goal with MacBook was to do the impossible.|help|Undo');
+    }
+
+    onDarkCorner(){
+        this.dialog.cornerDark('Our goal with MacBook was to do the impossible||Undo');
+    }
+
+    onDarkCornerWithIcon(){
+        this.dialog.cornerDark('Our goal with MacBook was to do the impossible.|help');
+    }
+
+    //thumb
+    onThumb(){
+        this.dialog.thumb('Our goal with MacBook was to do the impossible||Undo',function(v){
+            window.alert('pressed '+v);
+        });
+    }
+
+    onThumbWithIcon(){
+        this.dialog.thumb('Our goal with MacBook was to do the impossible.|help|Undo');
+    }
+
+    onDarkThumb(){
+        this.dialog.thumbDark('Our goal with MacBook was to do the impossible||Undo');
+    }
+
+    onDarkThumbWithIcon(){
+        this.dialog.thumbDark('Our goal with MacBook was to do the impossible.|help');
+    }
+
+    //flip
+    onFlip(){
+        this.dialog.flip('Our goal with MacBook was to do the impossible||Undo',function(v){
+            window.alert('pressed '+v);
+        });
+    }
+
+    onFlipWithIcon(){
+        this.dialog.flip('Our goal with MacBook was to do the impossible.|help|Undo');
+    }
+
+    onDarkFlip(){
+        this.dialog.flipDark('Our goal with MacBook was to do the impossible||Undo');
+    }
+
+    onDarkFlipWithIcon(){
+        this.dialog.flipDark('Our goal with MacBook was to do the impossible.|help');
+    }
+
+    //progress
+    onProgress(){
+        this.dialog.progress('Our goal with MacBook was to do the impossible||Undo',function(v){
+            window.alert('pressed '+v);
+        });
+    }
+
+    onProgressWithIcon(){
+        this.dialog.progress('Our goal with MacBook was to do the impossible.|help|Undo');
+    }
+
+    onDarkProgress(){
+        this.dialog.progressDark('Our goal with MacBook was to do the impossible||Undo');
+    }
+
+    onDarkProgressWithIcon(){
+        this.dialog.progressDark('Our goal with MacBook was to do the impossible.|help');
     }
 
 

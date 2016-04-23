@@ -2,7 +2,6 @@
 .userSelect(@argument: none) {
     -webkit-user-select: @argument;
     -moz-user-select: @argument;
-    -ms-user-select: @argument;
     user-select: @argument;
 }
 .appearance(@argument: none) {
@@ -53,6 +52,36 @@
 
 
 .opacityAnimation( @name,@duration,@timing, @x, @y) {
+    .Keyframe(@pre, @post, @vendor) {
+        @keyframe: ~"@{pre}@@{vendor}keyframes @{name} {0%";
+
+        @{keyframe} {
+            opacity: @x;
+        }
+
+        100% {
+            opacity: @y;
+        }
+
+        .Local() {
+        }
+
+        .Local() when (@post=1) {
+            @local: ~"}.@{name}";
+
+            @{local} {
+                .animation(@name @duration @timing);
+            }
+        }
+
+        .Local;
+    }
+
+    .Keyframe("", 0,"-webkit-");
+    .Keyframe(~"}", 1,"");
+}
+
+.jellyAnimation( @name,@duration,@timing, @x, @y) {
     .Keyframe(@pre, @post, @vendor) {
         @keyframe: ~"@{pre}@@{vendor}keyframes @{name} {0%";
 

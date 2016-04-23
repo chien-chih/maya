@@ -1,20 +1,24 @@
 import {Component} from 'angular2/core';
 import {AiButton,AiConfirm,AiConfirmContext,AiModalInstance,AiModalDialog,AiModalConfig,AiModalAlign,AiModalPosition} from '../Ai';
 
-export class AiNotificationContext {
+export class AiNotifyContext {
     constructor(
-        public message:string = '',
-        public ico:string='',
-        public color:string='',
-        public ok: string = ''
+        public message:string,
+        public ico:string,
+        public ok: string,
+        public style:string,
+        public color:string
     ) {}
 }
 
 @Component({
-    selector: 'ai-notification',
+    selector: 'ai-notify',
     directives: [AiButton],
+    host:{
+        '[class]': 'getClass()'
+        },
     template:
-    `<div [class]='getClass()' [attr.hasIcon]='hasIcon()'>
+    `
     	<div class="inner">
             <span class='ico' ai-material>{{context.ico}}</span>
     		<p class='msg'>
@@ -23,28 +27,37 @@ export class AiNotificationContext {
     		</p>
     	</div>
     	<ai-button icon class='close' (_click)='close()'>clear</ai-button>
-    </div>`
+    `
 })
-export class AiNotification implements AiModalDialog {
+export class AiNotify implements AiModalDialog {
 
-    static get DefaultConfig():AiModalConfig{
+    static GetConfig(context: AiNotifyContext):AiModalConfig{
         let config:AiModalConfig =new AiModalConfig();
-        config.x=AiModalPosition.Begin;
-        config.y=AiModalPosition.Begin;
-        config.animation='slidetop';
-        config.width='100%';
+        
         config.floating=true;
-        config.TimeHide=15000;
+        config.TimeHide=15000*10;
+        if(context.style==='slidedown'){
+            config.x=AiModalPosition.Begin();
+            config.y=AiModalPosition.Begin();
+            config.animation='slidedown';
+            config.width='100%';
+        }else if (context.style==='corner'){
+            config.x=AiModalPosition.End(-20);
+            config.y=AiModalPosition.Begin(20);
+        } 
+        
         return config;
     }
 
-    constructor(public instance: AiModalInstance,public context: AiNotificationContext) {
+    constructor(public instance: AiModalInstance,public context: AiNotifyContext) {
     }
 
     getClass(){
-        var c='body';
+        var c=this.context.style;
         if(this.context.color.length > 0)
             c+=' '+this.context.color;
+        if(this.context.ico.length > 0)
+            c+=' hasico';
         return c;
     }
 
@@ -60,9 +73,6 @@ export class AiNotification implements AiModalDialog {
         this.instance.dismiss();
     }
 
-    hasIcon(){
-        return this.context.ico.length > 0 ? '':null;
-    }
 
 
 }

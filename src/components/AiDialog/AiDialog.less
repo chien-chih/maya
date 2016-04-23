@@ -129,9 +129,48 @@ ai-alert .ai-dlg-body .ico {
     color:rgba(252, 61, 57, 0.9);
 }
 
-/* notification */
+/* notify */
 
-ai-notification .body{
+ai-notify {
+    
+}
+
+ai-notify .inner{
+    .userSelect(text);
+}
+
+ai-notify .ok {
+    line-height: normal;
+    min-height:0;
+    margin:0;
+    min-width:0;
+    font-size:initial;
+    overflow:visible;
+    padding:0;
+}
+
+ai-notify .msg{
+    margin:0;
+}
+
+ai-notify .ico {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+ai-notify .close {
+    position: absolute;
+    margin:0;
+    color:#777;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* slidedown */
+
+ai-notify.slidedown{
+    display:block;
     background: rgba(255,255,255,.85);
     color: #777;
     position: relative;
@@ -141,68 +180,104 @@ ai-notification .body{
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
 }
 
-ai-notification .body[hasIcon]{
+ai-notify.slidedown.hasico{
 
 }
 
-ai-notification .msg{
-    margin:0;
-}
-ai-notification [hasIcon] p{
-    margin-left:80px;
-}
-
-ai-notification .ico {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+ai-notify.slidedown .ico {
     left: 15px;
     width: 42px;
     height: 42px;
     font-size: 42px;
 }
 
-ai-notification .close {
+ai-notify.slidedown.hasico .msg{ 
+    margin-left:80px;
+}
+
+ai-notify.slidedown .close {
     top: 50%;
     transform: translateY(-50%);
     right: 20px;
-    position: absolute;
-    margin:0;
-    color:#777;
-    background: transparent;
     width: 20px;
     height: 20px;
     line-height: 20px;
     font-size:20px;
-    overflow: hidden;
-    cursor: pointer;
 }
 
-ai-notification .close.hover {
+ai-notify.slidedown .close.hover {
     color:#000;
 }
 
-ai-notification .ok {
-    line-height: normal;
-    min-height:0;
-    margin:0;
-    min-width:0;
-    font-size:initial;
-    overflow:visible;
-}
 
-ai-notification .body.black{
+/* slidedown dark */
+
+ai-notify.slidedown.dark{
     background: rgba(42,45,50,.85);
     color: rgba(250,251,255,0.95);
 }
 
-ai-notification .body.black[hasIcon]{
+ai-notify.slidedown.dark.hasico{
     box-shadow: inset 72px 0 rgba(0,0,0,0.6);
 }
 
-ai-notification .black .close {
+ai-notify.slidedown.dark .close {
     color:#14151b;
 }
-ai-notification .black .close.hover {
+ai-notify.slidedown.dark .close.hover {
     color:#fff;
 }
+
+/* corner */
+
+ai-notify.corner{
+    display:inline-block;
+    background: rgba(255,255,255,.95);
+    color: #777;
+    padding: 20px;
+    line-height: 1.4;
+    font-size: 90%;
+    width: 300px; 
+    border-radius: 5px;
+    
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.26);    
+}
+ai-notify.corner .ico {
+    left: 15px;
+    width: 32px;
+    height: 32px;
+    font-size: 32px;
+}
+
+ai-notify.corner.hasico .msg{ 
+    margin-left:42px;
+}
+
+ai-notify.corner .close {
+    top: 6px;
+    right: 6px;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    font-size: 16px;
+}
+
+ai-notify.corner .close.hover {
+    color:#000;
+}
+
+/* corner dark */
+
+ai-notify.corner.dark{
+    background: rgba(42,45,50,.85);
+    color: rgba(250,251,255,0.95);
+}
+
+ai-notify.corner.dark .close {
+    color:#14151b;
+}
+ai-notify.corner.dark .close.hover {
+    color:#fff;
+}
+
+    

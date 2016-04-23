@@ -138,14 +138,14 @@ export class AiModalContainer extends AiControl{
     loadAnimation(){
         let dom=AiDOM.get();
         var dialog=this.nativeElement.childNodes[0];
-        if(this.instance.config.animation==='slidetop')
+        if(this.instance.config.animation==='slidedown')
             dom.addClass(dialog, 'ai-top-in');
     }
 
     unloadAnimation():number{
         let dom=AiDOM.get();
         var dialog=this.nativeElement.childNodes[0];
-        if(this.instance.config.animation==='slidetop'){
+        if(this.instance.config.animation==='slidedown'){
             dom.addClass(dialog, 'ai-top-out');
             return 500;
         }

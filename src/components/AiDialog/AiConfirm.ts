@@ -33,9 +33,9 @@ export class AiConfirm implements AiModalDialog {
 
     static get DefaultConfig():AiModalConfig{
         let config:AiModalConfig =new AiModalConfig();
-        config.x=AiModalPosition.Center;
+        config.x=AiModalPosition.Center();
         config.y=new AiModalPosition(100,AiModalAlign.Begin);
-        config.mask='white';
+        config.mask='black';
         config.floating=true;
         config.animation='fade';
         return config;

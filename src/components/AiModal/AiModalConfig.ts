@@ -7,84 +7,83 @@ export enum AiModalAlign{
 
 export class AiModalPosition{
 
-    offset:any;
-
-    align:AiModalAlign;
-
-    constructor(offset:any=0,align:AiModalAlign=AiModalAlign.Begin) {
-        this.offset=offset;
-        this.align=align;
+    constructor(public value:any=0
+        ,public align:AiModalAlign=AiModalAlign.Begin
+        ,public offset:number=0) {
     }
 
-
-    static get Begin(){
-        return new AiModalPosition();
+    static Begin(offset:number=0){
+        return new AiModalPosition(0,AiModalAlign.Begin,offset);
     }
 
-    static get Center(){
-        return new AiModalPosition('50%',AiModalAlign.Center);
+    static Center(offset:number=0){
+        return new AiModalPosition('50%',AiModalAlign.Center,offset);
     }
 
-    static get End(){
-        return new AiModalPosition('100%',AiModalAlign.End);
+    static End(offset:number=0){
+        return new AiModalPosition('100%',AiModalAlign.End,offset);
     }
 
-    numberOffset(){
-        return Number(this.offset.replace('%','').trim());
+    numberValue(){
+        return Number(this.value.replace('%','').trim());
     }
 
     positionLeft(dialog,content,targetElement){
-        var x=this.offset;
+        var x=this.value;
         if(targetElement){
             var left=targetElement.offsetLeft;
-            if(typeof this.offset == 'string' && this.offset.indexOf('%') != -1){
+            if(typeof this.value == 'string' && this.value.indexOf('%') != -1){
                 var width=targetElement.offsetWidth;
-                var noffset:number=this.numberOffset();
-                x=left+ (width * noffset)/100;
+                var nvalue:number=this.numberValue();
+                x=left+ (width * nvalue)/100;
 
             }else
                 x=left+x;
         }
 
         dialog.style.left=x;
+        let contentLeft=0;
         switch(this.align){
-            case AiModalAlign.Begin:
-                content.style.left=0;
-                break;
+            //case AiModalAlign.Begin:
+              //  contentLeft=0;
+                //break;
             case AiModalAlign.Center:
-                content.style.left=-content.offsetWidth /2;
+                contentLeft=-content.offsetWidth /2;
                 break;
             case AiModalAlign.End:
-                content.style.left=-content.offsetWidth;
+                contentLeft=-content.offsetWidth;
                 break;
         }
+        content.style.left=contentLeft+this.offset;
     }
 
     positionTop(dialog,content,targetElement){
-        var y=this.offset;
+        var y=this.value;
         if(targetElement){
             var top=targetElement.offsetTop;
-            if(typeof this.offset == 'string' && this.offset.indexOf('%') != -1){
+            if(typeof this.value == 'string' && this.value.indexOf('%') != -1){
                 var height=targetElement.offsetHeight;
-                var noffset:number=this.numberOffset();
-                y=top+ (height * noffset)/100;
+                var nvalue:number=this.numberValue();
+                y=top+ (height * nvalue)/100;
 
             }else
                 y=top+y;
         }
 
         dialog.style.top=y;
+        let contentTop=0;
         switch(this.align){
-            case AiModalAlign.Begin:
-                content.style.top=0;
-                break;
+            //case AiModalAlign.Begin:
+              //  contentTop=0;
+                //break;
             case AiModalAlign.Center:
-                content.style.top=-content.offsetWidth /2;
+                contentTop=-content.offsetWidth /2;
                 break;
             case AiModalAlign.End:
-                content.style.top=-content.offsetWidth;
+                contentTop=-content.offsetWidth;
                 break;
         }
+        content.style.top=contentTop+this.offset;
     }
 
 }
@@ -96,9 +95,9 @@ export class AiModalPosition{
 @Injectable()
 export class AiModalConfig {
 
-    x:AiModalPosition=AiModalPosition.Center;
+    x:AiModalPosition=AiModalPosition.Center();
 
-    y:AiModalPosition=AiModalPosition.Begin;
+    y:AiModalPosition=AiModalPosition.Begin();
 
     width:string=null;
 

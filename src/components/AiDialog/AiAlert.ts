@@ -32,7 +32,7 @@ export class AiAlert implements AiModalDialog {
 
     static get DefaultConfig():AiModalConfig{
         let config:AiModalConfig =new AiModalConfig();
-        config.x=AiModalPosition.Center;
+        config.x=AiModalPosition.Center();
         config.y=new AiModalPosition(100,AiModalAlign.Begin);
         config.mask='black';
         config.floating=true;

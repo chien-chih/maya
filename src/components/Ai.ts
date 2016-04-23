@@ -11,4 +11,4 @@ export * from './AiModal/AiModal';
 export * from './AiDialog/AiDialog';
 export * from './AiDialog/AiConfirm';
 export * from './AiDialog/AiAlert';
-export * from './AiDialog/AiNotification';
+export * from './AiDialog/AiNotify';
