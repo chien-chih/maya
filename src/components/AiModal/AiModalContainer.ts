@@ -83,6 +83,7 @@ export class AiModalContainer extends AiControl{
             that.resetPosition();
         }, 1);
 
+
         //Watch Time Hide
         let closeAfter=this.instance.config.TimeHide;
         if(closeAfter > 0){
@@ -102,7 +103,6 @@ export class AiModalContainer extends AiControl{
             let dom=AiDOM.get();
             dom.addClass(dom.query('body'), 'modal-open');
         }
-        this.loadAnimation();
     }
 
     beforeUnload(callback){
@@ -135,12 +135,6 @@ export class AiModalContainer extends AiControl{
         }
     }
 
-    loadAnimation(){
-        let dom=AiDOM.get();
-        var dialog=this.nativeElement.childNodes[0];
-        if(this.instance.config.animation==='slidedown')
-            dom.addClass(dialog, 'ai-top-in');
-    }
 
     unloadAnimation():number{
         let dom=AiDOM.get();
@@ -149,7 +143,7 @@ export class AiModalContainer extends AiControl{
             dom.addClass(dialog, 'ai-top-out');
             return 500;
         }
-        else if(this.instance.config.animation==='fade'){
+        else if(this.instance.config.animation==='fade' || this.instance.config.animation==='jelly'){
             dom.addClass(this.nativeElement, 'ai-fade-out');
             return 300;
         }

@@ -44,6 +44,7 @@ export class AiNotify implements AiModalDialog {
         }else if (context.style==='corner'){
             config.x=AiModalPosition.End(-20);
             config.y=AiModalPosition.Begin(20);
+            config.animation='jelly';
         } 
         
         return config;
@@ -58,6 +59,12 @@ export class AiNotify implements AiModalDialog {
             c+=' '+this.context.color;
         if(this.context.ico.length > 0)
             c+=' hasico';
+            
+        if (this.context.style==='slidedown')
+            c+=' ai-top-in';
+        else if (this.context.style==='corner')
+            c+=' ai-jelly-in';
+            
         return c;
     }
 
