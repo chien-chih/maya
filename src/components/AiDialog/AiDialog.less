@@ -135,7 +135,7 @@ ai-notify {
     
 }
 
-ai-notify .inner{
+ai-notify .msg{
     .userSelect(text);
 }
 
@@ -192,7 +192,7 @@ ai-notify.slidedown .ico {
 }
 
 ai-notify.slidedown.hasico .msg{ 
-    margin-left:80px;
+    margin-left:50px;
 }
 
 ai-notify.slidedown .close {
@@ -280,4 +280,91 @@ ai-notify.corner.dark .close.hover {
     color:#fff;
 }
 
+/* thumb */
+
+ai-notify.thumb{
+    display:inline-block;
+    background: rgba(255,255,255,.95);
+    color: #777;
+    padding: 0;
+    font-size: 90%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.26);  
+    overflow:hidden;
+    width:64px;
+    height:64px;
+    transition: width .5s;
+}
+.expand ai-notify.thumb{
+    width:380px;
+}
+
+
+ai-notify.thumb .ico {
+    left: 0px;
+    width: 64px;
+    height: 64px;
+    line-height: 64px;
+    font-size: 48px;
+    background:#666;
+    color:#888;
+    text-align: center;
+    vertical-align: middle;
+}
+
+ai-notify.thumb .msg{ 
+    position:absolute;
+    left:-380px;
+    right:25px;
+    line-height:64px;
+    vertical-align: middle;
+    white-space: nowrap;
+    transition: left .5s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.expand ai-notify.thumb .msg{
+    left:79px;
+}
+
+
+ai-notify.thumb.expand .close{
+    display:inline-block;
+}
+
+ai-notify.thumb .close {
+    top: 6px;
+    right: 6px;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    font-size: 16px;
+    display: none;
+}
+
+.expand ai-notify.thumb .close{
+    display:inline-block;
+}
+
+
+ai-notify.thumb .close.hover {
+    color:#000;
+}
+
+/* thumb dark */
+
+ai-notify.thumb.dark{
+    background: rgba(42,45,50,.85);
+    color: rgba(250,251,255,0.95);
+}
+
+ai-notify.thumb.dark .close {
+    color:#14151b;
+}
+ai-notify.thumb.dark .close.hover {
+    color:#fff;
+}
+ai-notify.thumb.dark .ico {
+    background:#333;
+}
     

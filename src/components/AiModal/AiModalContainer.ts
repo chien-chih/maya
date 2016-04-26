@@ -101,9 +101,24 @@ export class AiModalContainer extends AiControl{
 
         if (this.instance.isOnlyModal){
             let dom=AiDOM.get();
-            dom.addClass(dom.query('body'), 'modal-open');
+            dom.addClass(dom.query('body'), 'ai-modal-open');
+        }
+
+        this.loadAnimation();
+
+    }
+
+    loadAnimation(){
+        let dom=AiDOM.get();
+        var dialog=this.nativeElement.childNodes[0];
+        if(this.instance.config.animation==='thumb'){
+            TimerWrapper.setTimeout(() => {
+                dom.addClass(this.nativeElement, 'expand');
+            }, 1000);
+
         }
     }
+
 
     beforeUnload(callback){
 
@@ -131,7 +146,7 @@ export class AiModalContainer extends AiControl{
 
         if (this.instance.isNoModal){
             let dom=AiDOM.get();
-            dom.removeClass(dom.query('body'), 'modal-open');
+            dom.removeClass(dom.query('body'), 'ai-modal-open');
         }
     }
 
@@ -146,6 +161,14 @@ export class AiModalContainer extends AiControl{
         else if(this.instance.config.animation==='fade' || this.instance.config.animation==='jelly'){
             dom.addClass(this.nativeElement, 'ai-fade-out');
             return 300;
+        }
+        else if(this.instance.config.animation==='thumb'){
+            dom.removeClass(this.nativeElement, 'expand');
+            TimerWrapper.setTimeout(() => {
+                dom.addClass(this.nativeElement, 'ai-fade-out');
+            }, 500);
+
+            return 990;
         }
         return 0;
     }

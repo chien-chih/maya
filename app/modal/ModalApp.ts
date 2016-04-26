@@ -75,21 +75,21 @@ export class AppComponent  extends AiApp{
 
     //thumb
     onThumb(){
-        this.dialog.thumb('Our goal with MacBook was to do the impossible||Undo',function(v){
+        this.dialog.thumb('MacBook was to do the impossible||Undo',function(v){
             window.alert('pressed '+v);
         });
     }
 
     onThumbWithIcon(){
-        this.dialog.thumb('Our goal with MacBook was to do the impossible.|help|Undo');
+        this.dialog.thumb('MacBook was to do the impossible.|help|Undo');
     }
 
     onDarkThumb(){
-        this.dialog.thumbDark('Our goal with MacBook was to do the impossible||Undo');
+        this.dialog.thumbDark('MacBook was to do the impossible||Undo');
     }
 
     onDarkThumbWithIcon(){
-        this.dialog.thumbDark('Our goal with MacBook was to do the impossible.|help');
+        this.dialog.thumbDark('MacBook was to do the impossible.|help');
     }
 
     //flip

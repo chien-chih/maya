@@ -19,13 +19,11 @@ export class AiNotifyContext {
         },
     template:
     `
-    	<div class="inner">
-            <span class='ico' ai-material>{{context.ico}}</span>
-    		<p class='msg'>
-    		{{context.message}}
-    		<ai-button *ngIf="hasOK()" link class='ok' (_click)='ok()'>{{context.ok}}</ai-button>
-    		</p>
-    	</div>
+    	<p class='msg'>
+    	    {{context.message}}
+    	    <ai-button *ngIf="hasOK()" link class='ok' (_click)='ok()'>{{context.ok}}</ai-button>
+    	</p>
+        <span class='ico' ai-material>{{context.ico}}</span>
     	<ai-button icon class='close' (_click)='close()'>clear</ai-button>
     `
 })
@@ -41,11 +39,17 @@ export class AiNotify implements AiModalDialog {
             config.y=AiModalPosition.Begin();
             config.animation='slidedown';
             config.width='100%';
-        }else if (context.style==='corner'){
+        }
+        else if (context.style==='corner'){
             config.x=AiModalPosition.End(-20);
             config.y=AiModalPosition.Begin(20);
             config.animation='jelly';
-        } 
+        }
+        else if (context.style==='thumb'){
+            config.x=AiModalPosition.Begin(20);
+            config.y=AiModalPosition.Begin(20);
+            config.animation='thumb';
+        }
         
         return config;
     }
@@ -63,6 +67,8 @@ export class AiNotify implements AiModalDialog {
         if (this.context.style==='slidedown')
             c+=' ai-top-in';
         else if (this.context.style==='corner')
+            c+=' ai-jelly-in';
+        else if (this.context.style==='thumb')
             c+=' ai-jelly-in';
             
         return c;
