@@ -1,5 +1,6 @@
-import {Component} from 'angular2/core';
-import {AiButton,AiConfirm,AiConfirmContext,AiModalInstance,AiModalDialog,AiModalConfig,AiModalAlign,AiModalPosition} from '../Ai';
+import {AiDOM,AiButton,AiConfirm,AiConfirmContext,AiModalInstance,AiModalDialog,AiModalConfig,AiModalAlign,AiModalPosition} from '../Ai';
+import {Component,ElementRef} from 'angular2/core';
+import {TimerWrapper} from "angular2/src/facade/async";
 
 export class AiNotifyContext {
     constructor(
@@ -14,9 +15,6 @@ export class AiNotifyContext {
 @Component({
     selector: 'ai-notify',
     directives: [AiButton],
-    host:{
-        '[class]': 'getClass()'
-        },
     template:
     `
     	<p class='msg'>
@@ -29,50 +27,95 @@ export class AiNotifyContext {
 })
 export class AiNotify implements AiModalDialog {
 
+    isClosing:boolean=false;
+    
+    nativeElement:any=null;
+    
+    openAnimation:string='';
+
     static GetConfig(context: AiNotifyContext):AiModalConfig{
         let config:AiModalConfig =new AiModalConfig();
         
         config.floating=true;
-        config.TimeHide=15000*10;
+        config.TimeHide=15000;
         if(context.style==='slidedown'){
             config.x=AiModalPosition.Begin();
             config.y=AiModalPosition.Begin();
-            config.animation='slidedown';
             config.width='100%';
         }
         else if (context.style==='corner'){
             config.x=AiModalPosition.End(-20);
             config.y=AiModalPosition.Begin(20);
-            config.animation='jelly';
         }
         else if (context.style==='thumb'){
             config.x=AiModalPosition.Begin(20);
             config.y=AiModalPosition.Begin(20);
-            config.animation='thumb';
+        }
+        else if (context.style==='flip'){
+            config.x=AiModalPosition.End(-20);
+            config.y=AiModalPosition.End();
         }
         
         return config;
     }
 
-    constructor(public instance: AiModalInstance,public context: AiNotifyContext) {
+    constructor(public instance: AiModalInstance,public context: AiNotifyContext,private ele: ElementRef) {
+        this.nativeElement=ele.nativeElement;
     }
 
-    getClass(){
-        var c=this.context.style;
+    onOpen(){
+        let dom=AiDOM.get();
+        let cs=this.context.style;
+        var self=this;
+        dom.addClass(this.nativeElement, cs);
         if(this.context.color.length > 0)
-            c+=' '+this.context.color;
+            dom.addClass(this.nativeElement, this.context.color);
         if(this.context.ico.length > 0)
-            c+=' hasico';
-            
-        if (this.context.style==='slidedown')
-            c+=' ai-top-in';
-        else if (this.context.style==='corner')
-            c+=' ai-jelly-in';
-        else if (this.context.style==='thumb')
-            c+=' ai-jelly-in';
-            
-        return c;
+            dom.addClass(this.nativeElement, 'hasico');
+
+        if (cs==='slidedown') 
+            this.openAnimation='ai-top-in';
+        else if (cs==='flip')
+            this.openAnimation='ai-flip-in';
+        else if (cs==='corner')
+            this.openAnimation='ai-jelly-in';
+        else if (cs==='thumb'){
+            this.openAnimation='ai-jelly-in';
+            TimerWrapper.setTimeout(() => {
+                dom.removeClass(self.nativeElement, 'ai-jelly-in');
+                dom.addClass(self.nativeElement, 'expand');
+            }, 1000);
+        }
+        dom.addClass(this.nativeElement, this.openAnimation);
+        
+    } 
+
+    beforeClose(): boolean{
+        let cs=this.context.style;
+        let dom=AiDOM.get();
+        dom.removeClass(this.nativeElement,this.openAnimation);
+        if (cs==='slidedown') 
+            dom.addClass(this.nativeElement, 'ai-top-out');
+        else if (cs==='flip')
+            dom.addClass(this.nativeElement, 'ai-flip-out');
+        else if (cs==='corner')
+            dom.addClass(this.nativeElement, 'ai-fade-out');
+        else if (cs==='thumb'){
+            dom.removeClass(this.nativeElement, 'expand');
+            TimerWrapper.setTimeout(() => {
+                dom.addClass(this.nativeElement, 'ai-fade-out');
+            }, 500);
+        }
+        return false;
     }
+
+    closingDelayTime():number{
+        let cs=this.context.style;
+        if (cs==='slidedown' || cs==='corner') 
+            return 500;
+        return 1000;
+    } 
+
 
     hasOK(){
         return this.context.ok.length > 0;
@@ -82,8 +125,8 @@ export class AiNotify implements AiModalDialog {
         this.instance.close(true);
     }
 
-    close() {
-        this.instance.dismiss();
+    close() { 
+        this.instance.close();
     }
 
 

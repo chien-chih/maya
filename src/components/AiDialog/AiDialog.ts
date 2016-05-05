@@ -1,9 +1,11 @@
 import {Injectable,DynamicComponentLoader,ComponentRef,ElementRef,Injector,provide,ResolvedProvider,Optional,ApplicationRef} from 'angular2/core';
-import {AiModal,AiModalInstance,AiAlert,AiAlertContext,AiConfirm,AiConfirmContext,AiNotify,AiNotifyContext,AiModalConfig,AiModalAlign,AiModalPosition} from '../Ai';
+import {AiModal,AiModalInstance,AiAlert,AiAlertContext,AiConfirm,AiConfirmContext,AiNotify,AiNotifyContext,AiCircle,AiCircleContext,AiModalConfig,AiModalAlign,AiModalPosition} from '../Ai';
 
 
 @Injectable()
 export class AiDialog{
+
+
 
     constructor(private modal: AiModal){
 
@@ -52,7 +54,7 @@ export class AiDialog{
 
     //text:message|icon|ok
     slidedown(text:string,callback?:any){
-        this.notification(text,'slidedown','',callback);
+        this.notification(text,'slidedown','',callback); 
     }
  
     //text:message|icon|ok
@@ -90,15 +92,6 @@ export class AiDialog{
         this.notification(text,'flip','dark',callback);
     }
 
-    //text:message|icon|ok
-    progress(text:string,callback?:any){
-        this.notification(text,'progress','',callback);
-    }
- 
-    //text:message|icon|ok
-    progressDark(text:string,callback?:any){
-        this.notification(text,'progress','dark',callback);
-    }
 
     //text:message|icon|ok
     notification(text:string,style:string,color:string,callback?:any){
@@ -119,6 +112,33 @@ export class AiDialog{
                     }
                 );
             });
+    }
+
+    //text:message|icon|ok
+    waitStart(text:string,callback?:any){
+
+        var n = text.split("|");
+        let context:AiCircleContext=new AiCircleContext(n[0],n[1]?n[1]:'',n[2]?n[2]:'');
+        let bindings = Injector.resolve([provide(AiCircleContext, {useValue: context})]);
+
+        let dialog = this.modal.open(
+            <any>AiCircle,bindings,AiCircle.GetConfig(context));
+        dialog.then(
+            (resultPromise) => {
+                return resultPromise.result.then(
+                    (result) => {
+                        if(callback) callback(true);
+                    },
+                    () =>{
+                        if(callback) callback();
+                    }
+                );
+            });
+    }
+ 
+    //text:message|icon|ok
+    waitStop(){
+        AiCircle.removeDlgInstance();
     }
 
 }

@@ -12,3 +12,4 @@ export * from './AiDialog/AiDialog';
 export * from './AiDialog/AiConfirm';
 export * from './AiDialog/AiAlert';
 export * from './AiDialog/AiNotify';
+export * from './AiDialog/AiCircle';

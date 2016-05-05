@@ -21,10 +21,12 @@ export class AiModalContainer extends AiControl{
 
     closeAfterTimerId:number=-1;
 
-    waitTimerId:number=-1;
+    delayTimerId:number=-1;
+    
+    isClosing:boolean=false;
 
     constructor(private instance: AiModalInstance,ele: ElementRef) {
-        super(ele);
+        super(ele); 
     }
 
     get Class():string{
@@ -37,7 +39,7 @@ export class AiModalContainer extends AiControl{
             cls+=' autohide';
 
         if(this.instance.config.animation==='fade')//must be here
-            cls+= ' ai-fade-in';
+            cls+= this.isClosing ? ' ai-fade-out' : ' ai-fade-in';
 
         return cls;
     }
@@ -69,15 +71,15 @@ export class AiModalContainer extends AiControl{
 
     onClick() {
         if(this.instance.config.autoHide)
-            this.instance.dismiss();
+            this.instance.close();
     }
 
     documentKeypress(event: KeyboardEvent) {
         if (this.instance.isTopModal && this.instance.config.ESCHide && event.keyCode==KeyCodes.ESCAPE)
-            this.instance.dismiss();
+            this.instance.close();
     }
 
-    onLoad(){
+    onOpen(){
         var that=this;
         TimerWrapper.setTimeout(() => {
             that.resetPosition();
@@ -88,7 +90,7 @@ export class AiModalContainer extends AiControl{
         let closeAfter=this.instance.config.TimeHide;
         if(closeAfter > 0){
             this.closeAfterTimerId=TimerWrapper.setInterval(() => {
-                that.instance.dismiss();
+                that.instance.close();
             }, closeAfter);
         }
 
@@ -104,45 +106,33 @@ export class AiModalContainer extends AiControl{
             dom.addClass(dom.query('body'), 'ai-modal-open');
         }
 
-        this.loadAnimation();
-
-    }
-
-    loadAnimation(){
-        let dom=AiDOM.get();
-        var dialog=this.nativeElement.childNodes[0];
-        if(this.instance.config.animation==='thumb'){
-            TimerWrapper.setTimeout(() => {
-                dom.addClass(this.nativeElement, 'expand');
-            }, 1000);
-
-        }
     }
 
 
-    beforeUnload(callback){
-
+    beforeClose(delay,callback){
+        var self=this;
+        this.isClosing=true;
         if(this.closeAfterTimerId != -1){
             TimerWrapper.clearTimeout(this.closeAfterTimerId);
             this.closeAfterTimerId=-1;
         }
 
-
-        var self=this;
-        if(this.waitTimerId != -1) {
-            TimerWrapper.clearTimeout(this.waitTimerId);
-            this.waitTimerId = -1;
+        if(this.delayTimerId != -1) {
+            TimerWrapper.clearTimeout(this.delayTimerId);   
+            this.delayTimerId = -1
         }
-        let waitTime=this.unloadAnimation();
-        if(waitTime==0) callback();
+        
+        if(delay==0)
+            callback();
         else
-            this.waitTimerId=TimerWrapper.setTimeout(() => {
-                callback();
-                self.waitTimerId=-1;
-            }, waitTime);
+            this.delayTimerId=TimerWrapper.setTimeout(() => {
+                    callback();
+                    self.delayTimerId=-1;
+                }, delay-100);
+        
     }
 
-    onUnload(){
+    onClose(){
 
         if (this.instance.isNoModal){
             let dom=AiDOM.get();
@@ -151,26 +141,5 @@ export class AiModalContainer extends AiControl{
     }
 
 
-    unloadAnimation():number{
-        let dom=AiDOM.get();
-        var dialog=this.nativeElement.childNodes[0];
-        if(this.instance.config.animation==='slidedown'){
-            dom.addClass(dialog, 'ai-top-out');
-            return 500;
-        }
-        else if(this.instance.config.animation==='fade' || this.instance.config.animation==='jelly'){
-            dom.addClass(this.nativeElement, 'ai-fade-out');
-            return 300;
-        }
-        else if(this.instance.config.animation==='thumb'){
-            dom.removeClass(this.nativeElement, 'expand');
-            TimerWrapper.setTimeout(() => {
-                dom.addClass(this.nativeElement, 'ai-fade-out');
-            }, 500);
-
-            return 990;
-        }
-        return 0;
-    }
 
 }

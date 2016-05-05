@@ -15,7 +15,9 @@
 }
 .animation(@name) {
     -webkit-animation: @name;
+    -webkit-animation-fill-mode: forwards;    
     animation: @name;
+    animation-fill-mode: forwards;    
 }
 
 .transform(...) {
@@ -80,6 +82,83 @@
     .Keyframe("", 0,"-webkit-");
     .Keyframe(~"}", 1,"");
 }
+
+.flipVAnimation( @name,@duration,@timing,@perspective) {
+    .Keyframe(@pre, @post, @vendor) {
+        @keyframe: ~"@{pre}@@{vendor}keyframes @{name} {0%";
+
+        @{keyframe} {
+            transform: perspective(@perspective) rotate3d(1,0,0,-90deg);
+            transition-timing-function: ease-in;        
+        }
+
+        40% {
+            transform: perspective(@perspective) rotate3d(1,0,0,20deg);
+            transition-timing-function: ease-out;        
+        }
+
+        60% {
+            transform: perspective(@perspective) rotate3d(1,0,0,-10deg);
+            transition-timing-function: ease-in;
+            opacity: 1;
+        }
+
+        80% {
+            transform: perspective(@perspective) rotate3d(1,0,0,5deg);
+            transition-timing-function: ease-out;
+        }
+
+
+        100% {
+            transform: perspective(@perspective);
+        }
+
+        .Local() {
+        }
+
+        .Local() when (@post=1) {
+            @local: ~"}.@{name}";
+
+            @{local} {
+                .animation(@name @duration @timing);
+            }
+        }
+
+        .Local;
+    }
+
+    .Keyframe("", 0,"-webkit-");
+    .Keyframe(~"}", 1,"");
+}
+
+.flipOutAnimation( @name,@duration,@timing,@perspective) {
+    .Keyframe(@pre, @post, @vendor) {
+        @keyframe: ~"@{pre}@@{vendor}keyframes @{name} {0%";
+
+        @{keyframe} {
+            transform: perspective(@perspective);
+        }
+
+        100% {
+            transform: perspective(@perspective) rotate3d(1, 0, 0, -90deg);
+            transition-timing-function: @timing;
+        }
+
+        .Local() when (@post=1) {
+            @local: ~"}.@{name}";
+
+            @{local} {
+                .animation(@name @duration @timing);
+            }
+        }
+        .Local;
+    }
+
+    .Keyframe("", 0,"-webkit-");
+    .Keyframe(~"}", 1,"");
+}
+
+
 
 .jellyAnimation( @name,@duration,@timing) {
     .Keyframe(@pre, @post, @vendor) {

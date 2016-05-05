@@ -17,7 +17,7 @@ export class AiModalInstance {
     containerRef: ComponentRef;
 
     inElement: boolean;
-
+    
     constructor(public config: AiModalConfig,private modal:AiModal) {
         this._resultDefered = PromiseWrapper.completer();
     }
@@ -46,32 +46,18 @@ export class AiModalInstance {
      *  Close the modal with a return value, i.e: result.
      */
     close(result: any = null) {
-        if ( this.dialogRef.instance.beforeClose &&
-                this.dialogRef.instance.beforeClose() === true ) return;
-
         var self=this;
-        this.containerRef.instance.beforeUnload(function(){
-            self.dispose();
-            self._resultDefered.resolve(result);
-        });
-    }
+        if (this.dialogRef.instance.beforeClose &&
+            this.dialogRef.instance.beforeClose() === true ) return;
 
-    /**
-     *  Close the modal without a return value, i.e: cancelled.
-     *  This call is automatically invoked when a user either:
-     *  - Presses an exit keyboard key (if configured).
-     *  - Clicks outside of the modal window (if configured).
-     *  Usually, dismiss represent a Cancel button or a X button.
-     */
-    dismiss() {
-        if ( this.dialogRef.instance.beforeDismiss &&
-            this.dialogRef.instance.beforeDismiss() === true ) return;
-
-        var self=this;
-        this.containerRef.instance.beforeUnload(function(){
+        let delay=0;
+        if (this.dialogRef.instance.closingDelayTime) 
+            delay=this.dialogRef.instance.closingDelayTime();
+        
+        this.containerRef.instance.beforeClose(delay,function(){
             self.dispose();
-            self._resultDefered.reject();
         });
+        self._resultDefered.resolve(result);
     }
 
     private dispose() {
@@ -80,11 +66,13 @@ export class AiModalInstance {
     }
 
     onLoad(){
-        this.containerRef.instance.onLoad();
+        if (this.dialogRef.instance.onOpen) this.dialogRef.instance.onOpen();
+        this.containerRef.instance.onOpen();
     }
 
     onUnload(){
-        this.containerRef.instance.onUnload();
+        if (this.dialogRef.instance.onClose) this.dialogRef.instance.onClose();
+        this.containerRef.instance.onClose();
     }
 
 }

@@ -49,11 +49,15 @@ export class AiConfirm implements AiModalDialog {
     }
 
     cancel() {
-        this.instance.dismiss();
+        this.instance.close();
     }
 
     hasIcon(){
         return this.context.ico.length > 0 ? '':null;
+    }
+
+    closingDelayTime():number{
+        return 500;
     }
 
 }

@@ -94,13 +94,13 @@ export class AppComponent  extends AiApp{
 
     //flip
     onFlip(){
-        this.dialog.flip('Our goal with MacBook was to do the impossible||Undo',function(v){
+        this.dialog.flip('The event was added to your calendar. Check out all your events in your||event overview',function(v){
             window.alert('pressed '+v);
         });
     }
 
     onFlipWithIcon(){
-        this.dialog.flip('Our goal with MacBook was to do the impossible.|help|Undo');
+        this.dialog.flip('The event was added to your calendar. Check out all your events in your.|help|event overview');
     }
 
     onDarkFlip(){
@@ -111,23 +111,23 @@ export class AppComponent  extends AiApp{
         this.dialog.flipDark('Our goal with MacBook was to do the impossible.|help');
     }
 
-    //progress
-    onProgress(){
-        this.dialog.progress('Our goal with MacBook was to do the impossible||Undo',function(v){
+    //wait
+    onWaitStart(){
+        this.dialog.waitStart('Connection timed out||try again',function(v){
             window.alert('pressed '+v);
-        });
+        }); 
     }
 
-    onProgressWithIcon(){
-        this.dialog.progress('Our goal with MacBook was to do the impossible.|help|Undo');
+    onWaitStop(){
+        this.dialog.waitStop();
     }
 
-    onDarkProgress(){
-        this.dialog.progressDark('Our goal with MacBook was to do the impossible||Undo');
+    onWaitStartWithIcon(){
+        this.dialog.waitStart('Connection timed out|error_outline'); 
     }
 
-    onDarkProgressWithIcon(){
-        this.dialog.progressDark('Our goal with MacBook was to do the impossible.|help');
+    onWaitStartWithOK(){
+        this.dialog.waitStart('Connection timed out|error_outline|try again'); 
     }
 
 

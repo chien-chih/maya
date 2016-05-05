@@ -58,6 +58,7 @@ export class AiModalPosition{
     }
 
     positionTop(dialog,content,targetElement){
+
         var y=this.value;
         if(targetElement){
             var top=targetElement.offsetTop;
@@ -77,10 +78,10 @@ export class AiModalPosition{
               //  contentTop=0;
                 //break;
             case AiModalAlign.Center:
-                contentTop=-content.offsetWidth /2;
+                contentTop=-content.offsetHeight /2;
                 break;
             case AiModalAlign.End:
-                contentTop=-content.offsetWidth;
+                contentTop=-content.offsetHeight;
                 break;
         }
         content.style.top=contentTop+this.offset;

@@ -36,7 +36,7 @@ export class AiAlert implements AiModalDialog {
         config.y=new AiModalPosition(100,AiModalAlign.Begin);
         config.mask='black';
         config.floating=true;
-        config.animation='fade';
+        //config.animation='fade';
         return config;
     }
 
@@ -44,12 +44,15 @@ export class AiAlert implements AiModalDialog {
     }
 
     ok() {
-        this.instance.dismiss();
+        this.instance.close();
     }
 
     hasIcon(){
         return this.context.ico.length > 0 ? '':null;
     }
 
+    closingDelayTime():number{
+        return 500;
+    }
 
 }
